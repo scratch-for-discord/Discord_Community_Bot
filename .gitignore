@@ -133,5 +133,4 @@ dist
 .replit
 
 # Databases
-Database
-Database.json
+database

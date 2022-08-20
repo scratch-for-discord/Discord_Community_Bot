@@ -1,9 +1,13 @@
 (async () => {
     let process = require('process');
     process.on('uncaughtException', function(err) {
-        console.log(`𝕖𝕣𝕣𝕠𝕣❕`);
+        console.log(`Error!`);
         console.log(err);
     });
+    const events = require('events');
+    const {
+        exec
+    } = require("child_process")
     let Discord = require("discord.js")
     let Database = require("easy-json-database")
     let {
@@ -15,23 +19,19 @@
         MessageSelectMenu
     } = require("discord.js")
     let logs = require("discord-logs")
-    let dootabase = new Database("./database.json")
     const os = require("os-utils");
-    const lyricsFinder = require('lyrics-finder');
     let URL = require('url')
-    const ms = require("ms")
     let https = require("https")
     const {
         DiscordTogether
     } = require('discord-together');
-    const write = require('write');
-    require('events').EventEmitter.defaultMaxListeners = 50;
+    const miliConverter = require("millisecond-converter")
     let fs = require('fs');
     const devMode = typeof __E_IS_DEV !== "undefined" && __E_IS_DEV;
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     const s4d = {
         Discord,
-        database: new Database(`${devMode ? S4D_NATIVE_GET_PATH : "."}/database.json`),
+        database: new Database(`./database.json`),
         fire: null,
         joiningMember: null,
         reply: null,
@@ -56,17 +56,7 @@
     })
     logs(s4d.client);
     s4d.client.discordTogether = new DiscordTogether(s4d.client);
-
-    function secondsToDhms(seconds) {
-        var days = Math.floor(seconds / (3600 * 24));
-        seconds -= days * 3600 * 24;
-        var hrs = Math.floor(seconds / 3600);
-        seconds -= hrs * 3600;
-        var mnts = Math.floor(seconds / 60);
-        seconds -= mnts * 60;
-        return Math.floor(days) + " days, " + Math.floor(hrs) + " Hrs, " + Math.floor(mnts) + " Minutes, " + Math.floor(seconds) + " Seconds"
-    }
-    var member, prefix, databaseargs, voice, thread_channels, botuptime, color, s4dcolor, channelid, databasedata, loaded, skipped, i, delete2;
+    var member, prefix, databaseargs, voice, thread_channels, botuptime, color, s4dcolor, ar_keys, channel_name, channelid, databasedata, loaded, skipped, i, delete2;
 
     function colourRgb(r, g, b) {
         r = Math.max(Math.min(Number(r), 100), 0) * 2.55;
@@ -84,9 +74,21 @@
         return sequence.slice(start, end);
     }
 
+    function textToTitleCase(str) {
+        return str.replace(/\S+/g,
+            function(txt) {
+                return txt[0].toUpperCase() + txt.substring(1).toLowerCase();
+            });
+    }
+
+    function colourRandom() {
+        var num = Math.floor(Math.random() * Math.pow(2, 24));
+        return '#' + ('00000' + num.toString(16)).substr(-6);
+    }
+
 
     s4d.client.on('ready', async () => {
-        console.clear();
+        eval('console.clear()');
         console.log('🧱・S4D#6399 is alive!');
         s4d.client.user.setPresence({
             status: "online",
@@ -110,16 +112,16 @@
         }
         for (i = 1; i_inc >= 0 ? i <= i_end : i >= i_end; i += i_inc) {
             delete2 = 'yes';
-            s4d.client.channels.cache.get((databaseargs[(i - 1)].slice(7, 25))).messages.fetch((databaseargs[(i - 1)].slice(26, 44))).then(s4dmessage => {
+            s4d.client.channels.cache.get((databaseargs[(i - 1)].slice(7, 25))).messages.fetch((databaseargs[(i - 1)].slice(26, 44))).then(async (s4dmessage) => {
                 delete2 = 'no';
 
             });
             await delay(Number(0.5) * 1000);
             if (delete2 == 'yes') {
                 s4d.database.delete(String(([databaseargs[(i - 1)].slice(7, 25), '-', databaseargs[(i - 1)].slice(26, 44)].join(''))));
-                skipped = (typeof skipped == 'number' ? skipped : 0) + 1;
+                skipped = (typeof skipped === 'number' ? skipped : 0) + 1;
             } else {
-                loaded = (typeof loaded == 'number' ? loaded : 0) + 1;
+                loaded = (typeof loaded === 'number' ? loaded : 0) + 1;
             }
             await delay(Number(0.5) * 1000);
         }
@@ -131,9 +133,9 @@
         s4d.tokenInvalid = true;
         s4d.tokenError = e;
         if (e.toString().toLowerCase().includes("token")) {
-            console.log("An invalid token was provided!")
+            throw new Error("An invalid bot token was provided!")
         } else {
-            console.log("Intents are not turned on!")
+            throw new Error("Privileged Gateway Intents are not enabled! Please go to https://discord.com/developers and turn on all of them.")
         }
     });
 
@@ -144,15 +146,26 @@
     });
     server.listen(3000);
 
+    s4d.client.on('messageUpdate', async (oldMessage, newMessage) => {
+        s4dmessage = newMessage
+        if ((newMessage.content) == 'https://tenor.com/view/rick-astley-never-gonna-give-you-up-rickroll-dance-moves-dancing-guy-gif-20856902') {
+            if ((newMessage.member.user.id) == '939129451046920253') {
+                await delay(Number(4) * 1000);
+                newMessage.delete()
+            }
+        }
+
+    });
+
     s4d.client.on('interactionCreate', async (interaction) => {
         let member = interaction.guild.members.cache.get(interaction.member.user.id)
         if (s4d.database.get(String('botban')).indexOf(String(interaction.member.user)) + 1 == 0) {
             if ((interaction.commandName) == 'bot') {
-                if ((interaction.options.getSubcommand('bot')) == 'shutdown') {
+                if ((interaction.options.getSubcommand()) == 'shutdown') {
                     if ((interaction.member).permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
                         await interaction.reply({
                             content: 'shuting down...',
-                            ephemeral: true,
+                            ephemeral: true || false,
                             components: []
                         });
                         await delay(Number(2) * 1000);
@@ -160,22 +173,22 @@
                     } else {
                         await interaction.reply({
                             content: '<a:youtried:939133664887988264>',
-                            ephemeral: true,
+                            ephemeral: true || false,
                             components: []
                         });
                     }
-                } else if ((interaction.options.getSubcommand('bot')) == 'info') {
+                } else if ((interaction.options.getSubcommand()) == 'info') {
                     let bot = new MessageEmbed()
                     bot.setTitle('Help');
                     bot.addField('Guilds', String(s4d.client.guilds.cache.size), true);
                     bot.addField('Users', String(s4d.client.users.cache.size), true);
                     bot.addField('Info', ['Ram: `', Math.round((Number((os.totalmem()))) - (Number((os.freemem())))), '/', Math.round(Number((os.totalmem()))), ' MB (', Math.round((((Number((os.totalmem()))) - (Number((os.freemem())))) / (Number((os.totalmem())))) * 100), '%)`', '\n', 'Version: `v1.0.0`'].join(''), true);
-                    bot.addField('Other', ['Commands used: ', s4d.database.get(String('commands')), '\n', 'Server uptime: ', Math.round((Number((secondsToDhms(os.sysUptime()).toString()))) / 60) < 120 ? Math.round((Number((secondsToDhms(os.sysUptime()).toString()))) / 60) : Math.round(((Number((secondsToDhms(os.sysUptime()).toString()))) / 60) / 60), Math.round((Number((secondsToDhms(os.sysUptime()).toString()))) / 60) < 120 ? ' mins' : ' hours', '\n', 'Bot uptime: ', Math.round(((Math.floor(new Date().getTime() / 1000)) - botuptime) / 60) > 120 ? Math.round((((Math.floor(new Date().getTime() / 1000)) - botuptime) / 60) / 60) : Math.round(((Math.floor(new Date().getTime() / 1000)) - botuptime) / 60), Math.round(((Math.floor(new Date().getTime() / 1000)) - botuptime) / 60) > 120 ? ' hours' : ' mins'].join(''), false);
+                    bot.addField('Other', ['Commands used: ', s4d.database.get(String('commands')), '\n', 'Server uptime: ', Math.round((Number((miliConverter.secsMinsHoursDays((os.sysUptime() * 1000), "string")))) / 60) < 120 ? Math.round((Number((miliConverter.secsMinsHoursDays((os.sysUptime() * 1000), "string")))) / 60) : Math.round(((Number((miliConverter.secsMinsHoursDays((os.sysUptime() * 1000), "string")))) / 60) / 60), Math.round((Number((miliConverter.secsMinsHoursDays((os.sysUptime() * 1000), "string")))) / 60) < 120 ? ' mins' : ' hours', '\n', 'Bot uptime: ', Math.round(((Math.floor(new Date().getTime() / 1000)) - botuptime) / 60) > 120 ? Math.round((((Math.floor(new Date().getTime() / 1000)) - botuptime) / 60) / 60) : Math.round(((Math.floor(new Date().getTime() / 1000)) - botuptime) / 60), Math.round(((Math.floor(new Date().getTime() / 1000)) - botuptime) / 60) > 120 ? ' hours' : ' mins'].join(''), false);
                     bot.setColor(s4dcolor);
                     await interaction.reply({
                         embeds: [bot]
                     });
-                } else if ((interaction.options.getSubcommand('bot')) == 'ban') {
+                } else if ((interaction.options.getSubcommand()) == 'ban') {
                     if ((interaction.member).permissions.has(Permissions.FLAGS.KICK_MEMBERS)) {
                         if ((interaction.options.getUser('add')) != null) {
                             if (!(((interaction.guild).members.cache.get(((interaction.options.getUser('add')).id)) || await (interaction.guild).members.fetch(((interaction.options.getUser('add')).id)))).permissions.has(Permissions.FLAGS.KICK_MEMBERS)) {
@@ -186,20 +199,20 @@
                                     s4d.database.set(String('botban'), databaseargs);
                                     await interaction.reply({
                                         content: (String((interaction.options.getUser('add')).username) + ' has been banned from using me'),
-                                        ephemeral: true,
+                                        ephemeral: true || false,
                                         components: []
                                     });
                                 } else {
                                     await interaction.reply({
                                         content: (String((interaction.options.getUser('add')).username) + ' has been already bot banned'),
-                                        ephemeral: true,
+                                        ephemeral: true || false,
                                         components: []
                                     });
                                 }
                             } else {
                                 await interaction.reply({
                                     content: (String((interaction.options.getUser('add')).username) + ' can´t be bot banned'),
-                                    ephemeral: true,
+                                    ephemeral: true || false,
                                     components: []
                                 });
                             }
@@ -210,27 +223,27 @@
                                 s4d.database.set(String('botban'), databaseargs);
                                 await interaction.reply({
                                     content: (String((interaction.options.getUser('remove')).username) + ' has been unbanned from using me'),
-                                    ephemeral: true,
+                                    ephemeral: true || false,
                                     components: []
                                 });
                             } else {
                                 await interaction.reply({
                                     content: (String((interaction.options.getUser('remove')).username) + ' is not bot banned'),
-                                    ephemeral: true,
+                                    ephemeral: true || false,
                                     components: []
                                 });
                             }
                         } else {
                             await interaction.reply({
                                 content: 'This command is used to ban user from using me',
-                                ephemeral: true,
+                                ephemeral: true || false,
                                 components: []
                             });
                         }
                     } else {
                         await interaction.reply({
                             content: '<a:youtried:939133664887988264>',
-                            ephemeral: true,
+                            ephemeral: true || false,
                             components: []
                         });
                     }
@@ -249,7 +262,7 @@
                     embeds: [Help]
                 });
             } else if ((interaction.commandName) == 'server') {
-                let embed = new Discord.MessageEmbed()
+                var embed = new Discord.MessageEmbed()
                 embed.setAuthor(((interaction.guild).name), ((interaction.guild).iconURL({
                     dynamic: true
                 })));
@@ -276,7 +289,7 @@
                         resp.on("end", async () => {
                             let data = JSON.parse(data2)
                             if ((data.error) == 'Not valid!' || (data.stauts) == '500') {
-                                let embed = new Discord.MessageEmbed()
+                                var embed = new Discord.MessageEmbed()
                                 embed.setTitle('Color');
                                 embed.setColor('#ff0000');
                                 embed.setDescription('Not valid!');
@@ -287,7 +300,7 @@
                                 });
 
                             } else if ((data.statusCode) == '429') {
-                                let embed = new Discord.MessageEmbed()
+                                var embed = new Discord.MessageEmbed()
                                 embed.setTitle('Color');
                                 embed.setColor('#ff0000');
                                 embed.setDescription('You are Ratelimited!');
@@ -299,7 +312,7 @@
 
                             } else {
                                 color = (data.hex);
-                                let embed = new Discord.MessageEmbed()
+                                var embed = new Discord.MessageEmbed()
                                 embed.setTitle((data.name));
                                 embed.setColor(color);
                                 embed.addField('Hex', (data.hex), true);
@@ -324,21 +337,21 @@
                 } else {
                     databaseargs = false;
                 }
-                if ((interaction.options.getSubcommand('autopublish')) == 'list') {
+                if ((interaction.options.getSubcommand()) == 'list') {
                     if (databaseargs.length > 0) {
                         await interaction.reply({
                             content: (['autopublish channels - <#', databaseargs.join('> , <#'), '>'].join('')),
-                            ephemeral: false,
+                            ephemeral: false || false,
                             components: []
                         });
                     } else {
                         await interaction.reply({
                             content: 'no channels set yet',
-                            ephemeral: false,
+                            ephemeral: false || false,
                             components: []
                         });
                     }
-                } else if ((interaction.options.getSubcommand('autopublish')) == 'add') {
+                } else if ((interaction.options.getSubcommand()) == 'add') {
                     if ((interaction.member).permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
                         channelid = subsequenceFromStartFromEnd(String(interaction.options.getChannel('channel')), 2, 1);
                         try {
@@ -349,13 +362,13 @@
                                         s4d.database.set(String((String((interaction.guild).id) + '-autopublish')), databaseargs);
                                         await interaction.reply({
                                             content: ':thumbsup: ',
-                                            ephemeral: true,
+                                            ephemeral: true || false,
                                             components: []
                                         });
                                     } else {
                                         await interaction.reply({
                                             content: 'This channel is already registered',
-                                            ephemeral: true,
+                                            ephemeral: true || false,
                                             components: []
                                         });
                                     }
@@ -364,14 +377,14 @@
                                     s4d.database.set(String((String((interaction.guild).id) + '-autopublish')), databaseargs);
                                     await interaction.reply({
                                         content: ':thumbsup: ',
-                                        ephemeral: true,
+                                        ephemeral: true || false,
                                         components: []
                                     });
                                 }
                             } else {
                                 await interaction.reply({
                                     content: 'This channel either doesn´t exist or is not set to Announcements ',
-                                    ephemeral: true,
+                                    ephemeral: true || false,
                                     components: []
                                 });
                             }
@@ -379,7 +392,7 @@
                         } catch (err) {
                             await interaction.reply({
                                 content: 'This channel either doesn´t exist or is not set to Announcements ',
-                                ephemeral: true,
+                                ephemeral: true || false,
                                 components: []
                             });
 
@@ -387,11 +400,11 @@
                     } else {
                         await interaction.reply({
                             content: 'You are missing permission `Administrator`',
-                            ephemeral: true,
+                            ephemeral: true || false,
                             components: []
                         });
                     }
-                } else if ((interaction.options.getSubcommand('autopublish')) == 'remove') {
+                } else if ((interaction.options.getSubcommand()) == 'remove') {
                     if ((interaction.member).permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
                         channelid = subsequenceFromStartFromEnd(String(interaction.options.getChannel('channel')), 2, 1);
                         if (s4d.database.has(String((String((interaction.guild).id) + '-autopublish')))) {
@@ -400,27 +413,27 @@
                                 s4d.database.set(String((String((interaction.guild).id) + '-autopublish')), databaseargs);
                                 await interaction.reply({
                                     content: ':thumbsup: ',
-                                    ephemeral: true,
+                                    ephemeral: true || false,
                                     components: []
                                 });
                             } else {
                                 await interaction.reply({
                                     content: 'channel is not followed',
-                                    ephemeral: true,
+                                    ephemeral: true || false,
                                     components: []
                                 });
                             }
                         } else {
                             await interaction.reply({
                                 content: '0 channels are followed',
-                                ephemeral: true,
+                                ephemeral: true || false,
                                 components: []
                             });
                         }
                     } else {
                         await interaction.reply({
                             content: 'You are missing permission `Administrator`',
-                            ephemeral: true,
+                            ephemeral: true || false,
                             components: []
                         });
                     }
@@ -429,7 +442,7 @@
                 if ((interaction.commandName) == 'rickroll') {
                     await interaction.reply({
                         content: 'Never gonna give you up',
-                        ephemeral: false,
+                        ephemeral: false || false,
                         components: []
                     });
                     await delay(Number(1.7) * 1000);
@@ -469,7 +482,7 @@
                     s4d.client.discordTogether.createTogetherCode(voice, "youtube").then(async invite => {
                         await interaction.reply({
                             content: (invite.code),
-                            ephemeral: true,
+                            ephemeral: true || false,
                             components: []
                         });
 
@@ -477,14 +490,14 @@
                 } catch (err) {
                     await interaction.reply({
                         content: 'you aren´t in a voice channel',
-                        ephemeral: true,
+                        ephemeral: true || false,
                         components: []
                     });
                     console.log((err));
 
                 };
             } else if ((interaction.commandName) == 'report') {
-                let embed = new Discord.MessageEmbed()
+                var embed = new Discord.MessageEmbed()
                 embed.setTitle('🚨 REPORT 🚨')
                     .setURL();
                 embed.setDescription((['**author: **', interaction.member.user, ' - ', (interaction.member.user).id, '\n', '**offender: **', interaction.options.getUser('user'), ' - ', (interaction.options.getUser('user')).id, '\n', '**message: **', interaction.options.getString('reason')].join('')));
@@ -495,12 +508,12 @@
 
                 await interaction.reply({
                     content: 'Thanks for your report, please wait until the staff team view it, in meantime take a cookie 🍪!',
-                    ephemeral: true,
+                    ephemeral: true || false,
                     components: []
                 });
             } else if ((interaction.commandName) == 'links') {
                 if ((interaction.options.getString('link')) == 's4d') {
-                    let embed = new Discord.MessageEmbed()
+                    var embed = new Discord.MessageEmbed()
                     embed.setColor(s4dcolor);
                     embed.setTitle('Official s4d website')
                         .setURL();
@@ -512,7 +525,7 @@
                     });
 
                 } else if ((interaction.options.getString('link')) == 'slash') {
-                    let embed = new Discord.MessageEmbed()
+                    var embed = new Discord.MessageEmbed()
                     embed.setColor(s4dcolor);
                     embed.setTitle('Slash register')
                         .setURL();
@@ -524,7 +537,7 @@
                     });
 
                 } else if ((interaction.options.getString('link')) == 'replit') {
-                    let embed = new Discord.MessageEmbed()
+                    var embed = new Discord.MessageEmbed()
                     embed.setColor(s4dcolor);
                     embed.setTitle('Replit')
                         .setURL();
@@ -536,7 +549,7 @@
                     });
 
                 } else if ((interaction.options.getString('link')) == 'uptimerobot') {
-                    let embed = new Discord.MessageEmbed()
+                    var embed = new Discord.MessageEmbed()
                     embed.setColor(s4dcolor);
                     embed.setTitle('Replit')
                         .setURL();
@@ -549,7 +562,7 @@
 
                 }
             } else if ((interaction.commandName) == '247') {
-                let embed = new Discord.MessageEmbed()
+                var embed = new Discord.MessageEmbed()
                 embed.setColor(s4dcolor);
                 embed.setTitle('Wants to run the bot 24/7 for free?')
                     .setURL();
@@ -564,7 +577,7 @@
 
             } else if ((interaction.commandName) == 'errors') {
                 if ((interaction.options.getString('error')) == 'node16') {
-                    let embed = new Discord.MessageEmbed()
+                    var embed = new Discord.MessageEmbed()
                     embed.setColor(s4dcolor);
                     embed.setTitle('Update to node 16')
                         .setURL();
@@ -581,7 +594,7 @@
                     });
 
                 } else if ((interaction.options.getString('error')) == 'module') {
-                    let embed = new Discord.MessageEmbed()
+                    var embed = new Discord.MessageEmbed()
                     embed.setColor(s4dcolor);
                     embed.setTitle('Cannot find module X')
                         .setURL();
@@ -593,7 +606,7 @@
                     });
 
                 } else if ((interaction.options.getString('error')) == 'events') {
-                    let embed = new Discord.MessageEmbed()
+                    var embed = new Discord.MessageEmbed()
                     embed.setColor(s4dcolor);
                     embed.setTitle('Cannot find module \'node:events\'')
                         .setURL();
@@ -605,7 +618,7 @@
                     });
 
                 } else if ((interaction.options.getString('error')) == 'app') {
-                    let embed = new Discord.MessageEmbed()
+                    var embed = new Discord.MessageEmbed()
                     embed.setColor(s4dcolor);
                     embed.setTitle('Bot keeps loading forever, logged in as Unknown#0000')
                         .setURL();
@@ -617,7 +630,7 @@
                     });
 
                 } else if ((interaction.options.getString('error')) == 'Intents') {
-                    let embed = new Discord.MessageEmbed()
+                    var embed = new Discord.MessageEmbed()
                     embed.setColor(s4dcolor);
                     embed.setTitle('Shows \'code loaded\' but doesn\'t start the bot')
                         .setURL();
@@ -633,7 +646,7 @@
                     });
 
                 } else if ((interaction.options.getString('error')) == 'index') {
-                    let embed = new Discord.MessageEmbed()
+                    var embed = new Discord.MessageEmbed()
                     embed.setColor(s4dcolor);
                     embed.setTitle('index.js error')
                         .setURL();
@@ -648,7 +661,7 @@
                     });
 
                 } else if ((interaction.options.getString('error')) == 'database') {
-                    let embed = new Discord.MessageEmbed()
+                    var embed = new Discord.MessageEmbed()
                     embed.setColor(s4dcolor);
                     embed.setTitle('unexpected end of an json input')
                         .setURL();
@@ -663,7 +676,7 @@
 
                 }
             } else if ((interaction.commandName) == 'preview') {
-                let embed = new Discord.MessageEmbed()
+                var embed = new Discord.MessageEmbed()
                 embed.setColor(s4dcolor);
                 embed.setTitle('preview')
                     .setURL();
@@ -678,26 +691,68 @@
                     components: []
                 });
 
+            } else if ((interaction.commandName) == 'autoresponse') {
+                if (((interaction.member)._roles.includes(((s4d.client.guilds.cache.get('932651844344373278')).roles.cache.get('932651844457607220')).id)) || ((interaction.member)._roles.includes(((s4d.client.guilds.cache.get('932651844344373278')).roles.cache.get('932651844428251195')).id))) {
+                    if ((interaction.options.getSubcommand()) == 'show') {
+                        ar_keys = [];
+                        var JSONdataS4D = JSON.parse(fs.readFileSync('autoresponse.json'));
+                        Object.keys(JSONdataS4D).forEach(async s4dkey => {
+                            ar_keys.push((s4dkey));
+
+                        })
+                        var embed = new Discord.MessageEmbed()
+                        embed.setColor(s4dcolor);
+                        embed.setTitle('Autoresponse')
+                            .setURL();
+                        embed.setDescription((['**Keys: **', Object.keys(JSONdataS4D).length, '\n', '**KeyWords:**`', ar_keys.join('`, `'), '`'].join('')));
+                        await interaction.reply({
+                            embeds: [(embed)],
+                            ephemeral: true,
+                            components: []
+                        });
+
+                    } else if ((interaction.options.getSubcommand()) == 'set') {
+                        database2.set(String((interaction.options.getString('keyword'))), [interaction.options.getString('name'), interaction.options.getString('description')]);
+                        await interaction.reply({
+                            content: (['added `', interaction.options.getString('keyword'), '` to database"'].join('')),
+                            ephemeral: true || false,
+                            components: []
+                        });
+                    } else if ((interaction.options.getSubcommand()) == 'remove') {
+                        if (database2.has(String((interaction.options.getString('keyword'))))) {
+                            database2.delete(String((interaction.options.getString('keyword'))));
+                            await interaction.reply({
+                                content: (['Keyword `', interaction.options.getString('keyword'), '` removed'].join('')),
+                                ephemeral: true || false,
+                                components: []
+                            });
+                        } else {
+                            await interaction.reply({
+                                content: (['Keyword `', interaction.options.getString('keyword'), '` not found'].join('')),
+                                ephemeral: true || false,
+                                components: []
+                            });
+                        }
+                    }
+                } else {
+                    await interaction.reply({
+                        content: 'You dont have access to use this command!',
+                        ephemeral: true || false,
+                        components: []
+                    });
+                }
             } else if (false) {
                 return
-            } else if (false) {} else {}
+            } else {
+                return
+            }
             s4d.database.add(String('commands'), parseInt(1));
         } else {
             await interaction.reply({
                 content: 'you are bot banned from using me',
-                ephemeral: true,
+                ephemeral: true || false,
                 components: []
             });
-        }
-
-    });
-
-    s4d.client.on('messageUpdate', async (oldMessage, newMessage) => {
-        if ((newMessage.content) == 'https://tenor.com/view/rick-astley-never-gonna-give-you-up-rickroll-dance-moves-dancing-guy-gif-20856902') {
-            if ((newMessage.member.user.id) == '939129451046920253') {
-                await delay(Number(4) * 1000);
-                newMessage.delete()
-            }
         }
 
     });
@@ -722,7 +777,7 @@
 
                         };
                         await delay(Number(5) * 1000);
-                        s4d.client.channels.cache.get('932651845212573730').messages.fetch((reaction.message.id)).then(s4dmessage => {
+                        s4d.client.channels.cache.get('932651845212573730').messages.fetch((reaction.message.id)).then(async (s4dmessage) => {
                             s4dmessage.react('✅');
                             s4dmessage.react('❌');
                         });
@@ -763,7 +818,7 @@
 
                             };
                             await delay(Number(0.5) * 1000);
-                            s4d.client.channels.cache.get('932651845212573733').messages.fetch((reaction.message.id)).then(s4dmessage => {
+                            s4d.client.channels.cache.get('932651845212573733').messages.fetch((reaction.message.id)).then(async (s4dmessage) => {
                                 s4dmessage.react('❌');
                                 s4dmessage.react('🐛');
                             });
@@ -781,7 +836,7 @@
 
                             };
                             await delay(Number(0.5) * 1000);
-                            s4d.client.channels.cache.get('932651845212573733').messages.fetch((reaction.message.id)).then(s4dmessage => {
+                            s4d.client.channels.cache.get('932651845212573733').messages.fetch((reaction.message.id)).then(async (s4dmessage) => {
                                 s4dmessage.react('✨');
                                 s4dmessage.react('🐛');
                             });
@@ -828,7 +883,7 @@
 
                             };
                             await delay(Number(0.5) * 1000);
-                            s4d.client.channels.cache.get('932651845212573733').messages.fetch((reaction.message.id)).then(s4dmessage => {
+                            s4d.client.channels.cache.get('932651845212573733').messages.fetch((reaction.message.id)).then(async (s4dmessage) => {
                                 s4dmessage.react('🔧');
                                 s4dmessage.react('✨');
                             });
@@ -934,179 +989,106 @@
                 return
             } else {
                 if (!((s4dmessage.member.user).bot)) {
-            if (((s4dmessage.channel || {}).id) == '932651844973502472') {
-                s4dmessage.react('✋');
-                s4dmessage.react('✨');
-                s4dmessage.react('❓');
-                s4dmessage.react('❌');
-                s4dmessage.startThread({
-                        name: ('Support ' + String(s4d.database.get(String('932651844973502472-thread')))),
-                        autoArchiveDuration: 10080
-                    })
-                    .then(s4dCreatedThread => {
+                    if (((s4dmessage.channel).id) == '932651844973502472') {
+                        channel_name = 'Support ';
+                        s4dmessage.react('✋');
+                        s4dmessage.react('✨');
+                        s4dmessage.react('❓');
+                        s4dmessage.react('❌');
+                    } else if (((s4dmessage.channel).id) == '932651845212573730') {
+                        channel_name = 'Feedback ';
+                        s4dmessage.react('👍');
+                        s4dmessage.react('👎');
+                        s4dmessage.react('✅');
+                        s4dmessage.react('❌');
+                    } else if (((s4dmessage.channel).id) == '932651845212573733') {
+                        channel_name = 'Bug ';
+                        s4dmessage.react('🔎');
+                        s4dmessage.react('🐛');
+                        s4dmessage.react('🔧');
+                        s4dmessage.react('✨');
+                        s4dmessage.react('❌');
+                        s4dmessage.react('👍');
+                        s4dmessage.react('👎');
+                    } else {
+                        channel_name = 'Script ';
+                        s4dmessage.react('👍');
+                        s4dmessage.react('👎');
+                        s4dmessage.react('❔');
+                    }
+                    channel_name = String(channel_name) + String(database1.get(String((String((s4dmessage.channel).id) + '-thread'))));
+                    s4dmessage.startThread({
+                            name: channel_name,
+                            autoArchiveDuration: 10080
+                        })
+                        .then(async s4dCreatedThread => {
 
-                    })
-                    .catch(s4dThreadErr => {
-                        if (String(s4dThreadErr) === 'DiscordAPIError: Guild premium subscription level too low') {
-                            s4dmessage.startThread({
-                                    name: ('Support ' + String(s4d.database.get(String('932651844973502472-thread')))),
-                                    autoArchiveDuration: 4320
-                                })
-                                .then(s4dCreatedThread => {
+                        })
+                        .catch(async s4dThreadErr => {
+                            if (String(s4dThreadErr) === 'DiscordAPIError: Guild premium subscription level too low') {
+                                s4dmessage.startThread({
+                                        name: channel_name,
+                                        autoArchiveDuration: 4320
+                                    })
+                                    .then(async s4dCreatedThread => {
 
-                                })
-                                .catch(s4dThreadErr => {
-                                    if (String(s4dThreadErr) === 'DiscordAPIError: Guild premium subscription level too low') {
-                                        s4dmessage.startThread({
-                                                name: ('Support ' + String(s4d.database.get(String('932651844973502472-thread')))),
-                                                autoArchiveDuration: 1440
-                                            })
-                                            .then(s4dCreatedThread => {
+                                    })
+                                    .catch(async s4dThreadErr => {
+                                        if (String(s4dThreadErr) === 'DiscordAPIError: Guild premium subscription level too low') {
+                                            s4dmessage.startThread({
+                                                    name: channel_name,
+                                                    autoArchiveDuration: 1440
+                                                })
+                                                .then(async s4dCreatedThread => {
 
-                                            })
-                                            .catch(s4dThreadErr => {
-                                                if (String(s4dThreadErr) === 'DiscordAPIError: Guild premium subscription level too low') {
+                                                })
+                                                .catch(async s4dThreadErr => {
+                                                    if (String(s4dThreadErr) === 'DiscordAPIError: Guild premium subscription level too low') {
+                                                        s4dmessage.startThread({
+                                                                name: channel_name,
+                                                                autoArchiveDuration: 60
+                                                            })
+                                                            .then(async s4dCreatedThread => {
 
-                                                }
-                                            });
+                                                            })
+                                                            .catch(async s4dThreadErr => {
+                                                                if (String(s4dThreadErr) === 'DiscordAPIError: Guild premium subscription level too low') {
 
-                                    }
-                                });
+                                                                }
+                                                            });
 
-                        }
-                    });
-                s4d.database.add(String('932651844973502472-thread'), parseInt(1));
-            } else if (((s4dmessage.channel || {}).id) == '932651845212573730') {
-                s4dmessage.react('👍');
-                s4dmessage.react('👎');
-                s4dmessage.react('✅');
-                s4dmessage.react('❌');
-                s4dmessage.startThread({
-                        name: ('Suggestion ' + String(s4d.database.get(String('932651845212573730-thread')))),
-                        autoArchiveDuration: 10080
-                    })
-                    .then(s4dCreatedThread => {
+                                                    }
+                                                });
 
-                    })
-                    .catch(s4dThreadErr => {
-                        if (String(s4dThreadErr) === 'DiscordAPIError: Guild premium subscription level too low') {
-                            s4dmessage.startThread({
-                                    name: ('Suggestion ' + String(s4d.database.get(String('932651845212573730-thread')))),
-                                    autoArchiveDuration: 4320
-                                })
-                                .then(s4dCreatedThread => {
+                                        }
+                                    });
 
-                                })
-                                .catch(s4dThreadErr => {
-                                    if (String(s4dThreadErr) === 'DiscordAPIError: Guild premium subscription level too low') {
-                                        s4dmessage.startThread({
-                                                name: ('Suggestion ' + String(s4d.database.get(String('932651845212573730-thread')))),
-                                                autoArchiveDuration: 1440
-                                            })
-                                            .then(s4dCreatedThread => {
-
-                                            })
-                                            .catch(s4dThreadErr => {
-                                                if (String(s4dThreadErr) === 'DiscordAPIError: Guild premium subscription level too low') {
-
-                                                }
-                                            });
-
-                                    }
-                                });
-
-                        }
-                    });
-                s4d.database.add(String('932651845212573730-thread'), parseInt(1));
-            } else if (((s4dmessage.channel || {}).id) == '932651845212573733') {
-                s4dmessage.react('🔎');
-                s4dmessage.react('🐛');
-                s4dmessage.react('🔧');
-                s4dmessage.react('✨');
-                s4dmessage.react('❌');
-                s4dmessage.react('👍');
-                s4dmessage.react('👎');
-                s4dmessage.startThread({
-                        name: ('Bug ' + String(s4d.database.get(String('932651845212573733-thread')))),
-                        autoArchiveDuration: 10080
-                    })
-                    .then(s4dCreatedThread => {
-
-                    })
-                    .catch(s4dThreadErr => {
-                        if (String(s4dThreadErr) === 'DiscordAPIError: Guild premium subscription level too low') {
-                            s4dmessage.startThread({
-                                    name: ('Bug ' + String(s4d.database.get(String('932651845212573733-thread')))),
-                                    autoArchiveDuration: 4320
-                                })
-                                .then(s4dCreatedThread => {
-
-                                })
-                                .catch(s4dThreadErr => {
-                                    if (String(s4dThreadErr) === 'DiscordAPIError: Guild premium subscription level too low') {
-                                        s4dmessage.startThread({
-                                                name: ('Bug ' + String(s4d.database.get(String('932651845212573733-thread')))),
-                                                autoArchiveDuration: 1440
-                                            })
-                                            .then(s4dCreatedThread => {
-
-                                            })
-                                            .catch(s4dThreadErr => {
-                                                if (String(s4dThreadErr) === 'DiscordAPIError: Guild premium subscription level too low') {
-
-                                                }
-                                            });
-
-                                    }
-                                });
-
-                        }
-                    });
-                s4d.database.add(String('932651845212573733-thread'), parseInt(1));
-            } else if (((s4dmessage.channel || {}).id) == '935600698920419378') {
-                s4dmessage.react('👍');
-                s4dmessage.react('👎');
-                s4dmessage.react('❔');
-                s4dmessage.startThread({
-                        name: ('Script ' + String(s4d.database.get(String('935600698920419378-thread')))),
-                        autoArchiveDuration: 10080
-                    })
-                    .then(s4dCreatedThread => {
-
-                    })
-                    .catch(s4dThreadErr => {
-                        if (String(s4dThreadErr) === 'DiscordAPIError: Guild premium subscription level too low') {
-                            s4dmessage.startThread({
-                                    name: ('Script ' + String(s4d.database.get(String('935600698920419378-thread')))),
-                                    autoArchiveDuration: 4320
-                                })
-                                .then(s4dCreatedThread => {
-
-                                })
-                                .catch(s4dThreadErr => {
-                                    if (String(s4dThreadErr) === 'DiscordAPIError: Guild premium subscription level too low') {
-                                        s4dmessage.startThread({
-                                                name: ('Script ' + String(s4d.database.get(String('935600698920419378-thread')))),
-                                                autoArchiveDuration: 1440
-                                            })
-                                            .then(s4dCreatedThread => {
-
-                                            })
-                                            .catch(s4dThreadErr => {
-                                                if (String(s4dThreadErr) === 'DiscordAPIError: Guild premium subscription level too low') {
-
-                                                }
-                                            });
-
-                                    }
-                                });
-
-                        }
-                    });
-                s4d.database.add(String('935600698920419378-thread'), parseInt(1));
-            }
+                            }
+                        });
+                    database1.add(String((String((s4dmessage.channel).id) + '-thread')), parseInt(1));
                     s4d.database.set(String(([(s4dmessage.channel).id, '-', s4dmessage.id].join(''))), 'unstatuated');
                 }
+            }
+        } else if ((s4dmessage.channel) == s4d.client.channels.cache.get('1010545985006600292')) {
+            if (!((s4dmessage.member.user).bot)) {
+                var JSONdataS4D = JSON.parse(fs.readFileSync('autoresponse.json'));
+                Object.keys(JSONdataS4D).forEach(async s4dkey => {
+                    if (String(((s4dmessage.content).toLowerCase())).includes(String((s4dkey)))) {
+                        var embed = new Discord.MessageEmbed();
+                        embed.setAuthor({
+                            name: String('Interactive Automated Support Request'),
+                            iconURL: String('')
+                        });
+                        embed.setDescription(String((['**Name: **', textToTitleCase((JSONdataS4D[String((s4dkey))])[0]), '\n', '**Detected Keyword: **`', s4dkey, '`', '\n', (JSONdataS4D[String((s4dkey))])[1]].join(''))));
+                        embed.setColor((colourRandom()));
+                        s4dmessage.channel.send({
+                            embeds: [embed]
+                        });
+
+                        return
+                    }
+
+                })
             }
         } else if ('<@!939129451046920253>' == (s4dmessage.content)) {
             s4dmessage.reply({
@@ -1119,5 +1101,7 @@
 
     });
 
+    const database1 = new Database('./database.json')
+    const database2 = new Database('./autoresponse.json')
     return s4d
 })();

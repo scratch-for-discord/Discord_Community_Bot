@@ -1,0 +1,186 @@
+{
+  "logic": [
+    "basic / Category",
+    "the basic category that lets your code run if condition is true, for example if user has role \"moderator\" react with <:troll:935655955650195557>"
+  ],
+  "cannot find module": [
+    "Console / Error",
+    "in shell do: `npm i {MODULE_NAME}`"
+  ],
+  "need help": [
+    "help",
+    "tell me KeyWords or ask in <#932651844973502472>"
+  ],
+  "ephemeral": [
+    "ephemeral / hidden reply",
+    "with this you can make reply with button, menu or slash as hidden if \"true\""
+  ],
+  "loop": [
+    "basic / Category",
+    "basic thing that will make your code repeated, forever, by number of times, while there is an condition or until its done, count with i to define every item every loop ( most used with lists)"
+  ],
+  "list": [
+    "lists / array",
+    "Lists are thing that makes your script easier, most common use is command handler that will split text with \" \" (space) so let´s say you have command `!ban @someone  bad person` you split the text with delimiter \" \"  that means the list will be 1 st position - !ban, 2 nd - @someone, 3rd - bad, 4th - person"
+  ],
+  "expanded variable": [
+    "Variables / basic",
+    "has more features than regular variables, you can use const - constant (never changeable), var - global variable - use with other events, let - event variable - use only in current event"
+  ],
+  "variable": [
+    "variable / basic",
+    "easy way to change, split text or lists, variables are change - able, you can name them whatever you want, there are 3 options: 1. set = replace the value, 2. change - by -1/ +1 (adds or substract the value), 3. the variable you can put as text or number to other blocks"
+  ],
+  "function": [
+    "function / basic",
+    "Functions are often used to shorten your code, if you want to use one script multiple times, for example get member with ID, name... and return as variable"
+  ],
+  "print": [
+    "print / console",
+    "print will send text in the console, often usefull to find isues"
+  ],
+  "unix": [
+    "time / date",
+    "UNIX is basically time that changes every second by 1 and it´s count from 1.1.1970, for more information how to use discord formating see: https://hammertime.cyou/en-GB"
+  ],
+  "chat formating": [
+    "discord markdown / formating",
+    "check https://support.discord.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline-"
+  ],
+  "token": [
+    "developer porta / bot",
+    "token is basically password for your bot to use to login, you can get it in https://discord.com/developers/applications"
+  ],
+  "intent": [
+    "developer portal / bot",
+    "You must turn on all 3 intents on https://discord.com/developers/applications/"
+  ],
+  "process.env": [
+    "replit / secret",
+    "env makes your bot token safe, on replit go to Secrets (lock icon) on left pannel, and add a new secret name as \"token\" and in value put your token"
+  ],
+  "timestamp": [
+    "time / date",
+    "timestamp is time for example when message was sent or embed was made etc."
+  ],
+  "message author": [
+    "Member / user",
+    "Message author is property that is different from message member, message author has only things non - server related, so if you want to use roles, perms of message user, use message member!"
+  ],
+  "message member": [
+    "Member / user",
+    "Message member is property that is different from message author, message member has server related things, for example roles or permissions, so for server things use this!"
+  ],
+  "thread": [
+    "message",
+    "Thread is message channel type that can be start on message for example in <#932651844973502472>"
+  ],
+  "webhook": [
+    "Interaction",
+    "Webhook is interaction for discord that some bots use for example logs, you can send messages with custom name and pfp.."
+  ],
+  "slash": [
+    "interaction",
+    "slash command are command you can do with \"/\" to make a slash command you can use build in blocks, or slash commands gui https://slash-commands-gui.androz2091.fr/"
+  ],
+  "database": [
+    "database / object",
+    "database are usefull to storage datas, for example economy bot to story money. currently there are 4 types of databases: 1. JSON - basic database recommanded for begginers, you can select more data files and so, 2. MongoDB - Uses external database that has 500 MB storage free and good to use so you won´t loose your data, 3. Sqlite - database for Sqlite 4. replit - build in database for replit. if you want to store per member/server/channel etc. you can use block `create text with` in text category and on first position put ID of (member/server or channel) and second \"-coins) that will store for each user"
+  ],
+  "json request": [
+    "Website / json",
+    "Json request gets JSON data from given site, you can check https://popcat.xyz/api for endpoints, you can use create text with and add ( \"https://api.popcat.xyz/color/\" + input (for example message content)"
+  ],
+  "how to start": [
+    "Beginning / begin",
+    "you can check some <#935600698920419378>, or some examples on the website, you should try easy things, not go to database or lists in the first day"
+  ],
+  "application": [
+    "APP",
+    "The app is outdated and it´s better if you use s4d in your browser"
+  ],
+  "website": [
+    "website / preview",
+    "current preview is https://scratch-for-discord-469.vercel.app/, but you can also use https://scratch-for-discord.com/"
+  ],
+  "poopoo api": [
+    "API / json",
+    "This API is made by <@!712342308565024818>, <@!691111067807514685>, <@!699420041103540264> and you can use it by json request"
+  ],
+  "boolean": [
+    "Data type",
+    "Boolean is part of data type that can return either true or false"
+  ],
+  "integer": [
+    "Data type / number",
+    "Integer is part of data type that can be positive, negative, or zero and is a whole number: 1,2, 999, -20"
+  ],
+  "string": [
+    "Data type / text",
+    "used to represent and manipulate a sequence of characters."
+  ],
+  "float": [
+    "Data type / number",
+    "Number with a decimal point: 3.15, 9.06, 00.13"
+  ],
+  "Character": [
+    "Data type / char",
+    "Encoding text numerically: 97 (in ASCII, 97 is a lower case 'a')"
+  ],
+  "key": [
+    "Database / Object",
+    "Keys can edit / get values from a JSON file"
+  ],
+  "mongo": [
+    "Database / Object",
+    "MongoDB is a source-available cross-platform document-oriented database program. That can store your data up to 500 MB/free https://cloud.mongodb.com/"
+  ],
+  "welcome card": [
+    "Files / Images",
+    "Welcome cards blocks can be found in Files > Images > Member cards.  you can use it to goodbye/welcome/rankcard"
+  ],
+  "member card": [
+    "Files / Images",
+    "Welcome cards blocks can be found in Files > Images > Member cards. you can use it to goodbye/welcome/rankcard"
+  ],
+  "rank card": [
+    "Files / Images",
+    "Leveling cards blocks can be found in Files > Images > Member cards. you can use it to goodbye/welcome/rankcard"
+  ],
+  "captcha": [
+    "Images",
+    "Captcha blocks can be found in Files > Images > Captchas"
+  ],
+  "image": [
+    "Images",
+    "image eding can be found in Files > Images > Image editing. image effects can be found in FIles > Images > Simple effects."
+  ],
+  "reaction": [
+    "Reactions",
+    "With this category some of you are having problems. `emoji of the reaction` - is only name of the emoji"
+  ],
+  "run not working": [
+    "APP / error",
+    "The application is no longer supported and use the website https://scratch-for-discord-469.vercel.app/"
+  ],
+  "mongquick": [
+    "Database / error",
+    "mongquick is a github package, to install it use `npm i https://github.com/ahqsoftwares/quickmongo.git`"
+  ],
+  "math": [
+    "basic / Category",
+    "basic category to use your own mathematic functions.. you can add money to databases and so on, very useful is `random integer from 1 to 100` with this you can make random events..."
+  ],
+  "webserver": [
+    "bot",
+    "this block is made to make your bot host online 24/7 using https://uptimerobot.com/"
+  ],
+  "embed": [
+    "messages",
+    "make your message more cooler!"
+  ],
+  "role": [
+    "server / Category",
+    "roles management, verification, reacting roles and so one. make sure you are using `get role with ID/NAME equal to () on the server ()` and use MEMBER properties not USER!"
+  ]
+}

@@ -44,16 +44,16 @@
     "UNIX is basically time that changes every second by 1 and it´s count from 1.1.1970, for more information how to use discord formating see: https://hammertime.cyou/en-GB"
   ],
   "chat formating": [
-    "discord markdown / formating",
-    "check https://support.discord.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline-"
+    "Discord Markdown / Formating",
+    "**STYLES** \n *Italics* - `*italics*` or `_italics_` \n **Bold** - `**Bold**` \n ***Bold Italics*** - `***Bold Italics***` \n __Underline__ - `__Underline__` \n __*underline italics*__ - `__*underline italics*__` \n __**underline bold**__ - `__**underline bold**__` \n __***underline bold italics***__ - `__***underline bold italics***__` \n ~~Strikethrough~~ - `~~Strikethrough~~` \n **CODE BLOCKS** \n *Can be used to not show markdown and other formatings.. \n `One line` - ``` `One line` ``` \n ```Multi \nLine → ` ` `Multi Line` ` `  ```\n **BLOCK QUOTES** \n > hey - `> hey`(use `>>> ` to make it until the end of the message to be included in the quote) \n **MENTIONS** \n Member - <@939129451046920253> - `<@ID>` \n Role - <@&939195165611016223> - `<@&ID>` \n Channel - <#1010545985006600292> `<@#ID>` \n Emoji - <:troll:935655955650195557> - `<:NAME:ID>` (animated - `<a:NAME:ID>`)"
   ],
   "token": [
-    "developer porta / bot",
+    "Developer Portal / Bot",
     "token is basically password for your bot to use to login, you can get it in https://discord.com/developers/applications"
   ],
   "intent": [
     "developer portal / bot",
-    "You must turn on all 3 intents on https://discord.com/developers/applications/"
+    "Go to [discord dev](https://discord.com/developers/applications) \n → Choose your bot \n → Go to Bot Tab \n → Scroll down to Privileged Gateway Intents \n → checkmark the first three options."
   ],
   "process.env": [
     "replit / secret",
@@ -81,7 +81,8 @@
   ],
   "slash": [
     "interaction",
-    "slash command are command you can do with \"/\" to make a slash command you can use build in blocks, or slash commands gui https://slash-commands-gui.androz2091.fr/"
+    "slash command are command you can do with \"/\" to make a slash command you can use build in blocks, or slash commands gui https://slash-commands-gui.androz2091.fr/",
+    "https://i.imgur.com/VmBvMZq.png"
   ],
   "database": [
     "database / object",
@@ -96,8 +97,8 @@
     "you can check some <#935600698920419378>, or some examples on the website, you should try easy things, not go to database or lists in the first day"
   ],
   "application": [
-    "APP",
-    "The app is outdated and it´s better if you use s4d in your browser"
+    "APP / website",
+    "The app is outdated and it´s better if you use s4d in your browser, Hosting directly on the desktop app has stopped working on newer versions. So, it is recommended to host on [Replit](https://repl.it/)"
   ],
   "website": [
     "website / preview",
@@ -126,10 +127,6 @@
   "Character": [
     "Data type / char",
     "Encoding text numerically: 97 (in ASCII, 97 is a lower case 'a')"
-  ],
-  "key": [
-    "Database / Object",
-    "Keys can edit / get values from a JSON file"
   ],
   "mongo": [
     "Database / Object",
@@ -182,5 +179,53 @@
   "role": [
     "server / Category",
     "roles management, verification, reacting roles and so one. make sure you are using `get role with ID/NAME equal to () on the server ()` and use MEMBER properties not USER!"
+  ],
+  "node16": [
+    "Error / Replit",
+    "It is recommended to use preview 469"
+  ],
+  "node:events": [
+    "Error / Replit",
+    "Use the newest previews (such as 469) + install Node.js v16 and Discord.js v13"
+  ],
+  "json input": [
+    "Error / JSON",
+    "go to database.json make sure it starts with `{` and ends with `}` and last value has not a comma"
+  ],
+  "index": [
+    "Error / Replit",
+    "click the 3 dots in the left menu and click on \"show hidden files\"  replace .replit with \n`run = \"npm start\" \nentrypoint = \"bot.js\"`"
+  ],
+  "json file": [
+    "what is a json file?",
+    "a json file is basically an object in a file"
+  ],
+  "key": [
+    "Database / Object",
+    "Keys can edit / get values from a JSON file or an js Object, blocks can be found in: Files > Data"
+  ],
+  "24/7": [
+    "Uptime Robot / Replit",
+    "In order to run your bot full time using [Replit](https://repl.it) you will need the block in the image below. After creating a webserver you will have a link copy that link and create a monitor on [Uptime Robot](https://uptimerobot.com/) to run your project 24/7",
+    "https://cdn.discordapp.com/attachments/928283783252287541/1011920468334362634/Untitled_design.png"
+  ],
+  "scratch for discord": [
+    "s4d / scratch",
+    "This is the official server for S4D (Scratch for discord), official website is https://scratch-for-discord.com/ \n For more information check <#932651844973502465>"
+  ],
+  "chatbot": [
+    "spoonfeed / json request",
+    "For chatbot you can use \"https://api.popcat.xyz/chatbot?msg=who+made+you&owner=Noxyyk&botname=S4D\" pop cat API and JSON request, look at the image bellow!",
+    "https://i.imgur.com/kZXZ9Qo.png"
+  ],
+  "random": [
+    "list/array",
+    "how to get random item from list.",
+    "https://media.discordapp.net/attachments/1011704100120965202/1014448640745541682/screenshot_8.png"
+  ],
+  "rickroll": [
+    "get rolled",
+    "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
   ]
 }

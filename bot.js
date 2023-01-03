@@ -692,7 +692,7 @@
                     ephemeral: true,
                     components: []
                 });
-                const reviewed = reviews.get(String('reviewed'));
+                 reviewed = reviews.get(String('reviewed'));
 
                 /*
               i really didnt want to code the page generator in
@@ -705,7 +705,7 @@
                     .map(x => {
                         return {
                             user: x,
-                            total: reviewed[x].total
+                            total: reviewed[x].total,
                             numrev: Object.getOwnPropertyNames(reviewed[x].reviews).length
                         }
                     })

@@ -27,7 +27,6 @@
     let https = require("https")
     const synchronizeSlashCommands = require('@frostzzone/discord-sync-commands');
     const Database = require("easy-json-database")
-    const Database = require("easy-json-database")
 
     // define s4d components (pretty sure 90% of these arnt even used/required)
     let s4d = {

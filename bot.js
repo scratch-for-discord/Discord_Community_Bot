@@ -791,18 +791,18 @@
                         .setStyle(('PRIMARY')),
                     ));
                 let page = 1;
-                var page = new Discord.MessageEmbed();
-                page.setColor('#00cccc');
-                page.setTitle(String('helper list'))
-                page.setURL(String());
-                page.setDescription(String((pages[(page - 1)])));
-                page.setFooter({
+                var pageembed = new Discord.MessageEmbed();
+                pageembed.setColor('#00cccc');
+                pageembed.setTitle(String('helper list'))
+                pageembed.setURL(String());
+                pageembed.setDescription(String((pages[(page - 1)])));
+                pageembed.setFooter({
                     text: String((['page ', page, '/', pages.length].join(''))),
                     iconURL: String()
                 });
 
                 (interaction.channel).send({
-                    embeds: [page],
+                    embeds: [pageembed],
                     components: [buttons_right]
                 }).then(async m => {
 
@@ -820,12 +820,12 @@
                         } else if ((i.customId) == 'maxR') {
                             page = (pages.length)
                         }
-                        var page = new Discord.MessageEmbed();
-                        page.setColor('#00cccc');
-                        page.setTitle(String('helper list'))
-                        page.setURL(String());
-                        page.setDescription(String((pages[(page - 1)])));
-                        page.setFooter({
+                        var pageembed = new Discord.MessageEmbed();
+                        pageembed.setColor('#00cccc');
+                        pageembed.setTitle(String('helper list'))
+                        pageembed.setURL(String());
+                        pageembed.setDescription(String((pages[(page - 1)])));
+                        pageembed.setFooter({
                             text: String((['page ', page, '/', pages.length].join(''))),
                             iconURL: String()
                         });
@@ -837,21 +837,21 @@
                   */
                         if (page == 1) {
                             await i.update({
-                                embeds: [page],
+                                embeds: [pageembed],
                                 components: [buttons_right]
                             }).then(async m => {
 
                             });
                         } else if (page == pages.length) {
                             await i.update({
-                                embeds: [page],
+                                embeds: [pageembed],
                                 components: [buttons_left]
                             }).then(async m => {
 
                             });
                         } else {
                             await i.update({
-                                embeds: [page],
+                                embeds: [pageembed],
                                 components: [buttons_all]
                             }).then(async m => {
 

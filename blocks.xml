@@ -1,12 +1,14 @@
 <xml xmlns="https://developers.google.com/blockly/xml">
   <variables>
     <variable id="C%)J{{McR!CKzzY.;3f/">time_var</variable>
+    <variable id="MrVTvjr2IV=L$|^SyU`p">helper</variable>
     <variable id="Op^b/-:=qCUTDsKB?gO#">channel_update</variable>
     <variable id="f!Mja`$Ee`8u#g]C:})r">botuptime</variable>
     <variable id="H!o.^g3|a65F]tb^Y7B=">channel_update_old</variable>
     <variable id="Jq.viz+!!np3jBF1#JyM">key_reply</variable>
     <variable id=".w7Y4OP(.hS-ZT?2nivR">keys_names</variable>
     <variable id="|4F`.NPQ@@Q.%z)rTI3]">s4dcolor</variable>
+    <variable id="_U%=Z#c;|yP-K;;aC%(K">j</variable>
     <variable id="Irq:kS+VBT:#IWP7U8G1">ar_keys</variable>
     <variable id="bMpJU[j*uJa6brQt|/:!">channel_category</variable>
     <variable id="]vcq}3+[,HD5*I3,[XBc">channel_text</variable>
@@ -297,6 +299,241 @@
       </block>
     </value>
   </block>
+  <block type="procedures_defnoreturn" id="RT~PCBUJ2-XMBJ*77KK8" collapsed="true" x="401" y="-959">
+    <mutation>
+      <arg name="helper" varid="MrVTvjr2IV=L$|^SyU`p"></arg>
+    </mutation>
+    <field name="NAME">recalculate total rating</field>
+    <comment pinned="false" h="80" w="160">Describe this function...</comment>
+    <statement name="STACK">
+      <block type="express_var" id="_U0OqDQ)y)r;Qen}~`Oq">
+        <field name="TYPE">let</field>
+        <field name="COLON">;</field>
+        <value name="VAR">
+          <shadow type="text" id="Ik6KToP{Me6d0)uUH+Mf">
+            <field name="TEXT">rjson</field>
+          </shadow>
+        </value>
+        <value name="CONTENT">
+          <block type="s4d_get_data_new" id="9By||9tEq4^8R9lOnFC(">
+            <value name="KEY">
+              <shadow type="text" id="$Cmg5e@AlAHGBEI[LTVE">
+                <field name="TEXT">reviewers</field>
+              </shadow>
+            </value>
+            <value name="NAME">
+              <shadow type="text" id="z(aRt2+l]|Ad7QY^D+D4">
+                <field name="TEXT">reviews</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="express_var" id="k[feVGtQL|j@ZWL7Ij$]">
+            <field name="TYPE">let</field>
+            <field name="COLON">;</field>
+            <value name="VAR">
+              <shadow type="text" id=".3Xe/4Yg)KfAmici(Kq.">
+                <field name="TEXT">hjson</field>
+              </shadow>
+            </value>
+            <value name="CONTENT">
+              <block type="jg_object_getvalue" id="!3)d3bkC|NzyuR_#^Abu">
+                <value name="value">
+                  <shadow type="text" id="J7#BUr~#!Iar/0H;#_u#">
+                    <field name="TEXT">key</field>
+                  </shadow>
+                  <block type="variables_get" id="K1JLPYO~OXZdQrQs/P#|">
+                    <field name="VAR" id="MrVTvjr2IV=L$|^SyU`p">helper</field>
+                  </block>
+                </value>
+                <value name="object">
+                  <block type="blank" id="/*-:PDdG`N47[}:{%qF(">
+                    <field name="TEXT">rjson</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="express_var" id=":fbI/fEA]pg(sG.APK`~">
+                <field name="TYPE">let</field>
+                <field name="COLON">;</field>
+                <value name="VAR">
+                  <shadow type="text" id="$(SCQ1M?yn8=}1bUG;X9">
+                    <field name="TEXT">sum</field>
+                  </shadow>
+                </value>
+                <value name="CONTENT">
+                  <block type="math_number" id="[D)=Lq~G%4^Yz(o9#FSn">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="express_var" id="Cn_HGIL.RVPj)4:uX5jM">
+                    <field name="TYPE">const</field>
+                    <field name="COLON">;</field>
+                    <value name="VAR">
+                      <shadow type="text" id="[b-M~?mK!jnF1=u5%YC`">
+                        <field name="TEXT">length</field>
+                      </shadow>
+                    </value>
+                    <value name="CONTENT">
+                      <block type="lists_length" id="(jV6D,Kv2FJH{:76YhD1">
+                        <value name="VALUE">
+                          <block type="jg_objects_get_objects_key_names_in_list" id="t2,Bjh/z!~*yMrEBx6dt">
+                            <value name="OBJECT">
+                              <block type="blank" id="hvKm#?2d9cF^}2GBdTej">
+                                <field name="TEXT">hjson.reviews</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="controls_forEach" id="0rwSN6ZM]pFaZ,dDclKM">
+                        <field name="VAR" id="_U%=Z#c;|yP-K;;aC%(K">j</field>
+                        <value name="LIST">
+                          <block type="jg_objects_get_objects_key_names_in_list" id="M}_ZC_Weo*Aj_:EfqA?g">
+                            <value name="OBJECT">
+                              <block type="blank" id="mrXzLWRrtFlRYn|?^@(t">
+                                <field name="TEXT">hjson.reviews</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO">
+                          <block type="express_var" id="?CZTiUGPbZfF|WF+|iD=">
+                            <field name="TYPE">let</field>
+                            <field name="COLON">;</field>
+                            <value name="VAR">
+                              <shadow type="text" id="XB#h$2bxAmTRLgGp~,z#">
+                                <field name="TEXT">value</field>
+                              </shadow>
+                            </value>
+                            <value name="CONTENT">
+                              <block type="jg_object_getvalue" id="Pwm1{:(M:dYiqWC-$cpy">
+                                <value name="value">
+                                  <shadow type="text" id="PAl.y63|ZHp8C8eYXo!6">
+                                    <field name="TEXT">key</field>
+                                  </shadow>
+                                  <block type="variables_get" id="OGd:`TF};qOHy+h1On:a">
+                                    <field name="VAR" id="_U%=Z#c;|yP-K;;aC%(K">j</field>
+                                  </block>
+                                </value>
+                                <value name="object">
+                                  <block type="blank" id="cHfZ|{QBT+]r1hq`$X2%">
+                                    <field name="TEXT">hjson.reviews</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="jg_other_setvalue" id="dU)jsAzKgh%wE-7[Ihe/">
+                                <value name="input">
+                                  <block type="blank" id="KE,[e-[iZ0l[4!We0{8@">
+                                    <field name="TEXT">sum</field>
+                                  </block>
+                                </value>
+                                <value name="replace">
+                                  <block type="math_arithmetic" id="}iqj5/n:l)=~Fo1*$[D{">
+                                    <field name="OP">ADD</field>
+                                    <value name="A">
+                                      <shadow type="math_number" id="J;;{ku@S{4N^*:w`6CoW">
+                                        <field name="NUM">1</field>
+                                      </shadow>
+                                      <block type="blank" id="q|nFuuQ1@`=!hW#JrC,K">
+                                        <field name="TEXT">sum</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <shadow type="math_number" id="zeE-;uvrON+^/aZjQYM)">
+                                        <field name="NUM">1</field>
+                                      </shadow>
+                                      <block type="blank" id="P5-Q:.D4T4EqhrY*hyO%">
+                                        <field name="TEXT">value.rating</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="jg_objects_set_key_to_value_in_object" id="w0K+XkXwdl-W$~!5eQ|8">
+                            <value name="KEY">
+                              <shadow type="text" id="L,bmATIN@vj/mz|bQ.Rg">
+                                <field name="TEXT">total</field>
+                              </shadow>
+                            </value>
+                            <value name="VALUE">
+                              <block type="blank" id="!s0`dccG#P;G{xSMS-AS">
+                                <field name="TEXT">sum</field>
+                              </block>
+                            </value>
+                            <value name="OBJECT">
+                              <block type="blank" id="!)c`]DpIpy(1UZ7i=F]/">
+                                <field name="TEXT">hjson</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="jg_objects_set_key_to_value_in_object" id="jJ._$[0y|KpA/8G+6Z^]">
+                                <value name="KEY">
+                                  <shadow type="text" id=")|LosKoVAT;p.bq;rQoX">
+                                    <field name="TEXT">total</field>
+                                  </shadow>
+                                  <block type="variables_get" id="0ayy{NR)nm07WP`l%xp0">
+                                    <field name="VAR" id="MrVTvjr2IV=L$|^SyU`p">helper</field>
+                                  </block>
+                                </value>
+                                <value name="VALUE">
+                                  <block type="blank" id="|iG*+xW/w2I}o#LT^wl$">
+                                    <field name="TEXT">hjson</field>
+                                  </block>
+                                </value>
+                                <value name="OBJECT">
+                                  <block type="blank" id="rPwTvq%2-s~_F}Fy/lu*">
+                                    <field name="TEXT">rjson</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="s4d_set_data_new" id="zImozMJ%ZS[L[F;lo$ce">
+                                    <value name="KEY">
+                                      <shadow type="text" id="v/KIULkb(Af7l*1sV+e6">
+                                        <field name="TEXT">reviewers</field>
+                                      </shadow>
+                                    </value>
+                                    <value name="VALUE">
+                                      <shadow type="text" id="=-1U7Y`SKpMA-fjQW!WF">
+                                        <field name="TEXT">world</field>
+                                      </shadow>
+                                      <block type="blank" id="BNkmFyn`?Llo?/k*ByAj">
+                                        <field name="TEXT">rjson</field>
+                                      </block>
+                                    </value>
+                                    <value name="NAME">
+                                      <shadow type="text" id="hyy=WaQ3:JU]im*ftLa=">
+                                        <field name="TEXT">reviews</field>
+                                      </shadow>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
   <block type="jg_unused_floating_comment" id="dXDk;[I_Tzb1V.;}^~^k" x="-16" y="-821">
     <field name="TEXT">BASE</field>
   </block>
@@ -361,9 +598,6 @@
   </block>
   <block type="jg_unused_floating_comment" id="WuRmc#*uP2CEP0$cb`yD" x="564" y="-440">
     <field name="TEXT">MESSAGES</field>
-  </block>
-  <block type="jg_unused_floating_comment" id="J);PoxMoIED?U_9)q:+-" x="336" y="-417">
-    <field name="TEXT">DATABASE</field>
   </block>
   <block type="jg_unused_floating_comment" id="KjGMF=dTH(+{M?QukT1c" x="1194" y="-440">
     <field name="TEXT">INTERACTIONS</field>
@@ -1656,7 +1890,7 @@
       </block>
     </statement>
   </block>
-  <block type="s4d_on_message" id="hOn{/@8:*1yjo65PLOKf" collapsed="true" x="558" y="-360">
+  <block type="s4d_on_message" id="hOn{/@8:*1yjo65PLOKf" collapsed="true" x="548" y="-363">
     <statement name="STATEMENTS">
       <block type="controls_if" id="Z2Meh!T5+4!{3UMdKPbB">
         <mutation elseif="3"></mutation>
@@ -2480,6 +2714,87 @@
             </value>
           </block>
         </statement>
+        <value name="IF3">
+          <block type="frost_channel_types" id="4Y?2EBj?ULFBifAKqqUz">
+            <field name="type">'GUILD_PUBLIC_THREAD'</field>
+            <value name="Channel">
+              <shadow type="s4d_message_channel" id="T:?4Y@85ks-f$Zgpm6iw"></shadow>
+            </value>
+          </block>
+        </value>
+        <statement name="DO3">
+          <block type="controls_if" id=".,$+nQ}MBa_FgPRz!8:^">
+            <value name="IF0">
+              <block type="logic_operation" id="?_B$?fEUSXjZQ}-on{Q*">
+                <field name="OP">OR</field>
+                <value name="A">
+                  <block type="logic_operation" id="2]t!xTp=g}cd}:GGz(sI">
+                    <field name="OP">OR</field>
+                    <value name="A">
+                      <block type="s4d_includes" id="}7^Y9[,1f.[97AQ0QHpr">
+                        <value name="TEXT">
+                          <shadow type="text" id="^51GsmU:Q/;pRcNEKjDe">
+                            <field name="TEXT">abc</field>
+                          </shadow>
+                          <block type="s4d_message_content" id="JW|s;ZwDfq?]D8pfN8eM"></block>
+                        </value>
+                        <value name="INCLUDES">
+                          <shadow type="text" id=";v##l[ii/o*0]|ubN7]N">
+                            <field name="TEXT">thx</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="s4d_includes" id="s:H[MOZ8n*qjYoTR#QVF">
+                        <value name="TEXT">
+                          <shadow type="text" id="^51GsmU:Q/;pRcNEKjDe">
+                            <field name="TEXT">abc</field>
+                          </shadow>
+                          <block type="s4d_message_content" id="PM0@+wof_LSw2pWd){E*"></block>
+                        </value>
+                        <value name="INCLUDES">
+                          <shadow type="text" id="#kp4;ZL0zYIwz^q-T(JW">
+                            <field name="TEXT">thanks</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="s4d_includes" id="D[bM)T{o$mzn#F{|%evy">
+                    <value name="TEXT">
+                      <shadow type="text" id="^51GsmU:Q/;pRcNEKjDe">
+                        <field name="TEXT">abc</field>
+                      </shadow>
+                      <block type="s4d_message_content" id="JU9v;uvyrK-EWFZIxbpt"></block>
+                    </value>
+                    <value name="INCLUDES">
+                      <shadow type="text" id="Hu+4e4#(]*omsL]mnTN;">
+                        <field name="TEXT">thank you</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="jg_comments_connected_comment" id="Gz{O7^6x#QSCaHvCH92#">
+                <field name="TEXT">sussy wording 😳.&amp;#10;replace *insert command here* with the review &amp;#10;command</field>
+                <next>
+                  <block type="s4d_reply" id="}7yU.9CvV9TUGLRhsLiJ">
+                    <value name="CONTENT">
+                      <shadow type="text" id="r=6V7Hp`=7II2}z2Mkn%">
+                        <field name="TEXT">use `/review` in &lt;#932651844973502473&gt; to rate your helper(s)!</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </statement>
       </block>
     </statement>
   </block>
@@ -3258,7 +3573,7 @@
       </block>
     </statement>
   </block>
-  <block type="on_slash" id="K8jc=!7d8[g?uX(/c=lx" collapsed="true" x="1188" y="-365">
+  <block type="on_slash" id="K8jc=!7d8[g?uX(/c=lx" collapsed="true" x="1151" y="-329">
     <statement name="STATEMENTS">
       <block type="s4d_lasercat_switch_switch" id="HDEkOtP;qH{/I0*-~Wr}">
         <value name="switch">
@@ -5596,11 +5911,1374 @@
               </block>
             </statement>
             <value name="IF6">
-              <block type="logic_null" id="KF)j:h5O:%W:eU,Zv+)M"></block>
+              <block type="jg_text_remake_paragraph_quotes" id="-ErZoO~STZZfD8;o1S5:">
+                <field name="TEXT">review</field>
+              </block>
             </value>
+            <statement name="DO6">
+              <block type="express_var" id="kqGOw/*6hg!EZY)/W.{)">
+                <field name="TYPE">const</field>
+                <field name="COLON">;</field>
+                <value name="VAR">
+                  <shadow type="text" id="q`zrz1@8IC`y,U=fLAwW">
+                    <field name="TEXT">user</field>
+                  </shadow>
+                </value>
+                <value name="CONTENT">
+                  <block type="s4d_member_id" id=",fYyQgMIi@v#6FLn%4Yt">
+                    <value name="MEMBER">
+                      <block type="interaction_author" id="l4unFpW4cz]3s+uUilEI"></block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="express_var" id=".em^dWgx%@v1)8fXb%~e">
+                    <field name="TYPE">const</field>
+                    <field name="COLON">;</field>
+                    <value name="VAR">
+                      <shadow type="text" id="H2n}8gJVMI),436V0|yJ">
+                        <field name="TEXT">helper</field>
+                      </shadow>
+                    </value>
+                    <value name="CONTENT">
+                      <block type="s4d_member_id" id="^25P_Z*yL/^R3Y,`U(+y">
+                        <value name="MEMBER">
+                          <block type="options" id="%Rs!@Y-T_tI=;AyxGi_V">
+                            <mutation mode="Member" type="null"></mutation>
+                            <field name="SEARCH">Member</field>
+                            <value name="BOOLEAN">
+                              <block type="jg_text_remake_paragraph_quotes" id="TiOp5y8KPR0~#^CD2gZ{">
+                                <field name="TEXT">helper</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="express_var" id="Zvolm[oU[8ZwZ`nM$|AI">
+                        <field name="TYPE">let</field>
+                        <field name="COLON">;</field>
+                        <value name="VAR">
+                          <shadow type="text" id="satKQ2T7Tlv-0m=gmKhV">
+                            <field name="TEXT">reviewed</field>
+                          </shadow>
+                        </value>
+                        <value name="CONTENT">
+                          <block type="s4d_get_data_new" id="LPO0_7qUl7hP}-7nu7[t">
+                            <value name="KEY">
+                              <shadow type="text" id="kA6g-d*Z+cdcpNx{jqCY">
+                                <field name="TEXT">reviewed</field>
+                              </shadow>
+                            </value>
+                            <value name="NAME">
+                              <shadow type="text" id="BToBV_`*t8*~nLHFs`S:">
+                                <field name="TEXT">reviews</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="express_var" id=";_U^Q?cCOVKS%cCkc;.Z">
+                            <field name="TYPE">let</field>
+                            <field name="COLON">;</field>
+                            <value name="VAR">
+                              <shadow type="text" id="9BY_ND/#)uO9ckpuk!=j">
+                                <field name="TEXT">reviewers</field>
+                              </shadow>
+                            </value>
+                            <value name="CONTENT">
+                              <block type="s4d_get_data_new" id="G8hx)ikqZ7r3hR$SC;I]">
+                                <value name="KEY">
+                                  <shadow type="text" id="vRj`P1T]B/lel-)%[pP#">
+                                    <field name="TEXT">reviewers</field>
+                                  </shadow>
+                                </value>
+                                <value name="NAME">
+                                  <shadow type="text" id="euHK^@_H#iJrol3U%{W;">
+                                    <field name="TEXT">reviews</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="express_var" id="N(u9}|pJ2i8uQBANxM/*" collapsed="true">
+                                <field name="TYPE">let</field>
+                                <field name="COLON">;</field>
+                                <value name="VAR">
+                                  <shadow type="text" id="{aRW7T$twc8+d1IbSpU+">
+                                    <field name="TEXT">newReview</field>
+                                  </shadow>
+                                </value>
+                                <value name="CONTENT">
+                                  <block type="gsa_new_object_creator_empty_search_moment_searchMoment" id="Qw=_|)OL@`B0/Um,1TYz">
+                                    <statement name="STATEMENTS">
+                                      <block type="gsa_new_object_item_creator_empty_search_moment_searchMoment" id="(3**fU9UvM95Uw0p=e]V">
+                                        <field name="name">rating</field>
+                                        <value name="value">
+                                          <block type="options" id="h]+g;%xya@D):I?d^X_q">
+                                            <mutation mode="String" type="null"></mutation>
+                                            <field name="SEARCH">String</field>
+                                            <value name="BOOLEAN">
+                                              <block type="jg_text_remake_paragraph_quotes" id="zET#oQxCk*=/HmX29}{p">
+                                                <field name="TEXT">rating</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="gsa_new_object_item_creator_empty_search_moment_searchMoment" id="!^yU-iT2ktG=K8b;f*w2">
+                                            <field name="name">comment</field>
+                                            <value name="value">
+                                              <block type="options" id="U13:wOKSa{qp3I[P{Fn4">
+                                                <mutation mode="String" type="null"></mutation>
+                                                <field name="SEARCH">String</field>
+                                                <value name="BOOLEAN">
+                                                  <block type="jg_text_remake_paragraph_quotes" id=":`=ou*).$/:Ma]G!2hQ?">
+                                                    <field name="TEXT">comment</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="gsa_new_object_item_creator_empty_search_moment_searchMoment" id="*j:vvoXSl92d(#91;b,M">
+                                                <field name="name">timestamp</field>
+                                                <value name="value">
+                                                  <block type="frost_current" id="`J/YomH/f$A(@UD8jr!a">
+                                                    <field name="DATA_TYPE">UNIX_ms</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="jg_objects_set_key_to_value_in_object" id="=6?:frXlg!BW5sb,Nsn`">
+                                    <value name="KEY">
+                                      <shadow type="text" id="QodEB47M$6cN}g$77Lyo">
+                                        <field name="TEXT">key</field>
+                                      </shadow>
+                                      <block type="blank" id="RacQNMC4GpMt!q9Vq_3]">
+                                        <field name="TEXT">user</field>
+                                      </block>
+                                    </value>
+                                    <value name="VALUE">
+                                      <block type="blank" id="uDl_)LJ+j_1CbUrzV-3l">
+                                        <field name="TEXT">newReview</field>
+                                      </block>
+                                    </value>
+                                    <value name="OBJECT">
+                                      <block type="jg_object_getvalue" id="CJlqFAYWbk+OaS#D+#}P">
+                                        <value name="value">
+                                          <shadow type="text" id="^b`:HWN6+RXwK8wz0nU/">
+                                            <field name="TEXT">key</field>
+                                          </shadow>
+                                          <block type="blank" id="#D{k.Tfk1Rh*/1C|*0S`">
+                                            <field name="TEXT">reviews</field>
+                                          </block>
+                                        </value>
+                                        <value name="object">
+                                          <block type="jg_object_getvalue" id="cSRXn^TrC9K})9li/sx2">
+                                            <value name="value">
+                                              <shadow type="text" id="^b`:HWN6+RXwK8wz0nU/">
+                                                <field name="TEXT">key</field>
+                                              </shadow>
+                                              <block type="blank" id="{DnoO2Zf1Ox-x%+LizPz">
+                                                <field name="TEXT">helper</field>
+                                              </block>
+                                            </value>
+                                            <value name="object">
+                                              <block type="blank" id="KbP+FI+,+R`5@KwgzQiX">
+                                                <field name="TEXT">reviewed</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="push_to_list" id="MbKSE*0p7p[o#S#FqZ2r">
+                                        <value name="LIST">
+                                          <block type="jg_object_getvalue" id="0)sLR)h0K[%cu4$R%IG-">
+                                            <value name="value">
+                                              <shadow type="text" id="^b`:HWN6+RXwK8wz0nU/">
+                                                <field name="TEXT">key</field>
+                                              </shadow>
+                                              <block type="blank" id="16g{bIY:x=Zcq{j(G?Iy">
+                                                <field name="TEXT">user</field>
+                                              </block>
+                                            </value>
+                                            <value name="object">
+                                              <block type="blank" id=",-px$R1SZyZdJP.O9}J/">
+                                                <field name="TEXT">reviewers</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <value name="PUSH">
+                                          <block type="blank" id="9lf:i|j9n,a3bfEL?ZN}">
+                                            <field name="TEXT">helper</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="controls_if" id="9NcU~P7SMM|xWCu^Bkx%" collapsed="true">
+                                            <value name="IF0">
+                                              <block type="list_contains" id="q^/`7tmmKv[nGTv$5D01">
+                                                <value name="LIST">
+                                                  <block type="jg_object_getvalue" id="zZG?:Cgn=R78e/Ku#Cwb">
+                                                    <value name="value">
+                                                      <shadow type="text" id="^b`:HWN6+RXwK8wz0nU/">
+                                                        <field name="TEXT">key</field>
+                                                      </shadow>
+                                                      <block type="blank" id="_OpnhKbA(hU@jMn_fBfv">
+                                                        <field name="TEXT">user</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="object">
+                                                      <block type="blank" id="Z#*734_Pz|QAmyA:?j04">
+                                                        <field name="TEXT">reviewers</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <value name="NAME">
+                                                  <block type="blank" id="%32he/5~fk;xc$h!{6WQ">
+                                                    <field name="TEXT">helper</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="DO0">
+                                              <block type="slash_reply" id="|zB-2c|usIST/AS/_2Cy">
+                                                <value name="CONTENT">
+                                                  <block type="jg_text_remake_paragraph_quotes" id="RPdb#@KWUF*Ds~A=iLxj">
+                                                    <field name="TEXT">you have already reviewed this helper. </field>
+                                                  </block>
+                                                </value>
+                                                <value name="BOOLEAN">
+                                                  <block type="logic_boolean" id="[0|nuRF6[Nv2ImD[iEOM">
+                                                    <field name="BOOL">FALSE</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="s4d_send_wait_reply" id="@N{:98^MT0w~-p)V8WBh">
+                                                    <value name="CONTENT">
+                                                      <shadow type="text" id="/a51:I((!rCS3AR/c@_G">
+                                                        <field name="TEXT">do you want to edit your review?</field>
+                                                      </shadow>
+                                                    </value>
+                                                    <value name="CHANNEL">
+                                                      <block type="interaction_channel" id="Ht_)F-ZtqtQ.0m|nf%8G"></block>
+                                                    </value>
+                                                    <value name="MEMBER">
+                                                      <block type="interaction_author" id="$L%h_^(A=b4j3EE-[`hY"></block>
+                                                    </value>
+                                                    <value name="TIME">
+                                                      <shadow type="math_number" id="IHo7hs;p/s_ss_Bt6+6d">
+                                                        <field name="NUM">5</field>
+                                                      </shadow>
+                                                    </value>
+                                                    <statement name="THEN">
+                                                      <block type="controls_if" id="kRl?OCp{e*#*mELU)s*T">
+                                                        <value name="IF0">
+                                                          <block type="logic_negate" id="igOal_cHCZKDdQlt%HAG">
+                                                            <value name="BOOL">
+                                                              <block type="s4d_starts_with" id="zQi-mNgN,[;r%bt,N1:n">
+                                                                <value name="STRING">
+                                                                  <shadow type="text" id="T9:}]-=p=Ggmopq_)eh=">
+                                                                    <field name="TEXT">abc</field>
+                                                                  </shadow>
+                                                                  <block type="s4d_send_wait_reply_value" id="dM@lUGC^zVw/fS{c?Xo9"></block>
+                                                                </value>
+                                                                <value name="SUBSTRING">
+                                                                  <shadow type="text" id="$:tThusiV*$vkMH_E@vb">
+                                                                    <field name="TEXT">y</field>
+                                                                  </shadow>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <statement name="DO0">
+                                                          <block type="s4d_send_channel" id="K3Z2A2$MU,v(y1{nT?#9">
+                                                            <value name="CONTENT">
+                                                              <block type="jg_text_remake_paragraph_quotes" id="/pg.F?44UNo5JpN2^uno">
+                                                                <field name="TEXT">cancelled</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="CHANNEL">
+                                                              <block type="interaction_channel" id="8EG_6J7-ab:t1mY@}8G3"></block>
+                                                            </value>
+                                                            <next>
+                                                              <block type="s4d_return" id="~?#Vh5HWb}ZBcbyLQcHk"></block>
+                                                            </next>
+                                                          </block>
+                                                        </statement>
+                                                        <next>
+                                                          <block type="s4d_set_data_new" id="A36Y0nrj_#6#[BgRUU8P">
+                                                            <value name="KEY">
+                                                              <shadow type="text" id="JNp:7[!J]QSneb;8b}/+">
+                                                                <field name="TEXT">reviewed</field>
+                                                              </shadow>
+                                                            </value>
+                                                            <value name="VALUE">
+                                                              <shadow type="text" id="9$lQho#@,.u~Xx8obL}p">
+                                                                <field name="TEXT">world</field>
+                                                              </shadow>
+                                                              <block type="blank" id="zDVa!KE#UM4TKECYF!gM">
+                                                                <field name="TEXT">reviewed</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="NAME">
+                                                              <shadow type="text" id="[5?r6$A-kr*7MQ*9TG$/">
+                                                                <field name="TEXT">reviews</field>
+                                                              </shadow>
+                                                            </value>
+                                                            <next>
+                                                              <block type="s4d_set_data_new" id="awK$pB]xe)RBiP2ZWa7B">
+                                                                <value name="KEY">
+                                                                  <shadow type="text" id="E?%Q`Be(T7$F#X`eMkM!">
+                                                                    <field name="TEXT">reviewers</field>
+                                                                  </shadow>
+                                                                </value>
+                                                                <value name="VALUE">
+                                                                  <shadow type="text" id="F2@que}%:D58|Vbx#rHO">
+                                                                    <field name="TEXT">world</field>
+                                                                  </shadow>
+                                                                  <block type="blank" id="tkMU:Q2a:uD6.+9?vAVX">
+                                                                    <field name="TEXT">reviewers</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="NAME">
+                                                                  <shadow type="text" id="NtV^s{K0ym}o:Ww*D47p">
+                                                                    <field name="TEXT">reviews</field>
+                                                                  </shadow>
+                                                                </value>
+                                                                <next>
+                                                                  <block type="procedures_callnoreturn" id="Y:]2t@v}RMY5kD8L_Gap">
+                                                                    <mutation name="recalculate total rating">
+                                                                      <arg name="helper"></arg>
+                                                                    </mutation>
+                                                                    <value name="ARG0">
+                                                                      <block type="blank" id="|kPk~*)FK8#SCZ_fe|8r">
+                                                                        <field name="TEXT">helper</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <next>
+                                                                      <block type="jg_channels_send_in_channel_with_allowed_list_of_pings_on_users_on_roles" id="^I+*W|.k/yke8R3UNGc(">
+                                                                        <value name="CONTENT">
+                                                                          <shadow type="text" id="{EXkEu9-c[0:5o%wqI%9">
+                                                                            <field name="TEXT">No user ping here!</field>
+                                                                          </shadow>
+                                                                          <block type="text_join" id="Tvr|Qry_trGf{UZT~Hg5">
+                                                                            <mutation items="3"></mutation>
+                                                                            <value name="ADD0">
+                                                                              <block type="jg_text_remake_paragraph_quotes" id="[L?ijYP?P)6NIcZ;cVzR">
+                                                                                <field name="TEXT">successfully edited your rating for </field>
+                                                                              </block>
+                                                                            </value>
+                                                                            <value name="ADD1">
+                                                                              <block type="options" id="N]Ie[)lMPYzX*H|1--Sb">
+                                                                                <mutation mode="Member" type="null"></mutation>
+                                                                                <field name="SEARCH">Member</field>
+                                                                                <value name="BOOLEAN">
+                                                                                  <block type="jg_text_remake_paragraph_quotes" id="NTO?V};=Ob-dmRW-dzA;">
+                                                                                    <field name="TEXT">helper</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                              </block>
+                                                                            </value>
+                                                                            <value name="ADD2">
+                                                                              <block type="jg_text_remake_paragraph_quotes" id="43qDD%~m$)za)ZopFviN">
+                                                                                <field name="TEXT">!</field>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="CHANNEL">
+                                                                          <block type="interaction_channel" id=":s}qR]VPJO+J}UMd@-3D"></block>
+                                                                        </value>
+                                                                        <value name="USERS">
+                                                                          <block type="lists_create_with" id="_e5GC;bFY}gKgQb3AdO8">
+                                                                            <mutation items="0"></mutation>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </next>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </statement>
+                                                    <statement name="CATCH">
+                                                      <block type="s4d_send_channel" id="KA/-MJw{G:jC5h)QzfX_">
+                                                        <value name="CONTENT">
+                                                          <block type="jg_text_remake_paragraph_quotes" id="Rd1v4{{Qxsyk60O^9rI/">
+                                                            <field name="TEXT">cancelled</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="CHANNEL">
+                                                          <block type="interaction_channel" id="#5f0Hf=zM08N%1|xu^,`"></block>
+                                                        </value>
+                                                      </block>
+                                                    </statement>
+                                                    <next>
+                                                      <block type="s4d_return" id="2roxaXl]MpCi9dV.)Df8"></block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </statement>
+                                            <next>
+                                              <block type="s4d_set_data_new" id="hqsS~l7Swj3(0JGXJyKg">
+                                                <value name="KEY">
+                                                  <shadow type="text" id="nC.d{f8d?VX;0|DErY#S">
+                                                    <field name="TEXT">reviewed</field>
+                                                  </shadow>
+                                                </value>
+                                                <value name="VALUE">
+                                                  <shadow type="text" id="9$lQho#@,.u~Xx8obL}p">
+                                                    <field name="TEXT">world</field>
+                                                  </shadow>
+                                                  <block type="blank" id="ul$1zPm1IPtl][+0dE^!">
+                                                    <field name="TEXT">reviewed</field>
+                                                  </block>
+                                                </value>
+                                                <value name="NAME">
+                                                  <shadow type="text" id="EWy[6.@xEEoVg9W{y|;3">
+                                                    <field name="TEXT">reviews</field>
+                                                  </shadow>
+                                                </value>
+                                                <next>
+                                                  <block type="s4d_set_data_new" id=")XnlK7rMq/#eFBfeAz3$">
+                                                    <value name="KEY">
+                                                      <shadow type="text" id="de7^R^)63VZnX#7a$Q$V">
+                                                        <field name="TEXT">reviewers</field>
+                                                      </shadow>
+                                                    </value>
+                                                    <value name="VALUE">
+                                                      <shadow type="text" id="F2@que}%:D58|Vbx#rHO">
+                                                        <field name="TEXT">world</field>
+                                                      </shadow>
+                                                      <block type="blank" id="nFsy{?}vX[!n7Ub|D_fN">
+                                                        <field name="TEXT">reviewers</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="NAME">
+                                                      <shadow type="text" id=")qeQZ;3Tx`bsmM+?cp.4">
+                                                        <field name="TEXT">reviews</field>
+                                                      </shadow>
+                                                    </value>
+                                                    <next>
+                                                      <block type="procedures_callnoreturn" id="NYsovNPY-xZdnHodmEv!">
+                                                        <mutation name="recalculate total rating">
+                                                          <arg name="helper"></arg>
+                                                        </mutation>
+                                                        <value name="ARG0">
+                                                          <block type="blank" id="=k954n%`.Dg|qzsm2QL6">
+                                                            <field name="TEXT">helper</field>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="slash_reply" id="SnY30e[12@+{gSYqLK|T" collapsed="true">
+                                                            <value name="CONTENT">
+                                                              <block type="text_join" id="@w*B3#ZaRHa#BI-61Fe@">
+                                                                <mutation items="3"></mutation>
+                                                                <value name="ADD0">
+                                                                  <block type="jg_text_remake_paragraph_quotes" id="`={VTIS[_s?h=%somtN=">
+                                                                    <field name="TEXT">successfully rated </field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="ADD1">
+                                                                  <block type="options" id="uC@8-JWVR7kBG*KxJB!D">
+                                                                    <mutation mode="Member" type="null"></mutation>
+                                                                    <field name="SEARCH">Member</field>
+                                                                    <value name="BOOLEAN">
+                                                                      <block type="jg_text_remake_paragraph_quotes" id="eG@q3+NIM2OGY9QFSuS,">
+                                                                        <field name="TEXT">helper</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="ADD2">
+                                                                  <block type="jg_text_remake_paragraph_quotes" id="`E8Og|1.4Z}F=F5dVNX5">
+                                                                    <field name="TEXT">!</field>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <value name="BOOLEAN">
+                                                              <block type="logic_boolean" id="YG@A*9wO($)`AY}oQsZN">
+                                                                <field name="BOOL">TRUE</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
             <value name="IF7">
-              <block type="logic_null" id="?N`V~4KNpv6(QsQ,gB$|"></block>
+              <block type="jg_text_remake_paragraph_quotes" id="ZuoL/OF-1Gof%}IvS87u">
+                <field name="TEXT">helper-list</field>
+              </block>
             </value>
+            <statement name="DO7">
+              <block type="jg_comments_connected_comment" id="9~+4BXf?,AJ|uUn+J%8h">
+                <field name="TEXT">i rlly need to add the "notify discord that the &amp;#10;bot got the command and is infact working on &amp;#10;a response but currently has no text to send" &amp;#10;block</field>
+                <next>
+                  <block type="slash_reply" id="bC!2X3Tz@cbNn7zX~b4^">
+                    <value name="CONTENT">
+                      <block type="jg_text_remake_paragraph_quotes" id="3x|XsMu|u5fFRzQlZilf">
+                        <field name="TEXT">getting helpers</field>
+                      </block>
+                    </value>
+                    <value name="BOOLEAN">
+                      <block type="logic_boolean" id="/l7Y@?vV[nY,l]+i6R_k">
+                        <field name="BOOL">TRUE</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="express_var" id="b+pS`63O:US3B(r=wMI.">
+                        <field name="TYPE">const</field>
+                        <field name="COLON">;</field>
+                        <value name="VAR">
+                          <shadow type="text" id="uN0=9Kd,2LANWt7.*,KK">
+                            <field name="TEXT">reviewed</field>
+                          </shadow>
+                        </value>
+                        <value name="CONTENT">
+                          <block type="s4d_get_data_new" id="sq5y8eaBWO#~4_fo!-[z">
+                            <value name="KEY">
+                              <shadow type="text" id="E-}NrUsiH:4-cD~/dmg@">
+                                <field name="TEXT">reviewed</field>
+                              </shadow>
+                            </value>
+                            <value name="NAME">
+                              <shadow type="text" id="=Vd|@hL_3p9fVK5XbNzH">
+                                <field name="TEXT">reviews</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="jg_comments_connected_comment" id="=PM?U1kRrXD5n[7T;ro`">
+                            <field name="TEXT">i really didnt want to code the page generator in &amp;#10;s4d so your gona just have to deal with this lmao</field>
+                            <next>
+                              <block type="blank_code" id="(u4OS}jVP9pK`SSzVYr@" collapsed="true">
+                                <field name="TEXT">let pages = [[]]&amp;#10;let helpers = Object.getOwnPropertyNames(reviewed)&amp;#10;.map(x =&gt; {&amp;#10;  return {&amp;#10;    user: x,&amp;#10;    total: reviewed[x].total&amp;#10;    numrev: Object.getOwnPropertyNames(reviewed[x].reviews).length&amp;#10;  }&amp;#10;})&amp;#10;.sort((a, b) =&gt; a.total - b.total)&amp;#10;.reduce((out, item) =&gt; {&amp;#10;  if (out.user != null) out = [`&lt;@${out.user}&gt; \`${out.user}\`: ${out.total}`]&amp;#10;  out.push(`&lt;@${item.user}&gt; \`${item.user}\`: ${Math.floor(item.total / item.numrev)}`)&amp;#10;  return out&amp;#10;})&amp;#10;.forEach((item, index) =&gt; {&amp;#10;  let page = pages.length - 1&amp;#10;  if (page &lt; Math.floor(index / 10)) {&amp;#10;    pages[page] = pages[page].join(',\n')&amp;#10;    pages.push([])&amp;#10;    page = pages.length - 1&amp;#10;  }&amp;#10;  pages[page].push(item)&amp;#10;})&amp;#10;pages[pages.length - 1] = pages[pages.length - 1].join(',\n')</field>
+                                <next>
+                                  <block type="express_var" id="C9B/hwy||tjf:5lL(-HD">
+                                    <field name="TYPE">const</field>
+                                    <field name="COLON">;</field>
+                                    <value name="VAR">
+                                      <shadow type="text" id="8JW?YyDajrT*EDqQhTB(">
+                                        <field name="TEXT">buttons_all</field>
+                                      </shadow>
+                                    </value>
+                                    <value name="CONTENT">
+                                      <block type="s4d_button_row" id="C~([.@Y%Hgrb8=Z()VK*" collapsed="true">
+                                        <statement name="BUTTONS">
+                                          <block type="s4d_message_row_block" id="YbY0eLclf7JAK,K:^ZiZ">
+                                            <mutation xmlns="http://www.w3.org/1999/xhtml" style="true" emoji="true" custom_id="true" disabled="true"></mutation>
+                                            <value name="STYLE">
+                                              <block type="s4d_button_style" id="$x{.j^)uo,NRYgPKn=33">
+                                                <field name="COLOR">PRIMARY</field>
+                                              </block>
+                                            </value>
+                                            <value name="EMOJI">
+                                              <block type="jg_text_remake_paragraph_quotes" id="ex^sI+:{Pi.]z0qKy)Uj">
+                                                <field name="TEXT">⏮</field>
+                                              </block>
+                                            </value>
+                                            <value name="CUSTOM_ID">
+                                              <block type="jg_text_remake_paragraph_quotes" id="kzhR@uXIQgbZtYW9{{gu">
+                                                <field name="TEXT">maxL</field>
+                                              </block>
+                                            </value>
+                                            <value name="DISABLED">
+                                              <block type="logic_boolean" id="?rH|XVVqR6B*8Z~8by,B">
+                                                <field name="BOOL">FALSE</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="s4d_message_row_block" id="g]O=_Eop#Hv)#SOYp8LS">
+                                                <mutation xmlns="http://www.w3.org/1999/xhtml" style="true" emoji="true" custom_id="true" disabled="true"></mutation>
+                                                <value name="STYLE">
+                                                  <block type="s4d_button_style" id="68)e*~TrS}lb^`OJLy:l">
+                                                    <field name="COLOR">PRIMARY</field>
+                                                  </block>
+                                                </value>
+                                                <value name="EMOJI">
+                                                  <block type="jg_text_remake_paragraph_quotes" id="L]y)1}3}p)VL`w6/Hr,I">
+                                                    <field name="TEXT">◀</field>
+                                                  </block>
+                                                </value>
+                                                <value name="CUSTOM_ID">
+                                                  <block type="jg_text_remake_paragraph_quotes" id="#kblfrCn.,^,)rK{h_i%">
+                                                    <field name="TEXT">left</field>
+                                                  </block>
+                                                </value>
+                                                <value name="DISABLED">
+                                                  <block type="logic_boolean" id="2P-lB-P0Lb*2;eS6xK9r">
+                                                    <field name="BOOL">FALSE</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="s4d_message_row_block" id="0?a.)iD3W?ts`^^]vDuH">
+                                                    <mutation xmlns="http://www.w3.org/1999/xhtml" style="true" emoji="true" custom_id="true" disabled="true"></mutation>
+                                                    <value name="STYLE">
+                                                      <block type="s4d_button_style" id="Lg4?PkqeIgd#fn(-4@hi">
+                                                        <field name="COLOR">PRIMARY</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="EMOJI">
+                                                      <block type="jg_text_remake_paragraph_quotes" id="m}J,@w.jX{Snk6Y$S|lw">
+                                                        <field name="TEXT">▶</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="CUSTOM_ID">
+                                                      <block type="jg_text_remake_paragraph_quotes" id="hi[6%x|`S|8I[qJzl@Yw">
+                                                        <field name="TEXT">right</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="DISABLED">
+                                                      <block type="logic_boolean" id="r%VNaq7PzX9+4^@]qnOk">
+                                                        <field name="BOOL">FALSE</field>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="s4d_message_row_block" id="SEfVj{OZ)in~Hq@]=0P6">
+                                                        <mutation xmlns="http://www.w3.org/1999/xhtml" style="true" emoji="true" custom_id="true" disabled="true"></mutation>
+                                                        <value name="STYLE">
+                                                          <block type="s4d_button_style" id="~Fe0Yfz0Byt$bi:Ahy^j">
+                                                            <field name="COLOR">PRIMARY</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="EMOJI">
+                                                          <block type="jg_text_remake_paragraph_quotes" id=":9bHH;5l1j%A3d;i0%vH">
+                                                            <field name="TEXT">⏭</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="CUSTOM_ID">
+                                                          <block type="jg_text_remake_paragraph_quotes" id="Va`krH:fYWPZHWBv5h;/">
+                                                            <field name="TEXT">maxR</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="DISABLED">
+                                                          <block type="logic_boolean" id="|-TCq,.A^pDv8/A.FN8%">
+                                                            <field name="BOOL">FALSE</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="express_var" id="lL!_XyABn,a]z=)]ziCA">
+                                        <field name="TYPE">const</field>
+                                        <field name="COLON">;</field>
+                                        <value name="VAR">
+                                          <shadow type="text" id="(9GiWQU^mvOi!CH4.4ZK">
+                                            <field name="TEXT">buttons_left</field>
+                                          </shadow>
+                                        </value>
+                                        <value name="CONTENT">
+                                          <block type="s4d_button_row" id="=L%To(0KXzCrbphk|#wL" collapsed="true">
+                                            <statement name="BUTTONS">
+                                              <block type="s4d_message_row_block" id="Va(lmM)$8s$KF.Qzb!^L">
+                                                <mutation xmlns="http://www.w3.org/1999/xhtml" style="true" emoji="true" custom_id="true" disabled="true"></mutation>
+                                                <value name="STYLE">
+                                                  <block type="s4d_button_style" id="@^yhb2(Xs;ZB.HquLX.C">
+                                                    <field name="COLOR">PRIMARY</field>
+                                                  </block>
+                                                </value>
+                                                <value name="EMOJI">
+                                                  <block type="jg_text_remake_paragraph_quotes" id="u|ySaWhlt{PInjjI]V7a">
+                                                    <field name="TEXT">⏮</field>
+                                                  </block>
+                                                </value>
+                                                <value name="CUSTOM_ID">
+                                                  <block type="jg_text_remake_paragraph_quotes" id="@[ieXU-O%Br`-;O]~?yD">
+                                                    <field name="TEXT">maxL</field>
+                                                  </block>
+                                                </value>
+                                                <value name="DISABLED">
+                                                  <block type="logic_boolean" id="Kwlojmrhz)G@265v_(nj">
+                                                    <field name="BOOL">FALSE</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="s4d_message_row_block" id="KNc:TvfBhM4G[9*8AA23">
+                                                    <mutation xmlns="http://www.w3.org/1999/xhtml" style="true" emoji="true" custom_id="true" disabled="true"></mutation>
+                                                    <value name="STYLE">
+                                                      <block type="s4d_button_style" id="4w(Ly77:`vxd6!X0|L!Y">
+                                                        <field name="COLOR">PRIMARY</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="EMOJI">
+                                                      <block type="jg_text_remake_paragraph_quotes" id="nnPX!T^9dM?g5q])[:sc">
+                                                        <field name="TEXT">◀</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="CUSTOM_ID">
+                                                      <block type="jg_text_remake_paragraph_quotes" id="Pw[Kau=0Wx5}#?mY;ML{">
+                                                        <field name="TEXT">left</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="DISABLED">
+                                                      <block type="logic_boolean" id="0UU(kXaa8X:-{jVFg0Kt">
+                                                        <field name="BOOL">FALSE</field>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="s4d_message_row_block" id="6dLHGdD4}9Q-S#4OV.xp">
+                                                        <mutation xmlns="http://www.w3.org/1999/xhtml" style="true" emoji="true" custom_id="true" disabled="true"></mutation>
+                                                        <value name="STYLE">
+                                                          <block type="s4d_button_style" id="+u8CzFxUR{|xcQ_I5,AW">
+                                                            <field name="COLOR">PRIMARY</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="EMOJI">
+                                                          <block type="jg_text_remake_paragraph_quotes" id="8_YqR5iCL-K)}gkiaa7C">
+                                                            <field name="TEXT">▶</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="CUSTOM_ID">
+                                                          <block type="jg_text_remake_paragraph_quotes" id="rPU-H*AlYS.+7}lPo%/!">
+                                                            <field name="TEXT">right</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="DISABLED">
+                                                          <block type="logic_boolean" id="Sba1CkrsQ}}Zak=MFqY]">
+                                                            <field name="BOOL">TRUE</field>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="s4d_message_row_block" id="+$}]xgib,+63Am4:#`3(">
+                                                            <mutation xmlns="http://www.w3.org/1999/xhtml" style="true" emoji="true" custom_id="true" disabled="true"></mutation>
+                                                            <value name="STYLE">
+                                                              <block type="s4d_button_style" id="qY3xGueHdn+%Ccz,0ZHj">
+                                                                <field name="COLOR">PRIMARY</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="EMOJI">
+                                                              <block type="jg_text_remake_paragraph_quotes" id="Q~Gp!IXLy?%2h5U8IO|!">
+                                                                <field name="TEXT">⏭</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="CUSTOM_ID">
+                                                              <block type="jg_text_remake_paragraph_quotes" id="5GmM9RooCTea|i!,xE?q">
+                                                                <field name="TEXT">maxR</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="DISABLED">
+                                                              <block type="logic_boolean" id="JR$g*vu:Qi4O*uX=dF~0">
+                                                                <field name="BOOL">TRUE</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </statement>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="express_var" id="h%r#Sz(ARlIvOJDPqW9O">
+                                            <field name="TYPE">const</field>
+                                            <field name="COLON">;</field>
+                                            <value name="VAR">
+                                              <shadow type="text" id="?@eT`5{YKikD?vw-.XfR">
+                                                <field name="TEXT">buttons_right</field>
+                                              </shadow>
+                                            </value>
+                                            <value name="CONTENT">
+                                              <block type="s4d_button_row" id="9zR)YZE4C$1W-=EMLpP-" collapsed="true">
+                                                <statement name="BUTTONS">
+                                                  <block type="s4d_message_row_block" id="iRfm~O`TZo2)hX]h#p`9">
+                                                    <mutation xmlns="http://www.w3.org/1999/xhtml" style="true" emoji="true" custom_id="true" disabled="true"></mutation>
+                                                    <value name="STYLE">
+                                                      <block type="s4d_button_style" id="%1{fZUqJh2,4LV^Y;LzN">
+                                                        <field name="COLOR">PRIMARY</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="EMOJI">
+                                                      <block type="jg_text_remake_paragraph_quotes" id="7SPObrFFk|La9.Kr7Dqj">
+                                                        <field name="TEXT">⏮</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="CUSTOM_ID">
+                                                      <block type="jg_text_remake_paragraph_quotes" id="xLq_AKfGR$-v8wkR;F2M">
+                                                        <field name="TEXT">maxL</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="DISABLED">
+                                                      <block type="logic_boolean" id="WO6oT3uufjl],7;yi?`X">
+                                                        <field name="BOOL">TRUE</field>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="s4d_message_row_block" id="U3i#}^!Pa0}Rw5rDIokT">
+                                                        <mutation xmlns="http://www.w3.org/1999/xhtml" style="true" emoji="true" custom_id="true" disabled="true"></mutation>
+                                                        <value name="STYLE">
+                                                          <block type="s4d_button_style" id="r||P(nmCBM/Gvf:[1)lM">
+                                                            <field name="COLOR">PRIMARY</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="EMOJI">
+                                                          <block type="jg_text_remake_paragraph_quotes" id="FKgIY($4;/E=$2Ov-azD">
+                                                            <field name="TEXT">◀</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="CUSTOM_ID">
+                                                          <block type="jg_text_remake_paragraph_quotes" id="MOfOERh{=q8n4V]WI|lV">
+                                                            <field name="TEXT">left</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="DISABLED">
+                                                          <block type="logic_boolean" id="l_x.;zcQpX:Dy!nrTzDd">
+                                                            <field name="BOOL">TRUE</field>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="s4d_message_row_block" id="v#YN3=nS^ZMIYUZ)d,up">
+                                                            <mutation xmlns="http://www.w3.org/1999/xhtml" style="true" emoji="true" custom_id="true" disabled="true"></mutation>
+                                                            <value name="STYLE">
+                                                              <block type="s4d_button_style" id="HVW?sU83IS$3d~g19JoD">
+                                                                <field name="COLOR">PRIMARY</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="EMOJI">
+                                                              <block type="jg_text_remake_paragraph_quotes" id="lrm7i_q|cN{q:Mzew+-;">
+                                                                <field name="TEXT">▶</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="CUSTOM_ID">
+                                                              <block type="jg_text_remake_paragraph_quotes" id="E+Ydks$=E_(5)K)=Lzfg">
+                                                                <field name="TEXT">right</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="DISABLED">
+                                                              <block type="logic_boolean" id="@Ag,@EB%l*1x50qGr:R.">
+                                                                <field name="BOOL">FALSE</field>
+                                                              </block>
+                                                            </value>
+                                                            <next>
+                                                              <block type="s4d_message_row_block" id="sWkLmRO1.W[b82aGq~(A">
+                                                                <mutation xmlns="http://www.w3.org/1999/xhtml" style="true" emoji="true" custom_id="true" disabled="true"></mutation>
+                                                                <value name="STYLE">
+                                                                  <block type="s4d_button_style" id="7~=FPRtL8VX.*@9c*RR:">
+                                                                    <field name="COLOR">PRIMARY</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="EMOJI">
+                                                                  <block type="jg_text_remake_paragraph_quotes" id="_1}?gfo]`]$d/{/0}C|w">
+                                                                    <field name="TEXT">⏭</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="CUSTOM_ID">
+                                                                  <block type="jg_text_remake_paragraph_quotes" id="QKh^$gi(QdqdNbL,,Ffa">
+                                                                    <field name="TEXT">maxR</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="DISABLED">
+                                                                  <block type="logic_boolean" id="T@cqC?6Yf1oI62PNh!9W">
+                                                                    <field name="BOOL">FALSE</field>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </statement>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="express_var" id="=cW:xv5}iH/wpVjgo5ih">
+                                                <field name="TYPE">let</field>
+                                                <field name="COLON">;</field>
+                                                <value name="VAR">
+                                                  <shadow type="text" id="m~EC_azh9XN`D;0xuCT3">
+                                                    <field name="TEXT">page</field>
+                                                  </shadow>
+                                                </value>
+                                                <value name="CONTENT">
+                                                  <block type="math_number" id="]BU1,0=$fr[q*(BN1igj">
+                                                    <field name="NUM">1</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="s4d_embed_create" id="Sq*%%M^wUyO=Tu!WJkHj" collapsed="true">
+                                                    <field name="NAME">page</field>
+                                                    <statement name="THEN">
+                                                      <block type="s4d_embed_set_color" id="azG1%MB8W}%k~f@~c$*j">
+                                                        <value name="COLOUR">
+                                                          <shadow type="colour_picker" id="/@C..pokJ=!YZ~9szf{H">
+                                                            <field name="COLOUR">#00cccc</field>
+                                                          </shadow>
+                                                        </value>
+                                                        <next>
+                                                          <block type="s4d_embed_set_title" id="A*5xilf,_o9v0*nY`|Px">
+                                                            <value name="TITLE">
+                                                              <shadow type="text" id="t|DIyt@!5L,6M$H6JeQc">
+                                                                <field name="TEXT">helper list</field>
+                                                              </shadow>
+                                                            </value>
+                                                            <next>
+                                                              <block type="s4d_embed_set_desc" id=",lvhxfE`gb~0/.q[C8Xn">
+                                                                <value name="DESC">
+                                                                  <shadow type="text" id="^T%+r/zn3Qevi]wB1cyF">
+                                                                    <field name="TEXT">Some desc here...</field>
+                                                                  </shadow>
+                                                                  <block type="lists_getIndex" id="N5)AkvG6Dw*{rvB|9~70">
+                                                                    <mutation statement="false" at="true"></mutation>
+                                                                    <field name="MODE">GET</field>
+                                                                    <field name="WHERE">FROM_START</field>
+                                                                    <value name="VALUE">
+                                                                      <block type="blank" id="R30]L/!UymUt2?9Owbp+">
+                                                                        <field name="TEXT">pages</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="AT">
+                                                                      <block type="blank" id="[YNG%/byhI7JnrX]2uc6">
+                                                                        <field name="TEXT">page</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <next>
+                                                                  <block type="s4d_embed_set_footer" id="t*%TW}iDQn6e]$uEoe%q">
+                                                                    <value name="FOOTER">
+                                                                      <shadow type="text" id="tjj0AxTkhYEuSm5^/Tr_">
+                                                                        <field name="TEXT">page</field>
+                                                                      </shadow>
+                                                                      <block type="text_join" id="M-lB_6F~J0T,:v-u]Elu">
+                                                                        <mutation items="4"></mutation>
+                                                                        <value name="ADD0">
+                                                                          <block type="jg_text_remake_paragraph_quotes" id="@(r0)HZZ8gFygCz20xng">
+                                                                            <field name="TEXT">page </field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="ADD1">
+                                                                          <block type="blank" id="Vsu!^TghLrK8[wF:3eu{">
+                                                                            <field name="TEXT">page</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="ADD2">
+                                                                          <block type="jg_text_remake_paragraph_quotes" id="~@Yys3YkLoH]OmNS:m$%">
+                                                                            <field name="TEXT">/</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="ADD3">
+                                                                          <block type="lists_length" id="~#;L{~@::U/x4_L_kEW1">
+                                                                            <value name="VALUE">
+                                                                              <block type="blank" id=";xgzvWIWJI=~9zIfuqx|">
+                                                                                <field name="TEXT">pages</field>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </statement>
+                                                    <next>
+                                                      <block type="s4d_send_button" id="~A-]qIqB,^B|:tn|C|Pr" collapsed="true">
+                                                        <value name="CHANNEL">
+                                                          <block type="interaction_channel" id="(7CO4Pick+qPvWtd;fNB"></block>
+                                                        </value>
+                                                        <value name="CONTENT">
+                                                          <block type="s4d_embed_send" id="%irwRI^F2WPGmy9##^vu">
+                                                            <field name="NAME">page</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="BUTTON">
+                                                          <block type="blank" id="K*aNAS}6KE@tkVQ~QO?2">
+                                                            <field name="TEXT">buttons_right</field>
+                                                          </block>
+                                                        </value>
+                                                        <statement name="STATEMENTS">
+                                                          <block type="s4d_on_click" id="D-__?}a;j-}tEE$fb?EK">
+                                                            <statement name="STATEMENTS">
+                                                              <block type="controls_if" id="/Y3.,eh#tJeqKprH`Der">
+                                                                <mutation elseif="3"></mutation>
+                                                                <value name="IF0">
+                                                                  <block type="logic_compare" id="_$X2y=~uWBk(+ix}5dR=">
+                                                                    <field name="OP">EQ</field>
+                                                                    <value name="A">
+                                                                      <block type="s4d_button_click_id" id="0p`_+T6V$|Iul,*;y!M0"></block>
+                                                                    </value>
+                                                                    <value name="B">
+                                                                      <block type="jg_text_remake_paragraph_quotes" id="irL|W1^WKe]RB|li5O`C">
+                                                                        <field name="TEXT">maxL</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <statement name="DO0">
+                                                                  <block type="jg_other_setvalue" id="Isws-1QGwm=Dms(cL[,[">
+                                                                    <value name="input">
+                                                                      <block type="blank" id="NB/eqhRAC,,+{3KbC)+X">
+                                                                        <field name="TEXT">page</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="replace">
+                                                                      <block type="math_number" id="NX)a$(P5w.|ZlYjHjEOI">
+                                                                        <field name="NUM">1</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </statement>
+                                                                <value name="IF1">
+                                                                  <block type="logic_compare" id="d{2XZ.,SA9`J0Qn!pUI.">
+                                                                    <field name="OP">EQ</field>
+                                                                    <value name="A">
+                                                                      <block type="s4d_button_click_id" id=":;!QNE)T%KC!dJebihKH"></block>
+                                                                    </value>
+                                                                    <value name="B">
+                                                                      <block type="jg_text_remake_paragraph_quotes" id="xW3.`aF/aZq)Ot5.`,O?">
+                                                                        <field name="TEXT">left</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <statement name="DO1">
+                                                                  <block type="jg_other_setvalue" id=":L58o}VZ/fS[`t|#4,/5">
+                                                                    <value name="input">
+                                                                      <block type="blank" id="`})#o*[8TF@([.Ayt?i[">
+                                                                        <field name="TEXT">page</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="replace">
+                                                                      <block type="math_arithmetic" id=";:1E;4y1Mt5`aRowV81!">
+                                                                        <field name="OP">MINUS</field>
+                                                                        <value name="A">
+                                                                          <shadow type="math_number" id="KOxbzW:c6X*vAVQEqD:G">
+                                                                            <field name="NUM">1</field>
+                                                                          </shadow>
+                                                                          <block type="blank" id="R.$~h%Tk9F+`=7^L;UU5">
+                                                                            <field name="TEXT">page</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="B">
+                                                                          <shadow type="math_number" id="i#K_wO,7Zy2*u@hgqj?D">
+                                                                            <field name="NUM">1</field>
+                                                                          </shadow>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </statement>
+                                                                <value name="IF2">
+                                                                  <block type="logic_compare" id="+do)#5#wi:{0#`yBgz~C">
+                                                                    <field name="OP">EQ</field>
+                                                                    <value name="A">
+                                                                      <block type="s4d_button_click_id" id="!yt+JeUD$d9}GzGcJFc$"></block>
+                                                                    </value>
+                                                                    <value name="B">
+                                                                      <block type="jg_text_remake_paragraph_quotes" id="_qBytdlIlQt]TFqV(PIl">
+                                                                        <field name="TEXT">right</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <statement name="DO2">
+                                                                  <block type="jg_other_setvalue" id="|HXlOuk:g9y#,Hq@uYa!">
+                                                                    <value name="input">
+                                                                      <block type="blank" id="RKnR!S1(Sa+6zeeqmTnX">
+                                                                        <field name="TEXT">page</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="replace">
+                                                                      <block type="math_arithmetic" id="PZ@RF4ZuM9C24Bm.cINn">
+                                                                        <field name="OP">ADD</field>
+                                                                        <value name="A">
+                                                                          <shadow type="math_number" id="KOxbzW:c6X*vAVQEqD:G">
+                                                                            <field name="NUM">1</field>
+                                                                          </shadow>
+                                                                          <block type="blank" id="SK-9#R{A{bsdy4ozIsJd">
+                                                                            <field name="TEXT">page</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="B">
+                                                                          <shadow type="math_number" id="_DIPQ0!%ICy=,*5|0#Yh">
+                                                                            <field name="NUM">1</field>
+                                                                          </shadow>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </statement>
+                                                                <value name="IF3">
+                                                                  <block type="logic_compare" id="*$xje`h!?^fpMXL)?Fm9">
+                                                                    <field name="OP">EQ</field>
+                                                                    <value name="A">
+                                                                      <block type="s4d_button_click_id" id="`S3J~m|$jZQ-#e,DMN5["></block>
+                                                                    </value>
+                                                                    <value name="B">
+                                                                      <block type="jg_text_remake_paragraph_quotes" id="5]A!?-OVx#a18=:Sk#^j">
+                                                                        <field name="TEXT">maxR</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <statement name="DO3">
+                                                                  <block type="jg_other_setvalue" id="nNzbzlG+ZdFf,98-Pp1_">
+                                                                    <value name="input">
+                                                                      <block type="blank" id="mu#=}+aF~,1Bz3shsEVm">
+                                                                        <field name="TEXT">page</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="replace">
+                                                                      <block type="lists_length" id="A;|c9d-|(dxRMZ9?=T=g">
+                                                                        <value name="VALUE">
+                                                                          <block type="blank" id="?;8B%S^@piZAzLu^7k~P">
+                                                                            <field name="TEXT">pages</field>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </statement>
+                                                                <next>
+                                                                  <block type="s4d_embed_create" id="e3led%n`oTE[dgLTX#ef">
+                                                                    <field name="NAME">page</field>
+                                                                    <statement name="THEN">
+                                                                      <block type="s4d_embed_set_color" id=");p5Gh!].=QoX3tboG1,">
+                                                                        <value name="COLOUR">
+                                                                          <shadow type="colour_picker" id="fC-S0F$)/@4.o=]CXQ!i">
+                                                                            <field name="COLOUR">#00cccc</field>
+                                                                          </shadow>
+                                                                        </value>
+                                                                        <next>
+                                                                          <block type="s4d_embed_set_title" id="FP5Y9eI%H|%k]{D]FDze">
+                                                                            <value name="TITLE">
+                                                                              <shadow type="text" id="}C-0huO09$hb{Z`7)TgO">
+                                                                                <field name="TEXT">helper list</field>
+                                                                              </shadow>
+                                                                            </value>
+                                                                            <next>
+                                                                              <block type="s4d_embed_set_desc" id="jEJ2xl3+D~`;xy0C-JRO">
+                                                                                <value name="DESC">
+                                                                                  <shadow type="text" id="^T%+r/zn3Qevi]wB1cyF">
+                                                                                    <field name="TEXT">Some desc here...</field>
+                                                                                  </shadow>
+                                                                                  <block type="lists_getIndex" id="oJ;{0Uvq5tMT4Jn1_vq|">
+                                                                                    <mutation statement="false" at="true"></mutation>
+                                                                                    <field name="MODE">GET</field>
+                                                                                    <field name="WHERE">FROM_START</field>
+                                                                                    <value name="VALUE">
+                                                                                      <block type="blank" id="zEH54Q|B!xq4r%e9NZ+v">
+                                                                                        <field name="TEXT">pages</field>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                    <value name="AT">
+                                                                                      <block type="blank" id="#@8)q3L`3ba)]}.w+wLz">
+                                                                                        <field name="TEXT">page</field>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <next>
+                                                                                  <block type="s4d_embed_set_footer" id="R52]L0u~eYUbMuujc3+v">
+                                                                                    <value name="FOOTER">
+                                                                                      <shadow type="text" id="tjj0AxTkhYEuSm5^/Tr_">
+                                                                                        <field name="TEXT">page</field>
+                                                                                      </shadow>
+                                                                                      <block type="text_join" id="I7[%K[kVWW^z@/W2p]7l">
+                                                                                        <mutation items="4"></mutation>
+                                                                                        <value name="ADD0">
+                                                                                          <block type="jg_text_remake_paragraph_quotes" id="Hy!d6M2`{sZyq9q17kG!">
+                                                                                            <field name="TEXT">page </field>
+                                                                                          </block>
+                                                                                        </value>
+                                                                                        <value name="ADD1">
+                                                                                          <block type="blank" id="sk}?oU1g.YzuFC/jAH]+">
+                                                                                            <field name="TEXT">page</field>
+                                                                                          </block>
+                                                                                        </value>
+                                                                                        <value name="ADD2">
+                                                                                          <block type="jg_text_remake_paragraph_quotes" id="m10Y3qfA%,9-6q3er~1A">
+                                                                                            <field name="TEXT">/</field>
+                                                                                          </block>
+                                                                                        </value>
+                                                                                        <value name="ADD3">
+                                                                                          <block type="lists_length" id="h{VGKvhz*rQFIo7m/MVR">
+                                                                                            <value name="VALUE">
+                                                                                              <block type="blank" id="Ppv*,DlcnoY`Bny:y4u6">
+                                                                                                <field name="TEXT">pages</field>
+                                                                                              </block>
+                                                                                            </value>
+                                                                                          </block>
+                                                                                        </value>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                  </block>
+                                                                                </next>
+                                                                              </block>
+                                                                            </next>
+                                                                          </block>
+                                                                        </next>
+                                                                      </block>
+                                                                    </statement>
+                                                                    <next>
+                                                                      <block type="jg_comments_connected_comment" id="#UGzirizM-3V?gZzp!s3">
+                                                                        <field name="TEXT">im not sure if i got this correct but it should &amp;#10;be correct</field>
+                                                                        <next>
+                                                                          <block type="controls_if" id="b^iV0]]QQL#{$L[s(V~6">
+                                                                            <mutation elseif="1" else="1"></mutation>
+                                                                            <value name="IF0">
+                                                                              <block type="logic_compare" id="q.yP%*m]Dsg.SL0)UwW/">
+                                                                                <field name="OP">EQ</field>
+                                                                                <value name="A">
+                                                                                  <block type="blank" id="LGxNl~A=VmP_p0v/;+|F">
+                                                                                    <field name="TEXT">page</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <value name="B">
+                                                                                  <block type="math_number" id="#71ET,n@Y1XomxjCDz2v">
+                                                                                    <field name="NUM">1</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                              </block>
+                                                                            </value>
+                                                                            <statement name="DO0">
+                                                                              <block type="s4d_update" id="UI#pNghB^pz}^?|8;ktv">
+                                                                                <value name="CONTENT">
+                                                                                  <block type="s4d_embed_send" id="1DGzgXj+Lu;U,2n,xk|K">
+                                                                                    <field name="NAME">page</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <value name="BUTTON">
+                                                                                  <block type="blank" id="79[.x$_p6==Y~Y|Lr{!V">
+                                                                                    <field name="TEXT">buttons_right</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                              </block>
+                                                                            </statement>
+                                                                            <value name="IF1">
+                                                                              <block type="logic_compare" id="~Q.B{+d,xx^zqhDYa}Jk">
+                                                                                <field name="OP">EQ</field>
+                                                                                <value name="A">
+                                                                                  <block type="blank" id="p,czd*l6dC2iKH;Te963">
+                                                                                    <field name="TEXT">page</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <value name="B">
+                                                                                  <block type="lists_length" id="Q/,*L`g/pVKTi::a51pC">
+                                                                                    <value name="VALUE">
+                                                                                      <block type="blank" id="ZMH}d*,fWYvv);LajmT4">
+                                                                                        <field name="TEXT">pages</field>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                  </block>
+                                                                                </value>
+                                                                              </block>
+                                                                            </value>
+                                                                            <statement name="DO1">
+                                                                              <block type="s4d_update" id="t!O8E-o#ndZS3#},{h7t">
+                                                                                <value name="CONTENT">
+                                                                                  <block type="s4d_embed_send" id="]:GJO.9WpN+bV2!9m#FW">
+                                                                                    <field name="NAME">page</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <value name="BUTTON">
+                                                                                  <block type="blank" id="}(_s#Owl#Pt]|+F%_J*Z">
+                                                                                    <field name="TEXT">buttons_left</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                              </block>
+                                                                            </statement>
+                                                                            <statement name="ELSE">
+                                                                              <block type="s4d_update" id="ywv(4;-W}jP}7K%p5RCn">
+                                                                                <value name="CONTENT">
+                                                                                  <block type="s4d_embed_send" id="CDiValtK{INYxo-U]YFq">
+                                                                                    <field name="NAME">page</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <value name="BUTTON">
+                                                                                  <block type="blank" id="y#sO=fHmV7:4((BL2.sH">
+                                                                                    <field name="TEXT">buttons_all</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                              </block>
+                                                                            </statement>
+                                                                          </block>
+                                                                        </next>
+                                                                      </block>
+                                                                    </next>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </statement>
+                                                          </block>
+                                                        </statement>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
             <value name="IF8">
               <block type="logic_null" id="=cX?wqD`Q7rHJ^6HG^.l"></block>
             </value>
@@ -5634,6 +7312,183 @@
         </statement>
       </block>
     </statement>
+  </block>
+  <block type="frost_slash_register" id="KCcPp]8Fo_leBa_,pH({" collapsed="true" x="1459" y="-331">
+    <statement name="OPTIONS">
+      <block type="frost_slash_command" id="oQ6?x-$P|KI[{()i=LiR">
+        <value name="NAME">
+          <shadow type="text" id="p^:MC3|cKt~g6j(hm(2g">
+            <field name="TEXT">review</field>
+          </shadow>
+        </value>
+        <value name="DESC">
+          <shadow type="text" id=";p@C[RroJ6qgiq[MSBn+">
+            <field name="TEXT">rate a helper anywhere from 0 to five stars!</field>
+          </shadow>
+        </value>
+        <statement name="OPTIONS">
+          <block type="gsa_frost_slash_options" id="/66Y:_7I(z%LsNA7kEu!">
+            <field name="TYPE">6</field>
+            <value name="NAME">
+              <shadow type="text" id="=IAiQTlQ/n2O$g1^E~Eb">
+                <field name="TEXT">helper</field>
+              </shadow>
+            </value>
+            <value name="DESC">
+              <shadow type="text" id="5hHYJOjYBa+kxHB}=B;t">
+                <field name="TEXT">the helper to rate</field>
+              </shadow>
+            </value>
+            <value name="REQUIRED">
+              <shadow type="logic_boolean" id="Z^UY-_JC[/l^DJeN{9i%">
+                <field name="BOOL">TRUE</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="gsa_frost_slash_options" id="=).x50C.`(D`x(QMCaCd">
+                <field name="TYPE">3</field>
+                <value name="NAME">
+                  <shadow type="text" id="we2-J/WncG4c|Q)_n8Sa">
+                    <field name="TEXT">rating</field>
+                  </shadow>
+                </value>
+                <value name="DESC">
+                  <shadow type="text" id="a(7Ib~d0^O[{!+=?C,v+">
+                    <field name="TEXT">anything from 0-5 stars</field>
+                  </shadow>
+                </value>
+                <value name="REQUIRED">
+                  <shadow type="logic_boolean" id="bkL3?nOpytHW1Q$)w^Zn">
+                    <field name="BOOL">TRUE</field>
+                  </shadow>
+                </value>
+                <statement name="CHOICES">
+                  <block type="frost_slash_choices" id="de##iS4N^Rh3ha|#A.B_">
+                    <value name="NAME">
+                      <shadow type="text" id="W1+wB;=3-Bq](,rJly1B">
+                        <field name="TEXT">0 stars</field>
+                      </shadow>
+                    </value>
+                    <value name="OPTION_NAME">
+                      <shadow type="text" id="K_SNgD~QAF}Jc56vuYnP">
+                        <field name="TEXT">0</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="frost_slash_choices" id="zL#|Fo!L]X~I}._]l1/^">
+                        <value name="NAME">
+                          <shadow type="text" id="/ZHjvnVLI027T$FypZbs">
+                            <field name="TEXT">⭐</field>
+                          </shadow>
+                        </value>
+                        <value name="OPTION_NAME">
+                          <shadow type="text" id="ZlVbbE`}zKkCGju;nns@">
+                            <field name="TEXT">1</field>
+                          </shadow>
+                        </value>
+                        <next>
+                          <block type="frost_slash_choices" id="$Y%,tbUq|WL~EaCQPKt{">
+                            <value name="NAME">
+                              <shadow type="text" id="^.D9+Z2oJ6^+F@=0wyyI">
+                                <field name="TEXT">⭐⭐</field>
+                              </shadow>
+                            </value>
+                            <value name="OPTION_NAME">
+                              <shadow type="text" id="N:MiETb2YXVJRi:0!,[7">
+                                <field name="TEXT">2</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="frost_slash_choices" id="s(ks#r-I;#}!3.u$D`r,">
+                                <value name="NAME">
+                                  <shadow type="text" id="4=2cyzp`7@eyjkO:!.)o">
+                                    <field name="TEXT">⭐⭐⭐</field>
+                                  </shadow>
+                                </value>
+                                <value name="OPTION_NAME">
+                                  <shadow type="text" id="YtC}T8,-,d=zQX3_BX$1">
+                                    <field name="TEXT">3</field>
+                                  </shadow>
+                                </value>
+                                <next>
+                                  <block type="frost_slash_choices" id="d{1s}BxCpqtEM0g^kerA">
+                                    <value name="NAME">
+                                      <shadow type="text" id="@|$r$ebL1]-7(X$:]*KT">
+                                        <field name="TEXT">⭐⭐⭐⭐</field>
+                                      </shadow>
+                                    </value>
+                                    <value name="OPTION_NAME">
+                                      <shadow type="text" id="wbtVg{zyzMWp4TcrQq)0">
+                                        <field name="TEXT">4</field>
+                                      </shadow>
+                                    </value>
+                                    <next>
+                                      <block type="frost_slash_choices" id="Uc8Eldt=.Xikaj%(24N4">
+                                        <value name="NAME">
+                                          <shadow type="text" id="A+P5[PiWW)K14{9@!uCM">
+                                            <field name="TEXT">⭐⭐⭐⭐⭐</field>
+                                          </shadow>
+                                        </value>
+                                        <value name="OPTION_NAME">
+                                          <shadow type="text" id="I#y/=!]z{:LDZSx_BiDh">
+                                            <field name="TEXT">5</field>
+                                          </shadow>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="gsa_frost_slash_options" id="VuQ|rWJt*;8T(.Z$BFff">
+                    <field name="TYPE">3</field>
+                    <value name="NAME">
+                      <shadow type="text" id=".d!BEJda^xZ`c|B0yEEi">
+                        <field name="TEXT">comment</field>
+                      </shadow>
+                    </value>
+                    <value name="DESC">
+                      <shadow type="text" id="](D-na#dgiH!]tFA+{5v">
+                        <field name="TEXT">what is your opinion on this helper?</field>
+                      </shadow>
+                    </value>
+                    <value name="REQUIRED">
+                      <shadow type="logic_boolean" id="3~nm1`[_a$?N~HvN~[vc">
+                        <field name="BOOL">FALSE</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="frost_slash_command" id="DtdHXV66Tby/`LgD5sf/">
+            <value name="NAME">
+              <shadow type="text" id="{V5tlSZ:%$#E:]5*YG|]">
+                <field name="TEXT">helper-list</field>
+              </shadow>
+            </value>
+            <value name="DESC">
+              <shadow type="text" id="?/5=TqTw+W`e{`tX;*K:">
+                <field name="TEXT">get a list of helpers listed best to worst</field>
+              </shadow>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="jg_unused_floating_comment" id="J);PoxMoIED?U_9)q:+-" x="312" y="-259">
+    <field name="TEXT">DATABASE</field>
   </block>
   <block type="on_emojiupdate" id="AQX/?aU/ZHVCXiB7O!EF" collapsed="true" x="-16" y="-179">
     <statement name="STATEMENTS">
@@ -5688,6 +7543,9 @@
       </block>
     </statement>
   </block>
+  <block type="jg_unused_floating_comment" id="Xhb*Ij[*!9CvrQ%)OZqx" x="1159" y="-230">
+    <field name="TEXT">the db file HAS to be set to&amp;#10;{&amp;#10;  "reviewers": {},&amp;#10;  "reviewed": {}&amp;#10;}&amp;#10;other wise it wont work</field>
+  </block>
   <block type="s4d_database_create_new" id="Yf}|m=qNqo]!*4a;_Zm5" collapsed="true" x="321" y="-177">
     <value name="NAME">
       <shadow type="text" id="#C;U7$SO9Lwh,{_,KHDd">
@@ -5699,6 +7557,9 @@
         <field name="TEXT">autoresponse</field>
       </shadow>
     </value>
+  </block>
+  <block type="jg_unused_floating_comment" id="*IJgbIqOI$fXe?}(+Ym]" x="1463" y="-230">
+    <field name="TEXT">db format:&amp;#10;reviewers: &amp;#10;"user id": ["other user id"]&amp;#10;&amp;#10;reviewed: &amp;#10;"user id": {&amp;#10;   "reviews": {&amp;#10;     "other user id": {&amp;#10;       "rating": 0-5,&amp;#10;       "comment": "comment string",&amp;#10;       "timestamp": unix time&amp;#10;     },&amp;#10;     "total": 0-5&amp;#10;   }&amp;#10;}</field>
   </block>
   <block type="on_emojidelete" id="zb:Cyf@3XtTrzL@$/3`S" collapsed="true" x="-15" y="-116">
     <statement name="STATEMENTS">
@@ -5870,7 +7731,19 @@
       </block>
     </statement>
   </block>
-  <block type="text" id="i4itQjX}-P+hHoduln#Q" disabled="true" x="0" y="0">
-    <field name="TEXT">user</field>
+  <block type="s4d_database_create_new" id="RZ6MMF86OHObgtJ@@[05" collapsed="true" x="326" y="-53">
+    <value name="NAME">
+      <shadow type="text" id="ksyMIBJXlVG~5[~?o9/H">
+        <field name="TEXT">reviews</field>
+      </shadow>
+    </value>
+    <value name="FILE">
+      <shadow type="text" id="6+wXG;|)LDKXENS*h~.V">
+        <field name="TEXT">reviewsDB</field>
+      </shadow>
+    </value>
+  </block>
+  <block type="jg_unused_floating_comment" id="Keh$%Bbwlq)x#5OC=h.`" x="1006" y="-32">
+    <field name="TEXT">note that this runs on all threads regardless of &amp;#10;where since s4d doesnt currently have forum &amp;#10;channel support</field>
   </block>
 </xml>

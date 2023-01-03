@@ -1,16 +1,12 @@
 (async () => {
-    let process = require('process');
-    process.on('uncaughtException', function(err) {
-        console.log(`Error!`);
-        console.log(err);
-    });
+    // default imports
     const events = require('events');
     const {
         exec
     } = require("child_process")
-    let Discord = require("discord.js")
-    let Database = require("easy-json-database")
-    let {
+    const logs = require("discord-logs")
+    const Discord = require("discord.js")
+    const {
         MessageEmbed,
         MessageButton,
         MessageActionRow,
@@ -18,21 +14,27 @@
         Permissions,
         MessageSelectMenu
     } = require("discord.js")
-    let logs = require("discord-logs")
+    const fs = require('fs');
+    let process = require('process');
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    // block imports
     const os = require("os-utils");
     let URL = require('url')
+    let {
+        DB
+    } = require("mongquick");
     let https = require("https")
-    let fs = require('fs');
-    const devMode = typeof __E_IS_DEV !== "undefined" && __E_IS_DEV;
-    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-    const s4d = {
+    const synchronizeSlashCommands = require('@frostzzone/discord-sync-commands');
+    const Database = require("easy-json-database")
+    const Database = require("easy-json-database")
+
+    // define s4d components (pretty sure 90% of these arnt even used/required)
+    let s4d = {
         Discord,
-        database: new Database(`./database.json`),
         fire: null,
         joiningMember: null,
         reply: null,
-        tokenInvalid: false,
-        tokenError: null,
         player: null,
         manager: null,
         Inviter: null,
@@ -43,15 +45,55 @@
             if (!s4d.client.readyTimestamp) throw new Error('You cannot perform message operations while the bot is not connected to the Discord API')
         }
     };
+
+    // check if d.js is v13
+    if (!require('./package.json').dependencies['discord.js'].startsWith("^13.")) {
+        let file = JSON.parse(fs.readFileSync('package.json'))
+        file.dependencies['discord.js'] = '^13.12.0'
+        fs.writeFileSync('package.json', JSON.stringify(file))
+        exec('mpm i')
+        throw new Error("Seems you arent using v13 please re-run or run `npm i discord.js@13.12.0`");
+    }
+
+    // check if discord-logs is v2
+    if (!require('./package.json').dependencies['discord-logs'].startsWith("^2.")) {
+        let file = JSON.parse(fs.readFileSync('package.json'))
+        file.dependencies['discord-logs'] = '^2.0.0'
+        fs.writeFileSync('package.json', JSON.stringify(file))
+        exec('mpm i')
+        throw new Error("discord-logs must be 2.0.0. please re-run or if that fails run `npm i discord-logs@2.0.0` then re-run");
+    }
+
+    // create a new discord client
     s4d.client = new s4d.Discord.Client({
-        intents: [Object.values(s4d.Discord.Intents.FLAGS).reduce((acc, p) => acc | p, 0)],
-        partials: ["REACTION", "CHANNEL"]
+        intents: [
+            Object.values(s4d.Discord.Intents.FLAGS).reduce((acc, p) => acc | p, 0)
+        ],
+        partials: [
+            "REACTION",
+            "CHANNEL"
+        ]
     });
+
+    // when the bot is connected say so
     s4d.client.on('ready', () => {
         console.log(s4d.client.user.tag + " is alive!")
     })
+
+    // upon error print "Error!" and the error
+    process.on('uncaughtException', function(err) {
+        console.log('Error!');
+        console.log(err);
+    });
+
+    // give the new client to discord-logs
     logs(s4d.client);
-    var time_var, channel_update, botuptime, channel_update_old, key_reply, keys_names, s4dcolor, ar_keys, channel_category, channel_text, channel_voice, channel_announcement, channel_stage, roles_mod, roles_mentionable, roles_hoisted, roles_total;
+
+    // pre blockly code
+    s4d.database = new Database('./database.json')
+
+    // blockly code
+    var time_var, helper, channel_update, botuptime, channel_update_old, key_reply, keys_names, s4dcolor, j, ar_keys, channel_category, channel_text, channel_voice, channel_announcement, channel_stage, roles_mod, roles_mentionable, roles_hoisted, roles_total;
 
     // Describe this function...
     function time(time_var) {
@@ -66,6 +108,23 @@
         g = ('0' + (Math.round(g) || 0).toString(16)).slice(-2);
         b = ('0' + (Math.round(b) || 0).toString(16)).slice(-2);
         return '#' + r + g + b;
+    }
+
+    // Describe this function...
+    function recalculate_total_rating(helper) {
+        let rjson = reviews.get(String('reviewers'));
+        let hjson = (rjson[String(helper)]);
+        let sum = 0;
+        const length = ((Object.getOwnPropertyNames(hjson.reviews)).length);
+        var j_list = (Object.getOwnPropertyNames(hjson.reviews));
+        for (var j_index in j_list) {
+            j = j_list[j_index];
+            let value = (hjson.reviews[String(j)]);
+            sum = (sum + value.rating)
+        }
+        hjson[String('total')] = sum
+        rjson[String(helper)] = hjson
+        reviews.set(String('reviewers'), rjson);
     }
 
     function textToTitleCase(str) {
@@ -83,9 +142,9 @@
 
     var s4dcolor = (colourRgb((254 / 255) * 100, (169 / 255) * 100, (24 / 255) * 100));
 
-    await s4d.client.login((process.env.TOKEN)).catch((e) => {
-        s4d.tokenInvalid = true;
-        s4d.tokenError = e;
+    await s4d.client.login((process.env[String('TOKEN')])).catch((e) => {
+        const tokenInvalid = true;
+        const tokenError = e;
         if (e.toString().toLowerCase().includes("token")) {
             throw new Error("An invalid bot token was provided!")
         } else {
@@ -239,7 +298,19 @@
                     repliedUser: true
                 }
             });
-        } else if (false) {}
+        } else if (((s4dmessage.channel).type) == 'GUILD_PUBLIC_THREAD') {
+            if ((String((s4dmessage.content)).includes(String('thx'))) || (String((s4dmessage.content)).includes(String('thanks'))) || (String((s4dmessage.content)).includes(String('thank you')))) {
+
+                /*
+              sussy wording 😳.
+          replace *insert command here* with the review
+          command
+              */
+                s4dmessage.channel.send({
+                    content: String('use `/review` in <#932651844973502473> to rate your helper(s)!')
+                });
+            }
+        }
 
     });
 
@@ -545,10 +616,252 @@
 
 
                 break;
-            case null:
+            case 'review':
+                const user = ((interaction.member.user).id);
+                const helper = ((interaction.options.getMember('helper')).id);
+                let reviewed = reviews.get(String('reviewed'));
+                let reviewers = reviews.get(String('reviewers'));
+                let newReview = {
+                    "rating": (interaction.options.getString('rating')),
+                    "comment": (interaction.options.getString('comment')),
+                    "timestamp": (new Date().getTime()),
+                };
+                ((reviewed[String(helper)])[String(reviews)])[String(user)] = newReview
+                    (reviewers[String(user)]).push(helper);
+                if ((reviewers[String(user)]).includes(helper)) {
+                    await interaction.reply({
+                        content: 'you have already reviewed this helper. ',
+                        ephemeral: false,
+                        components: []
+                    });
+                    (interaction.channel).send(String('do you want to edit your review?')).then(() => {
+                        (interaction.channel).awaitMessages({
+                            filter: (m) => m.author.id === (interaction.member).id,
+                            time: (5 * 60 * 1000),
+                            max: 1
+                        }).then(async (collected) => {
+                            s4d.reply = collected.first().content;
+                            s4d.message = collected.first();
+                            if (!(((s4d.reply) || '').startsWith('y' || ''))) {
+                                (interaction.channel).send({
+                                    content: String('cancelled')
+                                });
+                                return
+                            }
+                            reviews.set(String('reviewed'), reviewed);
+                            reviews.set(String('reviewers'), reviewers);
+                            recalculate_total_rating(helper);
+                            (interaction.channel).send({
+                                content: String((['successfully edited your rating for ', interaction.options.getMember('helper'), '!'].join(''))),
+                                allowedMentions: {
+                                    users: [],
+
+                                }
+                            });
+
+                            s4d.reply = null;
+                        }).catch(async (e) => {
+                            console.error(e);
+                            (interaction.channel).send({
+                                content: String('cancelled')
+                            });
+                        });
+                    })
+                    return
+                }
+                reviews.set(String('reviewed'), reviewed);
+                reviews.set(String('reviewers'), reviewers);
+                recalculate_total_rating(helper);
+                await interaction.reply({
+                    content: (['successfully rated ', interaction.options.getMember('helper'), '!'].join('')),
+                    ephemeral: true,
+                    components: []
+                });
 
                 break;
-            case null:
+            case 'helper-list':
+
+                /*
+              i rlly need to add the "notify discord that the
+          bot got the command and is infact working on
+          a response but currently has no text to send"
+          block
+              */
+                await interaction.reply({
+                    content: 'getting helpers',
+                    ephemeral: true,
+                    components: []
+                });
+                const reviewed = reviews.get(String('reviewed'));
+
+                /*
+              i really didnt want to code the page generator in
+          s4d so your gona just have to deal with this lmao
+              */
+                let pages = [
+                    []
+                ]
+                let helpers = Object.getOwnPropertyNames(reviewed)
+                    .map(x => {
+                        return {
+                            user: x,
+                            total: reviewed[x].total
+                            numrev: Object.getOwnPropertyNames(reviewed[x].reviews).length
+                        }
+                    })
+                    .sort((a, b) => a.total - b.total)
+                    .reduce((out, item) => {
+                        if (out.user != null) out = [`<@${out.user}> \`${out.user}\`: ${out.total}`]
+                        out.push(`<@${item.user}> \`${item.user}\`: ${Math.floor(item.total / item.numrev)}`)
+                        return out
+                    })
+                    .forEach((item, index) => {
+                        let page = pages.length - 1
+                        if (page < Math.floor(index / 10)) {
+                            pages[page] = pages[page].join(',\n')
+                            pages.push([])
+                            page = pages.length - 1
+                        }
+                        pages[page].push(item)
+                    })
+                pages[pages.length - 1] = pages[pages.length - 1].join(',\n')
+                const buttons_all = (new MessageActionRow()
+                    .addComponents(new MessageButton()
+                        .setCustomId('maxL')
+                        .setEmoji('⏮')
+                        .setDisabled(false)
+                        .setStyle(('PRIMARY')),
+                        new MessageButton()
+                        .setCustomId('left')
+                        .setEmoji('◀')
+                        .setDisabled(false)
+                        .setStyle(('PRIMARY')),
+                        new MessageButton()
+                        .setCustomId('right')
+                        .setEmoji('▶')
+                        .setDisabled(false)
+                        .setStyle(('PRIMARY')),
+                        new MessageButton()
+                        .setCustomId('maxR')
+                        .setEmoji('⏭')
+                        .setDisabled(false)
+                        .setStyle(('PRIMARY')),
+                    ));
+                const buttons_left = (new MessageActionRow()
+                    .addComponents(new MessageButton()
+                        .setCustomId('maxL')
+                        .setEmoji('⏮')
+                        .setDisabled(false)
+                        .setStyle(('PRIMARY')),
+                        new MessageButton()
+                        .setCustomId('left')
+                        .setEmoji('◀')
+                        .setDisabled(false)
+                        .setStyle(('PRIMARY')),
+                        new MessageButton()
+                        .setCustomId('right')
+                        .setEmoji('▶')
+                        .setDisabled(true)
+                        .setStyle(('PRIMARY')),
+                        new MessageButton()
+                        .setCustomId('maxR')
+                        .setEmoji('⏭')
+                        .setDisabled(true)
+                        .setStyle(('PRIMARY')),
+                    ));
+                const buttons_right = (new MessageActionRow()
+                    .addComponents(new MessageButton()
+                        .setCustomId('maxL')
+                        .setEmoji('⏮')
+                        .setDisabled(true)
+                        .setStyle(('PRIMARY')),
+                        new MessageButton()
+                        .setCustomId('left')
+                        .setEmoji('◀')
+                        .setDisabled(true)
+                        .setStyle(('PRIMARY')),
+                        new MessageButton()
+                        .setCustomId('right')
+                        .setEmoji('▶')
+                        .setDisabled(false)
+                        .setStyle(('PRIMARY')),
+                        new MessageButton()
+                        .setCustomId('maxR')
+                        .setEmoji('⏭')
+                        .setDisabled(false)
+                        .setStyle(('PRIMARY')),
+                    ));
+                let page = 1;
+                var page = new Discord.MessageEmbed();
+                page.setColor('#00cccc');
+                page.setTitle(String('helper list'))
+                page.setURL(String());
+                page.setDescription(String((pages[(page - 1)])));
+                page.setFooter({
+                    text: String((['page ', page, '/', pages.length].join(''))),
+                    iconURL: String()
+                });
+
+                (interaction.channel).send({
+                    embeds: [page],
+                    components: [buttons_right]
+                }).then(async m => {
+
+                    let collector = m.createMessageComponentCollector({
+                        filter: i => i.user.id === i.user.id,
+                        time: Number(60000) * 1000
+                    });
+                    collector.on('collect', async i => {
+                        if ((i.customId) == 'maxL') {
+                            page = 1
+                        } else if ((i.customId) == 'left') {
+                            page = (page - 1)
+                        } else if ((i.customId) == 'right') {
+                            page = (page + 1)
+                        } else if ((i.customId) == 'maxR') {
+                            page = (pages.length)
+                        }
+                        var page = new Discord.MessageEmbed();
+                        page.setColor('#00cccc');
+                        page.setTitle(String('helper list'))
+                        page.setURL(String());
+                        page.setDescription(String((pages[(page - 1)])));
+                        page.setFooter({
+                            text: String((['page ', page, '/', pages.length].join(''))),
+                            iconURL: String()
+                        });
+
+
+                        /*
+                  im not sure if i got this correct but it should
+              be correct
+                  */
+                        if (page == 1) {
+                            await i.update({
+                                embeds: [page],
+                                components: [buttons_right]
+                            }).then(async m => {
+
+                            });
+                        } else if (page == pages.length) {
+                            await i.update({
+                                embeds: [page],
+                                components: [buttons_left]
+                            }).then(async m => {
+
+                            });
+                        } else {
+                            await i.update({
+                                embeds: [page],
+                                components: [buttons_all]
+                            }).then(async m => {
+
+                            });
+                        }
+
+                    })
+
+                });
 
                 break;
             case null:
@@ -569,6 +882,61 @@
                 s4d.database.add(String('commands'), parseInt(1));
 
         };
+
+    });
+
+    synchronizeSlashCommands(s4d.client, [{
+        name: 'review',
+        description: 'rate a helper anywhere from 0 to five stars!',
+        options: [{
+            type: 6,
+            name: 'helper',
+            required: true,
+            description: 'the helper to rate',
+            choices: [
+
+            ]
+        }, {
+            type: 3,
+            name: 'rating',
+            required: true,
+            description: 'anything from 0-5 stars',
+            choices: [{
+                name: String('0 stars'),
+                value: String('0')
+            }, {
+                name: String('⭐'),
+                value: String('1')
+            }, {
+                name: String('⭐⭐'),
+                value: String('2')
+            }, {
+                name: String('⭐⭐⭐'),
+                value: String('3')
+            }, {
+                name: String('⭐⭐⭐⭐'),
+                value: String('4')
+            }, {
+                name: String('⭐⭐⭐⭐⭐'),
+                value: String('5')
+            }, ]
+        }, {
+            type: 3,
+            name: 'comment',
+            required: false,
+            description: 'what is your opinion on this helper?',
+            choices: [
+
+            ]
+        }, ]
+    }, {
+        name: 'helper-list',
+        description: 'get a list of helpers listed best to worst',
+        options: [
+
+        ]
+    }, ], {
+        debug: false,
 
     });
 
@@ -613,5 +981,6 @@
 
     });
 
+    const reviews = new Database('./reviewsDB.json')
     return s4d
 })();

@@ -21,9 +21,6 @@
     // block imports
     const os = require("os-utils");
     let URL = require('url')
-    let {
-        DB
-    } = require("mongquick");
     let https = require("https")
     const synchronizeSlashCommands = require('@frostzzone/discord-sync-commands');
     const Database = require("easy-json-database")

@@ -890,14 +890,14 @@
               choices: [
 
               ]
-          }, {
-              name: 'helper-list',
-              description: 'get a list of helpers listed best to worst',
-              type: 1,
-              options: [
-
-              ]
           }, ]
+      }, {
+          name: 'helper-list',
+          description: 'get a list of helpers listed best to worst',
+          type: 1,
+          options: [
+
+          ]
       }, ]
   }, {
       name: 'bot',

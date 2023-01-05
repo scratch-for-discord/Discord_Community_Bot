@@ -901,7 +901,7 @@
       }, ]
   }, {
       name: 'bot',
-      description: '',
+      description: 'description of bot',
       options: [{
           name: 'info',
           description: 'info about the bot',

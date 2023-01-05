@@ -1,12 +1,11 @@
 <xml xmlns="https://developers.google.com/blockly/xml">
   <variables>
     <variable id="C%)J{{McR!CKzzY.;3f/">time_var</variable>
-    <variable id="MrVTvjr2IV=L$|^SyU`p">helper</variable>
     <variable id="Op^b/-:=qCUTDsKB?gO#">channel_update</variable>
     <variable id="f!Mja`$Ee`8u#g]C:})r">botuptime</variable>
     <variable id="H!o.^g3|a65F]tb^Y7B=">channel_update_old</variable>
-    <variable id="|4F`.NPQ@@Q.%z)rTI3]">s4dcolor</variable>
     <variable id="_U%=Z#c;|yP-K;;aC%(K">j</variable>
+    <variable id="|4F`.NPQ@@Q.%z)rTI3]">s4dcolor</variable>
     <variable id="Irq:kS+VBT:#IWP7U8G1">ar_keys</variable>
     <variable id="bMpJU[j*uJa6brQt|/:!">channel_category</variable>
     <variable id="]vcq}3+[,HD5*I3,[XBc">channel_text</variable>
@@ -18,6 +17,45 @@
     <variable id=",Ouvphldy5a=or4kLO#H">roles_hoisted</variable>
     <variable id="^Me%Xne1bZkjW.nY92Mm">roles_total</variable>
   </variables>
+  <block type="jg_unused_floating_comment" id="J);PoxMoIED?U_9)q:+-" x="136" y="-1515">
+    <field name="TEXT">DATABASE</field>
+  </block>
+  <block type="s4d_database_create_new" id="Yf}|m=qNqo]!*4a;_Zm5" collapsed="true" x="135" y="-1431">
+    <value name="NAME">
+      <shadow type="text" id="#C;U7$SO9Lwh,{_,KHDd">
+        <field name="TEXT">database2</field>
+      </shadow>
+    </value>
+    <value name="FILE">
+      <shadow type="text" id="I*OA8L;)X*viER=JFVe(">
+        <field name="TEXT">autoresponse</field>
+      </shadow>
+    </value>
+  </block>
+  <block type="s4d_database_create_new" id="^H!6[]PVl6/uF~S*SD5E" collapsed="true" x="141" y="-1355">
+    <value name="NAME">
+      <shadow type="text" id="h}#=J^T:GH*R@A-K7T-Q">
+        <field name="TEXT">database1</field>
+      </shadow>
+    </value>
+    <value name="FILE">
+      <shadow type="text" id="m}68+Gs};.R3Qjd/#Qyw">
+        <field name="TEXT">database</field>
+      </shadow>
+    </value>
+  </block>
+  <block type="s4d_database_create_new" id="RZ6MMF86OHObgtJ@@[05" x="140" y="-1276">
+    <value name="NAME">
+      <shadow type="text" id="ksyMIBJXlVG~5[~?o9/H">
+        <field name="TEXT">reviews</field>
+      </shadow>
+    </value>
+    <value name="FILE">
+      <shadow type="text" id="6+wXG;|)LDKXENS*h~.V">
+        <field name="TEXT">reviewsDB</field>
+      </shadow>
+    </value>
+  </block>
   <block type="jg_unused_floating_comment" id="Uinm~sF:XXtcOmulp9nw" x="-30" y="-1086">
     <field name="TEXT">CONSTANTS</field>
   </block>
@@ -297,38 +335,42 @@
       </block>
     </value>
   </block>
-  <block type="procedures_defnoreturn" id="RT~PCBUJ2-XMBJ*77KK8" collapsed="true" x="401" y="-959">
-    <mutation>
-      <arg name="helper" varid="MrVTvjr2IV=L$|^SyU`p"></arg>
-    </mutation>
-    <field name="NAME">recalculate total rating</field>
-    <comment pinned="false" h="80" w="160">Describe this function...</comment>
-    <statement name="STACK">
-      <block type="express_var" id="_U0OqDQ)y)r;Qen}~`Oq">
-        <field name="TYPE">let</field>
-        <field name="COLON">;</field>
-        <value name="VAR">
-          <shadow type="text" id="Ik6KToP{Me6d0)uUH+Mf">
-            <field name="TEXT">rjson</field>
-          </shadow>
-        </value>
-        <value name="CONTENT">
-          <block type="s4d_get_data_new" id="9By||9tEq4^8R9lOnFC(">
-            <value name="KEY">
-              <shadow type="text" id="$Cmg5e@AlAHGBEI[LTVE">
-                <field name="TEXT">reviewers</field>
+  <block type="import_all" id="8b8yb*YYUK)@}C:BOqST" collapsed="true" x="411" y="-944">
+    <field name="TYPE">const</field>
+    <field name="COLON">;</field>
+    <value name="VAR">
+      <shadow type="text" id="K5}`3;=aE{G2^BBOu$@D">
+        <field name="TEXT">calc_total</field>
+      </shadow>
+    </value>
+    <value name="CONTENT">
+      <block type="gsa_function_item_creator_empty_search_moment_searchMoment" id="Yh$zy,n,DpHNYENJQl)h">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" inputs="helper" return="false" async="true"></mutation>
+        <field name="async">async</field>
+        <field name="vars">with helper</field>
+        <statement name="value">
+          <block type="express_var" id="_U0OqDQ)y)r;Qen}~`Oq">
+            <field name="TYPE">let</field>
+            <field name="COLON">;</field>
+            <value name="VAR">
+              <shadow type="text" id="Ik6KToP{Me6d0)uUH+Mf">
+                <field name="TEXT">rjson</field>
               </shadow>
             </value>
-            <value name="NAME">
-              <shadow type="text" id="z(aRt2+l]|Ad7QY^D+D4">
-                <field name="TEXT">reviews</field>
-              </shadow>
+            <value name="CONTENT">
+              <block type="s4d_get_data_new" id="9By||9tEq4^8R9lOnFC(">
+                <value name="KEY">
+                  <shadow type="text" id="$Cmg5e@AlAHGBEI[LTVE">
+                    <field name="TEXT">reviewed</field>
+                  </shadow>
+                </value>
+                <value name="NAME">
+                  <shadow type="text" id="z(aRt2+l]|Ad7QY^D+D4">
+                    <field name="TEXT">reviews</field>
+                  </shadow>
+                </value>
+              </block>
             </value>
-          </block>
-        </value>
-        <next>
-          <block type="jg_comments_connected_comment" id="6BtJdY$p(ye-*Wa;E0J$">
-            <field name="TEXT">This returns undefined</field>
             <next>
               <block type="express_var" id="k[feVGtQL|j@ZWL7Ij$]">
                 <field name="TYPE">let</field>
@@ -344,8 +386,8 @@
                       <shadow type="text" id="J7#BUr~#!Iar/0H;#_u#">
                         <field name="TEXT">key</field>
                       </shadow>
-                      <block type="variables_get" id="K1JLPYO~OXZdQrQs/P#|">
-                        <field name="VAR" id="MrVTvjr2IV=L$|^SyU`p">helper</field>
+                      <block type="blank" id="7(,y$d6};`w9uD[Yw%mr">
+                        <field name="TEXT">helper</field>
                       </block>
                     </value>
                     <value name="object">
@@ -370,161 +412,132 @@
                       </block>
                     </value>
                     <next>
-                      <block type="jg_comments_connected_comment" id="7iz_vEm@q%94RVd2^,?v">
-                        <field name="TEXT">Lenght is not used</field>
-                        <next>
-                          <block type="express_var" id="Cn_HGIL.RVPj)4:uX5jM">
-                            <field name="TYPE">const</field>
+                      <block type="controls_forEach" id="0rwSN6ZM]pFaZ,dDclKM">
+                        <field name="VAR" id="_U%=Z#c;|yP-K;;aC%(K">j</field>
+                        <value name="LIST">
+                          <block type="jg_objects_get_objects_key_names_in_list" id="M}_ZC_Weo*Aj_:EfqA?g">
+                            <value name="OBJECT">
+                              <block type="blank" id="mrXzLWRrtFlRYn|?^@(t">
+                                <field name="TEXT">hjson.reviews</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO">
+                          <block type="express_var" id="?CZTiUGPbZfF|WF+|iD=">
+                            <field name="TYPE">let</field>
                             <field name="COLON">;</field>
                             <value name="VAR">
-                              <shadow type="text" id="[b-M~?mK!jnF1=u5%YC`">
-                                <field name="TEXT">length</field>
+                              <shadow type="text" id="XB#h$2bxAmTRLgGp~,z#">
+                                <field name="TEXT">value</field>
                               </shadow>
                             </value>
                             <value name="CONTENT">
-                              <block type="lists_length" id="(jV6D,Kv2FJH{:76YhD1">
-                                <value name="VALUE">
-                                  <block type="jg_objects_get_objects_key_names_in_list" id="t2,Bjh/z!~*yMrEBx6dt">
-                                    <value name="OBJECT">
-                                      <block type="blank" id="hvKm#?2d9cF^}2GBdTej">
-                                        <field name="TEXT">hjson.reviews</field>
-                                      </block>
-                                    </value>
+                              <block type="jg_object_getvalue" id="Pwm1{:(M:dYiqWC-$cpy">
+                                <value name="value">
+                                  <shadow type="text" id="PAl.y63|ZHp8C8eYXo!6">
+                                    <field name="TEXT">key</field>
+                                  </shadow>
+                                  <block type="variables_get" id="OGd:`TF};qOHy+h1On:a">
+                                    <field name="VAR" id="_U%=Z#c;|yP-K;;aC%(K">j</field>
+                                  </block>
+                                </value>
+                                <value name="object">
+                                  <block type="blank" id="cHfZ|{QBT+]r1hq`$X2%">
+                                    <field name="TEXT">hjson.reviews</field>
                                   </block>
                                 </value>
                               </block>
                             </value>
                             <next>
-                              <block type="controls_forEach" id="0rwSN6ZM]pFaZ,dDclKM">
-                                <field name="VAR" id="_U%=Z#c;|yP-K;;aC%(K">j</field>
-                                <value name="LIST">
-                                  <block type="jg_objects_get_objects_key_names_in_list" id="M}_ZC_Weo*Aj_:EfqA?g">
-                                    <value name="OBJECT">
-                                      <block type="blank" id="mrXzLWRrtFlRYn|?^@(t">
-                                        <field name="TEXT">hjson.reviews</field>
+                              <block type="jg_other_setvalue" id="dU)jsAzKgh%wE-7[Ihe/">
+                                <value name="input">
+                                  <block type="blank" id="KE,[e-[iZ0l[4!We0{8@">
+                                    <field name="TEXT">sum</field>
+                                  </block>
+                                </value>
+                                <value name="replace">
+                                  <block type="math_arithmetic" id="}iqj5/n:l)=~Fo1*$[D{">
+                                    <field name="OP">ADD</field>
+                                    <value name="A">
+                                      <shadow type="math_number" id="J;;{ku@S{4N^*:w`6CoW">
+                                        <field name="NUM">1</field>
+                                      </shadow>
+                                      <block type="blank" id="q|nFuuQ1@`=!hW#JrC,K">
+                                        <field name="TEXT">sum</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <shadow type="math_number" id="zeE-;uvrON+^/aZjQYM)">
+                                        <field name="NUM">1</field>
+                                      </shadow>
+                                      <block type="blank" id="P5-Q:.D4T4EqhrY*hyO%">
+                                        <field name="TEXT">value.rating</field>
                                       </block>
                                     </value>
                                   </block>
                                 </value>
-                                <statement name="DO">
-                                  <block type="express_var" id="?CZTiUGPbZfF|WF+|iD=">
-                                    <field name="TYPE">let</field>
-                                    <field name="COLON">;</field>
-                                    <value name="VAR">
-                                      <shadow type="text" id="XB#h$2bxAmTRLgGp~,z#">
-                                        <field name="TEXT">value</field>
-                                      </shadow>
-                                    </value>
-                                    <value name="CONTENT">
-                                      <block type="jg_object_getvalue" id="Pwm1{:(M:dYiqWC-$cpy">
-                                        <value name="value">
-                                          <shadow type="text" id="PAl.y63|ZHp8C8eYXo!6">
-                                            <field name="TEXT">key</field>
-                                          </shadow>
-                                          <block type="variables_get" id="OGd:`TF};qOHy+h1On:a">
-                                            <field name="VAR" id="_U%=Z#c;|yP-K;;aC%(K">j</field>
-                                          </block>
-                                        </value>
-                                        <value name="object">
-                                          <block type="blank" id="cHfZ|{QBT+]r1hq`$X2%">
-                                            <field name="TEXT">hjson.reviews</field>
-                                          </block>
-                                        </value>
-                                      </block>
-                                    </value>
-                                    <next>
-                                      <block type="jg_other_setvalue" id="dU)jsAzKgh%wE-7[Ihe/">
-                                        <value name="input">
-                                          <block type="blank" id="KE,[e-[iZ0l[4!We0{8@">
-                                            <field name="TEXT">sum</field>
-                                          </block>
-                                        </value>
-                                        <value name="replace">
-                                          <block type="math_arithmetic" id="}iqj5/n:l)=~Fo1*$[D{">
-                                            <field name="OP">ADD</field>
-                                            <value name="A">
-                                              <shadow type="math_number" id="J;;{ku@S{4N^*:w`6CoW">
-                                                <field name="NUM">1</field>
-                                              </shadow>
-                                              <block type="blank" id="q|nFuuQ1@`=!hW#JrC,K">
-                                                <field name="TEXT">sum</field>
-                                              </block>
-                                            </value>
-                                            <value name="B">
-                                              <shadow type="math_number" id="zeE-;uvrON+^/aZjQYM)">
-                                                <field name="NUM">1</field>
-                                              </shadow>
-                                              <block type="blank" id="P5-Q:.D4T4EqhrY*hyO%">
-                                                <field name="TEXT">value.rating</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </value>
-                                      </block>
-                                    </next>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="jg_objects_set_key_to_value_in_object" id="w0K+XkXwdl-W$~!5eQ|8">
+                            <value name="KEY">
+                              <shadow type="text" id="L,bmATIN@vj/mz|bQ.Rg">
+                                <field name="TEXT">total</field>
+                              </shadow>
+                            </value>
+                            <value name="VALUE">
+                              <block type="blank" id="!s0`dccG#P;G{xSMS-AS">
+                                <field name="TEXT">sum</field>
+                              </block>
+                            </value>
+                            <value name="OBJECT">
+                              <block type="blank" id="!)c`]DpIpy(1UZ7i=F]/">
+                                <field name="TEXT">hjson</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="jg_objects_set_key_to_value_in_object" id="jJ._$[0y|KpA/8G+6Z^]">
+                                <value name="KEY">
+                                  <shadow type="text" id=")|LosKoVAT;p.bq;rQoX">
+                                    <field name="TEXT">total</field>
+                                  </shadow>
+                                  <block type="blank" id="T*vQF%$^dAns,xcYM.}2">
+                                    <field name="TEXT">helper</field>
                                   </block>
-                                </statement>
+                                </value>
+                                <value name="VALUE">
+                                  <block type="blank" id="|iG*+xW/w2I}o#LT^wl$">
+                                    <field name="TEXT">hjson</field>
+                                  </block>
+                                </value>
+                                <value name="OBJECT">
+                                  <block type="blank" id="rPwTvq%2-s~_F}Fy/lu*">
+                                    <field name="TEXT">rjson</field>
+                                  </block>
+                                </value>
                                 <next>
-                                  <block type="jg_objects_set_key_to_value_in_object" id="w0K+XkXwdl-W$~!5eQ|8">
+                                  <block type="s4d_set_data_new" id="zImozMJ%ZS[L[F;lo$ce">
                                     <value name="KEY">
-                                      <shadow type="text" id="L,bmATIN@vj/mz|bQ.Rg">
-                                        <field name="TEXT">total</field>
+                                      <shadow type="text" id="v/KIULkb(Af7l*1sV+e6">
+                                        <field name="TEXT">reviewed</field>
                                       </shadow>
                                     </value>
                                     <value name="VALUE">
-                                      <block type="blank" id="!s0`dccG#P;G{xSMS-AS">
-                                        <field name="TEXT">sum</field>
+                                      <shadow type="text" id="=-1U7Y`SKpMA-fjQW!WF">
+                                        <field name="TEXT">world</field>
+                                      </shadow>
+                                      <block type="blank" id="BNkmFyn`?Llo?/k*ByAj">
+                                        <field name="TEXT">rjson</field>
                                       </block>
                                     </value>
-                                    <value name="OBJECT">
-                                      <block type="blank" id="!)c`]DpIpy(1UZ7i=F]/">
-                                        <field name="TEXT">hjson</field>
-                                      </block>
+                                    <value name="NAME">
+                                      <shadow type="text" id="hyy=WaQ3:JU]im*ftLa=">
+                                        <field name="TEXT">reviews</field>
+                                      </shadow>
                                     </value>
-                                    <next>
-                                      <block type="jg_objects_set_key_to_value_in_object" id="jJ._$[0y|KpA/8G+6Z^]">
-                                        <value name="KEY">
-                                          <shadow type="text" id=")|LosKoVAT;p.bq;rQoX">
-                                            <field name="TEXT">total</field>
-                                          </shadow>
-                                          <block type="variables_get" id="0ayy{NR)nm07WP`l%xp0">
-                                            <field name="VAR" id="MrVTvjr2IV=L$|^SyU`p">helper</field>
-                                          </block>
-                                        </value>
-                                        <value name="VALUE">
-                                          <block type="blank" id="|iG*+xW/w2I}o#LT^wl$">
-                                            <field name="TEXT">hjson</field>
-                                          </block>
-                                        </value>
-                                        <value name="OBJECT">
-                                          <block type="blank" id="rPwTvq%2-s~_F}Fy/lu*">
-                                            <field name="TEXT">rjson</field>
-                                          </block>
-                                        </value>
-                                        <next>
-                                          <block type="s4d_set_data_new" id="zImozMJ%ZS[L[F;lo$ce">
-                                            <value name="KEY">
-                                              <shadow type="text" id="v/KIULkb(Af7l*1sV+e6">
-                                                <field name="TEXT">reviewers</field>
-                                              </shadow>
-                                            </value>
-                                            <value name="VALUE">
-                                              <shadow type="text" id="=-1U7Y`SKpMA-fjQW!WF">
-                                                <field name="TEXT">world</field>
-                                              </shadow>
-                                              <block type="blank" id="BNkmFyn`?Llo?/k*ByAj">
-                                                <field name="TEXT">rjson</field>
-                                              </block>
-                                            </value>
-                                            <value name="NAME">
-                                              <shadow type="text" id="hyy=WaQ3:JU]im*ftLa=">
-                                                <field name="TEXT">reviews</field>
-                                              </shadow>
-                                            </value>
-                                          </block>
-                                        </next>
-                                      </block>
-                                    </next>
                                   </block>
                                 </next>
                               </block>
@@ -538,9 +551,9 @@
               </block>
             </next>
           </block>
-        </next>
+        </statement>
       </block>
-    </statement>
+    </value>
   </block>
   <block type="jg_unused_floating_comment" id="dXDk;[I_Tzb1V.;}^~^k" x="-16" y="-821">
     <field name="TEXT">BASE</field>
@@ -2847,459 +2860,7 @@
       </block>
     </statement>
   </block>
-  <block type="frost_slash_register" id="KCcPp]8Fo_leBa_,pH({" collapsed="true" x="1567" y="-339">
-    <statement name="OPTIONS">
-      <block type="frost_slash_sub_command_group" id="Lt(GG3f0s=7`IeZZ7HfJ" collapsed="true">
-        <value name="NAME">
-          <block type="jg_text_remake_paragraph_quotes" id="=py9j,Ip^0z.sxtP49]u">
-            <field name="TEXT">helper</field>
-          </block>
-        </value>
-        <value name="DESC">
-          <block type="jg_text_remake_paragraph_quotes" id="^3xH{.A|0QDBIa`md%|Q">
-            <field name="TEXT">a set of commands for doing stuff related to helpers!</field>
-          </block>
-        </value>
-        <statement name="OPTIONS">
-          <block type="frost_slash_sub_command" id="wcUJ;VO@R1HrnzE6w[+(">
-            <value name="NAME">
-              <block type="jg_text_remake_paragraph_quotes" id="Td4B2be.2{gY/ECh:|y0">
-                <field name="TEXT">review</field>
-              </block>
-            </value>
-            <value name="DESC">
-              <block type="jg_text_remake_paragraph_quotes" id="?xJ8gTUQ2;$Q}23UlKog">
-                <field name="TEXT">rate a helper anywhere from 0 to five stars!</field>
-              </block>
-            </value>
-            <statement name="OPTIONS">
-              <block type="gsa_frost_slash_options" id="/66Y:_7I(z%LsNA7kEu!">
-                <field name="TYPE">6</field>
-                <value name="NAME">
-                  <shadow type="text" id="=IAiQTlQ/n2O$g1^E~Eb">
-                    <field name="TEXT">helper</field>
-                  </shadow>
-                </value>
-                <value name="DESC">
-                  <shadow type="text" id="5hHYJOjYBa+kxHB}=B;t">
-                    <field name="TEXT">the helper to rate</field>
-                  </shadow>
-                </value>
-                <value name="REQUIRED">
-                  <shadow type="logic_boolean" id="Z^UY-_JC[/l^DJeN{9i%">
-                    <field name="BOOL">TRUE</field>
-                  </shadow>
-                </value>
-                <next>
-                  <block type="gsa_frost_slash_options" id="=).x50C.`(D`x(QMCaCd" collapsed="true">
-                    <field name="TYPE">3</field>
-                    <value name="NAME">
-                      <shadow type="text" id="we2-J/WncG4c|Q)_n8Sa">
-                        <field name="TEXT">rating</field>
-                      </shadow>
-                    </value>
-                    <value name="DESC">
-                      <shadow type="text" id="a(7Ib~d0^O[{!+=?C,v+">
-                        <field name="TEXT">anything from 0-5 stars</field>
-                      </shadow>
-                    </value>
-                    <value name="REQUIRED">
-                      <shadow type="logic_boolean" id="bkL3?nOpytHW1Q$)w^Zn">
-                        <field name="BOOL">TRUE</field>
-                      </shadow>
-                    </value>
-                    <statement name="CHOICES">
-                      <block type="frost_slash_choices" id="de##iS4N^Rh3ha|#A.B_">
-                        <value name="NAME">
-                          <shadow type="text" id="W1+wB;=3-Bq](,rJly1B">
-                            <field name="TEXT">0 stars</field>
-                          </shadow>
-                        </value>
-                        <value name="OPTION_NAME">
-                          <shadow type="text" id="K_SNgD~QAF}Jc56vuYnP">
-                            <field name="TEXT">0</field>
-                          </shadow>
-                        </value>
-                        <next>
-                          <block type="frost_slash_choices" id="zL#|Fo!L]X~I}._]l1/^">
-                            <value name="NAME">
-                              <shadow type="text" id="/ZHjvnVLI027T$FypZbs">
-                                <field name="TEXT">⭐</field>
-                              </shadow>
-                            </value>
-                            <value name="OPTION_NAME">
-                              <shadow type="text" id="ZlVbbE`}zKkCGju;nns@">
-                                <field name="TEXT">1</field>
-                              </shadow>
-                            </value>
-                            <next>
-                              <block type="frost_slash_choices" id="$Y%,tbUq|WL~EaCQPKt{">
-                                <value name="NAME">
-                                  <shadow type="text" id="^.D9+Z2oJ6^+F@=0wyyI">
-                                    <field name="TEXT">⭐⭐</field>
-                                  </shadow>
-                                </value>
-                                <value name="OPTION_NAME">
-                                  <shadow type="text" id="N:MiETb2YXVJRi:0!,[7">
-                                    <field name="TEXT">2</field>
-                                  </shadow>
-                                </value>
-                                <next>
-                                  <block type="frost_slash_choices" id="s(ks#r-I;#}!3.u$D`r,">
-                                    <value name="NAME">
-                                      <shadow type="text" id="4=2cyzp`7@eyjkO:!.)o">
-                                        <field name="TEXT">⭐⭐⭐</field>
-                                      </shadow>
-                                    </value>
-                                    <value name="OPTION_NAME">
-                                      <shadow type="text" id="YtC}T8,-,d=zQX3_BX$1">
-                                        <field name="TEXT">3</field>
-                                      </shadow>
-                                    </value>
-                                    <next>
-                                      <block type="frost_slash_choices" id="d{1s}BxCpqtEM0g^kerA">
-                                        <value name="NAME">
-                                          <shadow type="text" id="@|$r$ebL1]-7(X$:]*KT">
-                                            <field name="TEXT">⭐⭐⭐⭐</field>
-                                          </shadow>
-                                        </value>
-                                        <value name="OPTION_NAME">
-                                          <shadow type="text" id="wbtVg{zyzMWp4TcrQq)0">
-                                            <field name="TEXT">4</field>
-                                          </shadow>
-                                        </value>
-                                        <next>
-                                          <block type="frost_slash_choices" id="Uc8Eldt=.Xikaj%(24N4">
-                                            <value name="NAME">
-                                              <shadow type="text" id="A+P5[PiWW)K14{9@!uCM">
-                                                <field name="TEXT">⭐⭐⭐⭐⭐</field>
-                                              </shadow>
-                                            </value>
-                                            <value name="OPTION_NAME">
-                                              <shadow type="text" id="I#y/=!]z{:LDZSx_BiDh">
-                                                <field name="TEXT">5</field>
-                                              </shadow>
-                                            </value>
-                                          </block>
-                                        </next>
-                                      </block>
-                                    </next>
-                                  </block>
-                                </next>
-                              </block>
-                            </next>
-                          </block>
-                        </next>
-                      </block>
-                    </statement>
-                    <next>
-                      <block type="gsa_frost_slash_options" id="VuQ|rWJt*;8T(.Z$BFff">
-                        <field name="TYPE">3</field>
-                        <value name="NAME">
-                          <shadow type="text" id=".d!BEJda^xZ`c|B0yEEi">
-                            <field name="TEXT">comment</field>
-                          </shadow>
-                        </value>
-                        <value name="DESC">
-                          <shadow type="text" id="](D-na#dgiH!]tFA+{5v">
-                            <field name="TEXT">what is your opinion on this helper?</field>
-                          </shadow>
-                        </value>
-                        <value name="REQUIRED">
-                          <shadow type="logic_boolean" id="3~nm1`[_a$?N~HvN~[vc">
-                            <field name="BOOL">FALSE</field>
-                          </shadow>
-                        </value>
-                      </block>
-                    </next>
-                  </block>
-                </next>
-              </block>
-            </statement>
-            <next>
-              <block type="frost_slash_sub_command" id="sIkgYPwX00SqYuadq1TT">
-                <value name="NAME">
-                  <block type="jg_text_remake_paragraph_quotes" id="WUFyD@+QrZSbGDciV5%`">
-                    <field name="TEXT">list</field>
-                  </block>
-                </value>
-                <value name="DESC">
-                  <block type="jg_text_remake_paragraph_quotes" id="a5^Hx]2L@]/EK:fHGc.V">
-                    <field name="TEXT">get a list of helpers listed best to worst</field>
-                  </block>
-                </value>
-              </block>
-            </next>
-          </block>
-        </statement>
-        <next>
-          <block type="frost_slash_sub_command_group" id="k$2Q/CzaSz=vsB2SK`_V" collapsed="true">
-            <value name="NAME">
-              <block type="jg_text_remake_paragraph_quotes" id="HY9*eC5m{Ok*Bj=|/aXG">
-                <field name="TEXT">bot</field>
-              </block>
-            </value>
-            <value name="DESC">
-              <block type="jg_text_remake_paragraph_quotes" id="FzA-!#FG%(8xrfA-:w,,">
-                <field name="TEXT"></field>
-              </block>
-            </value>
-            <statement name="OPTIONS">
-              <block type="frost_slash_sub_command" id="?,f;(J^wJlb)@Ufuezfy">
-                <value name="NAME">
-                  <block type="jg_text_remake_paragraph_quotes" id="n?2ToBwXB*sV.;+m?-du">
-                    <field name="TEXT">info</field>
-                  </block>
-                </value>
-                <value name="DESC">
-                  <block type="jg_text_remake_paragraph_quotes" id="U2c#fWIB:2^azaX?qi_!">
-                    <field name="TEXT">info about the bot</field>
-                  </block>
-                </value>
-                <next>
-                  <block type="frost_slash_sub_command" id="x_|m)AbC|13:cA^YJ!2h">
-                    <value name="NAME">
-                      <block type="jg_text_remake_paragraph_quotes" id=":kt3)]i|Mn+Fr6VbZ?_5">
-                        <field name="TEXT">shutdown</field>
-                      </block>
-                    </value>
-                    <value name="DESC">
-                      <block type="jg_text_remake_paragraph_quotes" id="/W5j~%Fle=PprA+.AYK+">
-                        <field name="TEXT">shutdown the bot (admin only)</field>
-                      </block>
-                    </value>
-                  </block>
-                </next>
-              </block>
-            </statement>
-            <next>
-              <block type="frost_slash_command" id="tY-?ejvK~ZUKe^FXAMtL">
-                <value name="NAME">
-                  <shadow type="text" id="Zz;I/}H1]StjR.El!{%7">
-                    <field name="TEXT">help</field>
-                  </shadow>
-                </value>
-                <value name="DESC">
-                  <shadow type="text" id=";4+hyC3~NRyd2g##+ajB">
-                    <field name="TEXT">help command</field>
-                  </shadow>
-                </value>
-                <next>
-                  <block type="frost_slash_command" id="OT*/Vx_MW2]h~7p(-K*(">
-                    <value name="NAME">
-                      <shadow type="text" id="*o=(WF};a;Raj)pYG31f">
-                        <field name="TEXT">server</field>
-                      </shadow>
-                    </value>
-                    <value name="DESC">
-                      <shadow type="text" id="sRcyJ~@xR]Nt!X4hs@x~">
-                        <field name="TEXT">server information</field>
-                      </shadow>
-                    </value>
-                    <next>
-                      <block type="frost_slash_command" id="aM%ZhN4L#|O]E2kygsC/">
-                        <value name="NAME">
-                          <shadow type="text" id="Il!zN=lWguMvp]G{579m">
-                            <field name="TEXT">server</field>
-                          </shadow>
-                        </value>
-                        <value name="DESC">
-                          <shadow type="text" id="~(n63dD+T5~|I9wQ6QF[">
-                            <field name="TEXT">server information</field>
-                          </shadow>
-                        </value>
-                        <next>
-                          <block type="jg_comments_connected_comment" id="3CS*6A$A{D4Eu)FDci^P">
-                            <field name="TEXT">ignoring auto response since its not in the &amp;#10;slash menu</field>
-                            <next>
-                              <block type="frost_slash_command" id="?SqhwwDxjlv~n!R}:f(H">
-                                <value name="NAME">
-                                  <shadow type="text" id="e)iVz6_8J(xZiKo97b~B">
-                                    <field name="TEXT">server</field>
-                                  </shadow>
-                                </value>
-                                <value name="DESC">
-                                  <shadow type="text" id="$R,sfOE6zG3dD:)-LKzG">
-                                    <field name="TEXT">server information</field>
-                                  </shadow>
-                                </value>
-                                <next>
-                                  <block type="frost_slash_sub_command_group" id="|ov2Q,]$n]5~r|;HMaH," collapsed="true">
-                                    <value name="NAME">
-                                      <block type="jg_text_remake_paragraph_quotes" id="8/8$7{I-3i`+~r%Y|!3V">
-                                        <field name="TEXT">report</field>
-                                      </block>
-                                    </value>
-                                    <value name="DESC">
-                                      <block type="jg_text_remake_paragraph_quotes" id="F9lCXbe3wgr(FFkJbTiB">
-                                        <field name="TEXT">person</field>
-                                      </block>
-                                    </value>
-                                    <statement name="OPTIONS">
-                                      <block type="frost_slash_sub_command" id="pRiSN}KWfp$kxnHN}[Rv">
-                                        <value name="NAME">
-                                          <block type="jg_text_remake_paragraph_quotes" id="2uHB4r!*%?V2VX1CVV4t">
-                                            <field name="TEXT">person</field>
-                                          </block>
-                                        </value>
-                                        <value name="DESC">
-                                          <block type="jg_text_remake_paragraph_quotes" id="}P$0~_2`qqHcGKrkT9L0">
-                                            <field name="TEXT">report a person</field>
-                                          </block>
-                                        </value>
-                                        <statement name="OPTIONS">
-                                          <block type="gsa_frost_slash_options" id="0ZfyoeRAt!Ei4j$ReYAr">
-                                            <field name="TYPE">6</field>
-                                            <value name="NAME">
-                                              <shadow type="text" id="9Ye!n5R)4L{[Mq)cP;lH">
-                                                <field name="TEXT">user</field>
-                                              </shadow>
-                                            </value>
-                                            <value name="DESC">
-                                              <shadow type="text" id="g*Fz`=#G6B:NuxNoDu%}">
-                                                <field name="TEXT">user</field>
-                                              </shadow>
-                                            </value>
-                                            <value name="REQUIRED">
-                                              <shadow type="logic_boolean" id="0OC;_S,3zUe.!+hzC{J:">
-                                                <field name="BOOL">TRUE</field>
-                                              </shadow>
-                                            </value>
-                                            <next>
-                                              <block type="gsa_frost_slash_options" id="*uP3EG,D9a*Eg+HBO4vo">
-                                                <field name="TYPE">3</field>
-                                                <value name="NAME">
-                                                  <shadow type="text" id="f9|Z+.vqRgA~U|.5+Q,S">
-                                                    <field name="TEXT">reason</field>
-                                                  </shadow>
-                                                </value>
-                                                <value name="DESC">
-                                                  <shadow type="text" id="?`go8hSU`_#YnME#RoC.">
-                                                    <field name="TEXT">reason</field>
-                                                  </shadow>
-                                                </value>
-                                                <value name="REQUIRED">
-                                                  <shadow type="logic_boolean" id="}jPH64R{kBiTSHq#fNGD">
-                                                    <field name="BOOL">TRUE</field>
-                                                  </shadow>
-                                                </value>
-                                              </block>
-                                            </next>
-                                          </block>
-                                        </statement>
-                                      </block>
-                                    </statement>
-                                    <next>
-                                      <block type="frost_slash_command" id="4ccAbZ74BG)I+3e,}U3%">
-                                        <value name="NAME">
-                                          <shadow type="text" id="9)!hxyq%/evAFS18^)ev">
-                                            <field name="TEXT">links</field>
-                                          </shadow>
-                                        </value>
-                                        <value name="DESC">
-                                          <shadow type="text" id="^N,Zz77,GOL0tS=.OH%T">
-                                            <field name="TEXT">link for website</field>
-                                          </shadow>
-                                        </value>
-                                        <statement name="OPTIONS">
-                                          <block type="gsa_frost_slash_options" id="Xr)F7R/,]nZ8-LBH,2G6">
-                                            <field name="TYPE">3</field>
-                                            <value name="NAME">
-                                              <shadow type="text" id="hO?!Km2)l@,.a?vO0cMX">
-                                                <field name="TEXT">link</field>
-                                              </shadow>
-                                            </value>
-                                            <value name="DESC">
-                                              <shadow type="text" id="CJUtn/W_aUR{!0T28tt]">
-                                                <field name="TEXT">link to a website...</field>
-                                              </shadow>
-                                            </value>
-                                            <value name="REQUIRED">
-                                              <shadow type="logic_boolean" id="=flAh3-559iQzGbnzQd2">
-                                                <field name="BOOL">FALSE</field>
-                                              </shadow>
-                                            </value>
-                                            <statement name="CHOICES">
-                                              <block type="frost_slash_choices" id="99cDY2XIm=aVS2ZRuh%$">
-                                                <value name="NAME">
-                                                  <shadow type="text" id="S],{ja$f_U#yFbHr+5?z">
-                                                    <field name="TEXT">slash builder</field>
-                                                  </shadow>
-                                                </value>
-                                                <value name="OPTION_NAME">
-                                                  <shadow type="text" id="zP/JqQ%QZ`QsN3ISl)Ba">
-                                                    <field name="TEXT">slash</field>
-                                                  </shadow>
-                                                </value>
-                                                <next>
-                                                  <block type="frost_slash_choices" id="awSf*jRTM~I6|HaCo]kn">
-                                                    <value name="NAME">
-                                                      <shadow type="text" id=",YfRF(BZ}-~e[uBadX^!">
-                                                        <field name="TEXT">replit</field>
-                                                      </shadow>
-                                                    </value>
-                                                    <value name="OPTION_NAME">
-                                                      <shadow type="text" id="o=?!u{]v]4@lpvgH=FI$">
-                                                        <field name="TEXT">replit</field>
-                                                      </shadow>
-                                                    </value>
-                                                    <next>
-                                                      <block type="frost_slash_choices" id="#q$I,?^?^48G`^on+%PW">
-                                                        <value name="NAME">
-                                                          <shadow type="text" id="k(I%3CTx|wJ*|nqR-WGW">
-                                                            <field name="TEXT">s4d official website</field>
-                                                          </shadow>
-                                                        </value>
-                                                        <value name="OPTION_NAME">
-                                                          <shadow type="text" id="PT.(;1p/]1PiwrK9]Z}=">
-                                                            <field name="TEXT">s4d</field>
-                                                          </shadow>
-                                                        </value>
-                                                        <next>
-                                                          <block type="frost_slash_choices" id="PLVcl$E@!K(8xa?YSSK.">
-                                                            <value name="NAME">
-                                                              <shadow type="text" id="2`,qob}u:iN.x~;8f^oI">
-                                                                <field name="TEXT">uptimerobot</field>
-                                                              </shadow>
-                                                            </value>
-                                                            <value name="OPTION_NAME">
-                                                              <shadow type="text" id="VCK7.POfOrf$dpF,0M6Y">
-                                                                <field name="TEXT">uptimerobot</field>
-                                                              </shadow>
-                                                            </value>
-                                                          </block>
-                                                        </next>
-                                                      </block>
-                                                    </next>
-                                                  </block>
-                                                </next>
-                                              </block>
-                                            </statement>
-                                          </block>
-                                        </statement>
-                                      </block>
-                                    </next>
-                                  </block>
-                                </next>
-                              </block>
-                            </next>
-                          </block>
-                        </next>
-                      </block>
-                    </next>
-                  </block>
-                </next>
-              </block>
-            </next>
-          </block>
-        </next>
-      </block>
-    </statement>
-  </block>
-  <block type="jg_unused_floating_comment" id="J);PoxMoIED?U_9)q:+-" x="312" y="-259">
-    <field name="TEXT">DATABASE</field>
-  </block>
-  <block type="on_slash" id="K8jc=!7d8[g?uX(/c=lx" x="1160" y="-300">
+  <block type="on_slash" id="K8jc=!7d8[g?uX(/c=lx" x="1196" y="-347">
     <statement name="STATEMENTS">
       <block type="s4d_lasercat_switch_switch" id="HDEkOtP;qH{/I0*-~Wr}">
         <value name="switch">
@@ -5646,7 +5207,7 @@
                                   </block>
                                 </statement>
                                 <next>
-                                  <block type="lasercat_jg_case_default" id="n`W#Yl(a0HclsSu|ggTy" collapsed="true">
+                                  <block type="lasercat_jg_case_default" id="n`W#Yl(a0HclsSu|ggTy">
                                     <value name="IF0">
                                       <block type="text" id="im+XKs+]jzcfWd:Y~.5x">
                                         <field name="TEXT">helper</field>
@@ -6133,12 +5694,16 @@
                                                                                                           </shadow>
                                                                                                         </value>
                                                                                                         <next>
-                                                                                                          <block type="procedures_callnoreturn" id="Y:]2t@v}RMY5kD8L_Gap">
-                                                                                                            <mutation name="recalculate total rating">
-                                                                                                              <arg name="helper"></arg>
-                                                                                                            </mutation>
-                                                                                                            <value name="ARG0">
-                                                                                                              <block type="blank" id="|kPk~*)FK8#SCZ_fe|8r">
+                                                                                                          <block type="gsa_function_item_runer" id="j0TYFXhm6{+*r[h(0Zr}">
+                                                                                                            <mutation xmlns="http://www.w3.org/1999/xhtml" inputs="dummy" return="false" await="false"></mutation>
+                                                                                                            <field name="await"></field>
+                                                                                                            <value name="function">
+                                                                                                              <block type="blank" id="}Q`=@Jm=s|f8E~#g$eY~">
+                                                                                                                <field name="TEXT">calc_total</field>
+                                                                                                              </block>
+                                                                                                            </value>
+                                                                                                            <value name="0">
+                                                                                                              <block type="blank" id="aet8y$qRqb,Z$2cGJc}%">
                                                                                                                 <field name="TEXT">helper</field>
                                                                                                               </block>
                                                                                                             </value>
@@ -6275,12 +5840,16 @@
                                                                                                   </shadow>
                                                                                                 </value>
                                                                                                 <next>
-                                                                                                  <block type="procedures_callnoreturn" id="NYsovNPY-xZdnHodmEv!">
-                                                                                                    <mutation name="recalculate total rating">
-                                                                                                      <arg name="helper"></arg>
-                                                                                                    </mutation>
-                                                                                                    <value name="ARG0">
-                                                                                                      <block type="blank" id="=k954n%`.Dg|qzsm2QL6">
+                                                                                                  <block type="gsa_function_item_runer" id="3QQTuasbz)0]1jhc^NV+">
+                                                                                                    <mutation xmlns="http://www.w3.org/1999/xhtml" inputs="dummy" return="false" await="false"></mutation>
+                                                                                                    <field name="await"></field>
+                                                                                                    <value name="function">
+                                                                                                      <block type="blank" id="T-?t$]H(S)}7yTxmP,AJ">
+                                                                                                        <field name="TEXT">calc_total</field>
+                                                                                                      </block>
+                                                                                                    </value>
+                                                                                                    <value name="0">
+                                                                                                      <block type="blank" id="-F#H#GiUv)Qge`2OAC1Q">
                                                                                                         <field name="TEXT">helper</field>
                                                                                                       </block>
                                                                                                     </value>
@@ -7370,6 +6939,455 @@
       </block>
     </statement>
   </block>
+  <block type="frost_slash_register" id="KCcPp]8Fo_leBa_,pH({" collapsed="true" x="1567" y="-339">
+    <statement name="OPTIONS">
+      <block type="frost_slash_sub_command_group" id="Lt(GG3f0s=7`IeZZ7HfJ" collapsed="true">
+        <value name="NAME">
+          <block type="jg_text_remake_paragraph_quotes" id="=py9j,Ip^0z.sxtP49]u">
+            <field name="TEXT">helper</field>
+          </block>
+        </value>
+        <value name="DESC">
+          <block type="jg_text_remake_paragraph_quotes" id="^3xH{.A|0QDBIa`md%|Q">
+            <field name="TEXT">a set of commands for doing stuff related to helpers!</field>
+          </block>
+        </value>
+        <statement name="OPTIONS">
+          <block type="frost_slash_sub_command" id="wcUJ;VO@R1HrnzE6w[+(">
+            <value name="NAME">
+              <block type="jg_text_remake_paragraph_quotes" id="Td4B2be.2{gY/ECh:|y0">
+                <field name="TEXT">review</field>
+              </block>
+            </value>
+            <value name="DESC">
+              <block type="jg_text_remake_paragraph_quotes" id="?xJ8gTUQ2;$Q}23UlKog">
+                <field name="TEXT">rate a helper anywhere from 0 to five stars!</field>
+              </block>
+            </value>
+            <statement name="OPTIONS">
+              <block type="gsa_frost_slash_options" id="/66Y:_7I(z%LsNA7kEu!">
+                <field name="TYPE">6</field>
+                <value name="NAME">
+                  <shadow type="text" id="=IAiQTlQ/n2O$g1^E~Eb">
+                    <field name="TEXT">helper</field>
+                  </shadow>
+                </value>
+                <value name="DESC">
+                  <shadow type="text" id="5hHYJOjYBa+kxHB}=B;t">
+                    <field name="TEXT">the helper to rate</field>
+                  </shadow>
+                </value>
+                <value name="REQUIRED">
+                  <shadow type="logic_boolean" id="Z^UY-_JC[/l^DJeN{9i%">
+                    <field name="BOOL">TRUE</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="gsa_frost_slash_options" id="=).x50C.`(D`x(QMCaCd" collapsed="true">
+                    <field name="TYPE">3</field>
+                    <value name="NAME">
+                      <shadow type="text" id="we2-J/WncG4c|Q)_n8Sa">
+                        <field name="TEXT">rating</field>
+                      </shadow>
+                    </value>
+                    <value name="DESC">
+                      <shadow type="text" id="a(7Ib~d0^O[{!+=?C,v+">
+                        <field name="TEXT">anything from 0-5 stars</field>
+                      </shadow>
+                    </value>
+                    <value name="REQUIRED">
+                      <shadow type="logic_boolean" id="bkL3?nOpytHW1Q$)w^Zn">
+                        <field name="BOOL">TRUE</field>
+                      </shadow>
+                    </value>
+                    <statement name="CHOICES">
+                      <block type="frost_slash_choices" id="de##iS4N^Rh3ha|#A.B_">
+                        <value name="NAME">
+                          <shadow type="text" id="W1+wB;=3-Bq](,rJly1B">
+                            <field name="TEXT">0 stars</field>
+                          </shadow>
+                        </value>
+                        <value name="OPTION_NAME">
+                          <shadow type="text" id="K_SNgD~QAF}Jc56vuYnP">
+                            <field name="TEXT">0</field>
+                          </shadow>
+                        </value>
+                        <next>
+                          <block type="frost_slash_choices" id="zL#|Fo!L]X~I}._]l1/^">
+                            <value name="NAME">
+                              <shadow type="text" id="/ZHjvnVLI027T$FypZbs">
+                                <field name="TEXT">⭐</field>
+                              </shadow>
+                            </value>
+                            <value name="OPTION_NAME">
+                              <shadow type="text" id="ZlVbbE`}zKkCGju;nns@">
+                                <field name="TEXT">1</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="frost_slash_choices" id="$Y%,tbUq|WL~EaCQPKt{">
+                                <value name="NAME">
+                                  <shadow type="text" id="^.D9+Z2oJ6^+F@=0wyyI">
+                                    <field name="TEXT">⭐⭐</field>
+                                  </shadow>
+                                </value>
+                                <value name="OPTION_NAME">
+                                  <shadow type="text" id="N:MiETb2YXVJRi:0!,[7">
+                                    <field name="TEXT">2</field>
+                                  </shadow>
+                                </value>
+                                <next>
+                                  <block type="frost_slash_choices" id="s(ks#r-I;#}!3.u$D`r,">
+                                    <value name="NAME">
+                                      <shadow type="text" id="4=2cyzp`7@eyjkO:!.)o">
+                                        <field name="TEXT">⭐⭐⭐</field>
+                                      </shadow>
+                                    </value>
+                                    <value name="OPTION_NAME">
+                                      <shadow type="text" id="YtC}T8,-,d=zQX3_BX$1">
+                                        <field name="TEXT">3</field>
+                                      </shadow>
+                                    </value>
+                                    <next>
+                                      <block type="frost_slash_choices" id="d{1s}BxCpqtEM0g^kerA">
+                                        <value name="NAME">
+                                          <shadow type="text" id="@|$r$ebL1]-7(X$:]*KT">
+                                            <field name="TEXT">⭐⭐⭐⭐</field>
+                                          </shadow>
+                                        </value>
+                                        <value name="OPTION_NAME">
+                                          <shadow type="text" id="wbtVg{zyzMWp4TcrQq)0">
+                                            <field name="TEXT">4</field>
+                                          </shadow>
+                                        </value>
+                                        <next>
+                                          <block type="frost_slash_choices" id="Uc8Eldt=.Xikaj%(24N4">
+                                            <value name="NAME">
+                                              <shadow type="text" id="A+P5[PiWW)K14{9@!uCM">
+                                                <field name="TEXT">⭐⭐⭐⭐⭐</field>
+                                              </shadow>
+                                            </value>
+                                            <value name="OPTION_NAME">
+                                              <shadow type="text" id="I#y/=!]z{:LDZSx_BiDh">
+                                                <field name="TEXT">5</field>
+                                              </shadow>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="gsa_frost_slash_options" id="VuQ|rWJt*;8T(.Z$BFff">
+                        <field name="TYPE">3</field>
+                        <value name="NAME">
+                          <shadow type="text" id=".d!BEJda^xZ`c|B0yEEi">
+                            <field name="TEXT">comment</field>
+                          </shadow>
+                        </value>
+                        <value name="DESC">
+                          <shadow type="text" id="](D-na#dgiH!]tFA+{5v">
+                            <field name="TEXT">what is your opinion on this helper?</field>
+                          </shadow>
+                        </value>
+                        <value name="REQUIRED">
+                          <shadow type="logic_boolean" id="3~nm1`[_a$?N~HvN~[vc">
+                            <field name="BOOL">FALSE</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="frost_slash_sub_command" id="sIkgYPwX00SqYuadq1TT">
+                <value name="NAME">
+                  <block type="jg_text_remake_paragraph_quotes" id="WUFyD@+QrZSbGDciV5%`">
+                    <field name="TEXT">list</field>
+                  </block>
+                </value>
+                <value name="DESC">
+                  <block type="jg_text_remake_paragraph_quotes" id="a5^Hx]2L@]/EK:fHGc.V">
+                    <field name="TEXT">get a list of helpers listed best to worst</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="frost_slash_sub_command_group" id="k$2Q/CzaSz=vsB2SK`_V" collapsed="true">
+            <value name="NAME">
+              <block type="jg_text_remake_paragraph_quotes" id="HY9*eC5m{Ok*Bj=|/aXG">
+                <field name="TEXT">bot</field>
+              </block>
+            </value>
+            <value name="DESC">
+              <block type="jg_text_remake_paragraph_quotes" id="FzA-!#FG%(8xrfA-:w,,">
+                <field name="TEXT"></field>
+              </block>
+            </value>
+            <statement name="OPTIONS">
+              <block type="frost_slash_sub_command" id="?,f;(J^wJlb)@Ufuezfy">
+                <value name="NAME">
+                  <block type="jg_text_remake_paragraph_quotes" id="n?2ToBwXB*sV.;+m?-du">
+                    <field name="TEXT">info</field>
+                  </block>
+                </value>
+                <value name="DESC">
+                  <block type="jg_text_remake_paragraph_quotes" id="U2c#fWIB:2^azaX?qi_!">
+                    <field name="TEXT">info about the bot</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="frost_slash_sub_command" id="x_|m)AbC|13:cA^YJ!2h">
+                    <value name="NAME">
+                      <block type="jg_text_remake_paragraph_quotes" id=":kt3)]i|Mn+Fr6VbZ?_5">
+                        <field name="TEXT">shutdown</field>
+                      </block>
+                    </value>
+                    <value name="DESC">
+                      <block type="jg_text_remake_paragraph_quotes" id="/W5j~%Fle=PprA+.AYK+">
+                        <field name="TEXT">shutdown the bot (admin only)</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="frost_slash_command" id="tY-?ejvK~ZUKe^FXAMtL">
+                <value name="NAME">
+                  <shadow type="text" id="Zz;I/}H1]StjR.El!{%7">
+                    <field name="TEXT">help</field>
+                  </shadow>
+                </value>
+                <value name="DESC">
+                  <shadow type="text" id=";4+hyC3~NRyd2g##+ajB">
+                    <field name="TEXT">help command</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="frost_slash_command" id="OT*/Vx_MW2]h~7p(-K*(">
+                    <value name="NAME">
+                      <shadow type="text" id="*o=(WF};a;Raj)pYG31f">
+                        <field name="TEXT">server</field>
+                      </shadow>
+                    </value>
+                    <value name="DESC">
+                      <shadow type="text" id="sRcyJ~@xR]Nt!X4hs@x~">
+                        <field name="TEXT">server information</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="frost_slash_command" id="aM%ZhN4L#|O]E2kygsC/">
+                        <value name="NAME">
+                          <shadow type="text" id="Il!zN=lWguMvp]G{579m">
+                            <field name="TEXT">server</field>
+                          </shadow>
+                        </value>
+                        <value name="DESC">
+                          <shadow type="text" id="~(n63dD+T5~|I9wQ6QF[">
+                            <field name="TEXT">server information</field>
+                          </shadow>
+                        </value>
+                        <next>
+                          <block type="jg_comments_connected_comment" id="3CS*6A$A{D4Eu)FDci^P">
+                            <field name="TEXT">ignoring auto response since its not in the &amp;#10;slash menu</field>
+                            <next>
+                              <block type="frost_slash_command" id="?SqhwwDxjlv~n!R}:f(H">
+                                <value name="NAME">
+                                  <shadow type="text" id="e)iVz6_8J(xZiKo97b~B">
+                                    <field name="TEXT">server</field>
+                                  </shadow>
+                                </value>
+                                <value name="DESC">
+                                  <shadow type="text" id="$R,sfOE6zG3dD:)-LKzG">
+                                    <field name="TEXT">server information</field>
+                                  </shadow>
+                                </value>
+                                <next>
+                                  <block type="frost_slash_sub_command_group" id="|ov2Q,]$n]5~r|;HMaH," collapsed="true">
+                                    <value name="NAME">
+                                      <block type="jg_text_remake_paragraph_quotes" id="8/8$7{I-3i`+~r%Y|!3V">
+                                        <field name="TEXT">report</field>
+                                      </block>
+                                    </value>
+                                    <value name="DESC">
+                                      <block type="jg_text_remake_paragraph_quotes" id="F9lCXbe3wgr(FFkJbTiB">
+                                        <field name="TEXT">person</field>
+                                      </block>
+                                    </value>
+                                    <statement name="OPTIONS">
+                                      <block type="frost_slash_sub_command" id="pRiSN}KWfp$kxnHN}[Rv">
+                                        <value name="NAME">
+                                          <block type="jg_text_remake_paragraph_quotes" id="2uHB4r!*%?V2VX1CVV4t">
+                                            <field name="TEXT">person</field>
+                                          </block>
+                                        </value>
+                                        <value name="DESC">
+                                          <block type="jg_text_remake_paragraph_quotes" id="}P$0~_2`qqHcGKrkT9L0">
+                                            <field name="TEXT">report a person</field>
+                                          </block>
+                                        </value>
+                                        <statement name="OPTIONS">
+                                          <block type="gsa_frost_slash_options" id="0ZfyoeRAt!Ei4j$ReYAr">
+                                            <field name="TYPE">6</field>
+                                            <value name="NAME">
+                                              <shadow type="text" id="9Ye!n5R)4L{[Mq)cP;lH">
+                                                <field name="TEXT">user</field>
+                                              </shadow>
+                                            </value>
+                                            <value name="DESC">
+                                              <shadow type="text" id="g*Fz`=#G6B:NuxNoDu%}">
+                                                <field name="TEXT">user</field>
+                                              </shadow>
+                                            </value>
+                                            <value name="REQUIRED">
+                                              <shadow type="logic_boolean" id="0OC;_S,3zUe.!+hzC{J:">
+                                                <field name="BOOL">TRUE</field>
+                                              </shadow>
+                                            </value>
+                                            <next>
+                                              <block type="gsa_frost_slash_options" id="*uP3EG,D9a*Eg+HBO4vo">
+                                                <field name="TYPE">3</field>
+                                                <value name="NAME">
+                                                  <shadow type="text" id="f9|Z+.vqRgA~U|.5+Q,S">
+                                                    <field name="TEXT">reason</field>
+                                                  </shadow>
+                                                </value>
+                                                <value name="DESC">
+                                                  <shadow type="text" id="?`go8hSU`_#YnME#RoC.">
+                                                    <field name="TEXT">reason</field>
+                                                  </shadow>
+                                                </value>
+                                                <value name="REQUIRED">
+                                                  <shadow type="logic_boolean" id="}jPH64R{kBiTSHq#fNGD">
+                                                    <field name="BOOL">TRUE</field>
+                                                  </shadow>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </statement>
+                                    <next>
+                                      <block type="frost_slash_command" id="4ccAbZ74BG)I+3e,}U3%">
+                                        <value name="NAME">
+                                          <shadow type="text" id="9)!hxyq%/evAFS18^)ev">
+                                            <field name="TEXT">links</field>
+                                          </shadow>
+                                        </value>
+                                        <value name="DESC">
+                                          <shadow type="text" id="^N,Zz77,GOL0tS=.OH%T">
+                                            <field name="TEXT">link for website</field>
+                                          </shadow>
+                                        </value>
+                                        <statement name="OPTIONS">
+                                          <block type="gsa_frost_slash_options" id="Xr)F7R/,]nZ8-LBH,2G6">
+                                            <field name="TYPE">3</field>
+                                            <value name="NAME">
+                                              <shadow type="text" id="hO?!Km2)l@,.a?vO0cMX">
+                                                <field name="TEXT">link</field>
+                                              </shadow>
+                                            </value>
+                                            <value name="DESC">
+                                              <shadow type="text" id="CJUtn/W_aUR{!0T28tt]">
+                                                <field name="TEXT">link to a website...</field>
+                                              </shadow>
+                                            </value>
+                                            <value name="REQUIRED">
+                                              <shadow type="logic_boolean" id="=flAh3-559iQzGbnzQd2">
+                                                <field name="BOOL">FALSE</field>
+                                              </shadow>
+                                            </value>
+                                            <statement name="CHOICES">
+                                              <block type="frost_slash_choices" id="99cDY2XIm=aVS2ZRuh%$">
+                                                <value name="NAME">
+                                                  <shadow type="text" id="S],{ja$f_U#yFbHr+5?z">
+                                                    <field name="TEXT">slash builder</field>
+                                                  </shadow>
+                                                </value>
+                                                <value name="OPTION_NAME">
+                                                  <shadow type="text" id="zP/JqQ%QZ`QsN3ISl)Ba">
+                                                    <field name="TEXT">slash</field>
+                                                  </shadow>
+                                                </value>
+                                                <next>
+                                                  <block type="frost_slash_choices" id="awSf*jRTM~I6|HaCo]kn">
+                                                    <value name="NAME">
+                                                      <shadow type="text" id=",YfRF(BZ}-~e[uBadX^!">
+                                                        <field name="TEXT">replit</field>
+                                                      </shadow>
+                                                    </value>
+                                                    <value name="OPTION_NAME">
+                                                      <shadow type="text" id="o=?!u{]v]4@lpvgH=FI$">
+                                                        <field name="TEXT">replit</field>
+                                                      </shadow>
+                                                    </value>
+                                                    <next>
+                                                      <block type="frost_slash_choices" id="#q$I,?^?^48G`^on+%PW">
+                                                        <value name="NAME">
+                                                          <shadow type="text" id="k(I%3CTx|wJ*|nqR-WGW">
+                                                            <field name="TEXT">s4d official website</field>
+                                                          </shadow>
+                                                        </value>
+                                                        <value name="OPTION_NAME">
+                                                          <shadow type="text" id="PT.(;1p/]1PiwrK9]Z}=">
+                                                            <field name="TEXT">s4d</field>
+                                                          </shadow>
+                                                        </value>
+                                                        <next>
+                                                          <block type="frost_slash_choices" id="PLVcl$E@!K(8xa?YSSK.">
+                                                            <value name="NAME">
+                                                              <shadow type="text" id="2`,qob}u:iN.x~;8f^oI">
+                                                                <field name="TEXT">uptimerobot</field>
+                                                              </shadow>
+                                                            </value>
+                                                            <value name="OPTION_NAME">
+                                                              <shadow type="text" id="VCK7.POfOrf$dpF,0M6Y">
+                                                                <field name="TEXT">uptimerobot</field>
+                                                              </shadow>
+                                                            </value>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </statement>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
   <block type="on_emojiupdate" id="AQX/?aU/ZHVCXiB7O!EF" collapsed="true" x="-16" y="-179">
     <statement name="STATEMENTS">
       <block type="s4d_embed_create" id="Wd`Ql6[o:@6T9V5zd*1+">
@@ -7422,18 +7440,6 @@
         </statement>
       </block>
     </statement>
-  </block>
-  <block type="s4d_database_create_new" id="Yf}|m=qNqo]!*4a;_Zm5" collapsed="true" x="321" y="-177">
-    <value name="NAME">
-      <shadow type="text" id="#C;U7$SO9Lwh,{_,KHDd">
-        <field name="TEXT">database2</field>
-      </shadow>
-    </value>
-    <value name="FILE">
-      <shadow type="text" id="I*OA8L;)X*viER=JFVe(">
-        <field name="TEXT">autoresponse</field>
-      </shadow>
-    </value>
   </block>
   <block type="on_emojidelete" id="zb:Cyf@3XtTrzL@$/3`S" collapsed="true" x="-15" y="-116">
     <statement name="STATEMENTS">
@@ -7514,18 +7520,6 @@
       </block>
     </statement>
   </block>
-  <block type="s4d_database_create_new" id="^H!6[]PVl6/uF~S*SD5E" collapsed="true" x="333" y="-118">
-    <value name="NAME">
-      <shadow type="text" id="h}#=J^T:GH*R@A-K7T-Q">
-        <field name="TEXT">database1</field>
-      </shadow>
-    </value>
-    <value name="FILE">
-      <shadow type="text" id="m}68+Gs};.R3Qjd/#Qyw">
-        <field name="TEXT">database</field>
-      </shadow>
-    </value>
-  </block>
   <block type="on_emojicreate" id="DI^Tm88=sMy;sWFtVk(0" collapsed="true" x="-8" y="-53">
     <statement name="STATEMENTS">
       <block type="s4d_embed_create" id="PG!0$5bN[#65ukV/GnQ[">
@@ -7605,21 +7599,4 @@
       </block>
     </statement>
   </block>
-  <block type="s4d_database_create_new" id="RZ6MMF86OHObgtJ@@[05" x="326" y="-53">
-    <value name="NAME">
-      <shadow type="text" id="ksyMIBJXlVG~5[~?o9/H">
-        <field name="TEXT">reviews</field>
-      </shadow>
-    </value>
-    <value name="FILE">
-      <shadow type="text" id="6+wXG;|)LDKXENS*h~.V">
-        <field name="TEXT">reviewsDB</field>
-      </shadow>
-    </value>
-  </block>
-  <block type="logic_null" id="=cX?wqD`Q7rHJ^6HG^.l" disabled="true" x="1256" y="7807"></block>
-  <block type="logic_null" id="ka`].-7E=P11$p@EOAoh" disabled="true" x="1256" y="7879"></block>
-  <block type="logic_null" id="evqC,.[uk.J40n8ep=mF" disabled="true" x="1256" y="7952"></block>
-  <block type="logic_null" id="wOlvSH0gFXb3aAFbK[aG" disabled="true" x="1256" y="8024"></block>
-  <block type="logic_null" id="^glQz01k1Y`v93zux8$|" disabled="true" x="1256" y="8096"></block>
 </xml>

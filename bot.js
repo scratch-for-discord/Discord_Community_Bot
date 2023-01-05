@@ -89,7 +89,7 @@
     s4d.database = new Database('./database.json')
 
     // blockly code
-    var time_var, helper, channel_update, botuptime, channel_update_old, s4dcolor, j, ar_keys, channel_category, channel_text, channel_voice, channel_announcement, channel_stage, roles_mod, roles_mentionable, roles_hoisted, roles_total;
+    var time_var, channel_update, botuptime, channel_update_old, j, s4dcolor, ar_keys, channel_category, channel_text, channel_voice, channel_announcement, channel_stage, roles_mod, roles_mentionable, roles_hoisted, roles_total;
     
     // Describe this function...
     function time(time_var) {
@@ -106,20 +106,16 @@
       return '#' + r + g + b;
     }
     
-    // Describe this function...
-    function recalculate_total_rating(helper) {
-      let rjson = reviews.get(String('reviewers'));
     
-          /*
-          This returns undefined
-          */
-         let hjson = (rjson[String(helper)]);
+    const database2 = new Database('./autoresponse.json')
+    const database1 = new Database('./database.json')
+    const reviews = new Database('./reviewsDB.json')
+    const s4dcolor = (colourRgb((254 / 255) * 100, (169 / 255) * 100, (24 / 255) * 100));
+    
+    const calc_total = async (helper) => {
+        let rjson = reviews.get(String('reviewed'));
+      let hjson = (rjson[String(helper)]);
       let sum = 0;
-    
-          /*
-          Lenght is not used
-          */
-         const length = ((Object.getOwnPropertyNames(hjson.reviews)).length);
       var j_list = (Object.getOwnPropertyNames(hjson.reviews));
       for (var j_index in j_list) {
         j = j_list[j_index];
@@ -128,11 +124,10 @@
             }
       hjson[String('total')] = sum
           rjson[String(helper)] = hjson
-          reviews.set(String('reviewers'), rjson);
-    }
+          reviews.set(String('reviewed'), rjson);
     
     
-    const s4dcolor = (colourRgb((254 / 255) * 100, (169 / 255) * 100, (24 / 255) * 100));
+    };
     
     await s4d.client.login((process.env[String('TOKEN')])).catch((e) => {
             const tokenInvalid = true;
@@ -280,182 +275,6 @@
           s4d.client.channels.cache.get('933175093016789074').send({embeds: [embed1]});
     
       }
-    
-    });
-    
-    synchronizeSlashCommands(s4d.client, [
-      {
-          name: 'helper',
-      		description: 'a set of commands for doing stuff related to helpers!',
-          type: 2,
-      		options: [
-              {
-            name: 'review',
-        		description: 'rate a helper anywhere from 0 to five stars!',
-            type: 1,
-        		options: [
-                {
-              type: 6,
-          	name: 'helper',
-              required: true,
-          	description: 'the helper to rate',
-              choices: [
-    
-              ]
-          },{
-              type: 3,
-          	name: 'rating',
-              required: true,
-          	description: 'anything from 0-5 stars',
-              choices: [
-                    {
-                name: String('0 stars'),
-                value: String('0')
-            },{
-                name: String('⭐'),
-                value: String('1')
-            },{
-                name: String('⭐⭐'),
-                value: String('2')
-            },{
-                name: String('⭐⭐⭐'),
-                value: String('3')
-            },{
-                name: String('⭐⭐⭐⭐'),
-                value: String('4')
-            },{
-                name: String('⭐⭐⭐⭐⭐'),
-                value: String('5')
-            },
-              ]
-          },{
-              type: 3,
-          	name: 'comment',
-              required: false,
-          	description: 'what is your opinion on this helper?',
-              choices: [
-    
-              ]
-          },
-            ]
-        },{
-            name: 'list',
-        		description: 'get a list of helpers listed best to worst',
-            type: 1,
-        		options: [
-    
-            ]
-        },
-          ]
-      },{
-          name: 'bot',
-      		description: '',
-          type: 2,
-      		options: [
-              {
-            name: 'info',
-        		description: 'info about the bot',
-            type: 1,
-        		options: [
-    
-            ]
-        },{
-            name: 'shutdown',
-        		description: 'shutdown the bot (admin only)',
-            type: 1,
-        		options: [
-    
-            ]
-        },
-          ]
-      },{
-          name: 'help',
-      		description: 'help command',
-      		options: [
-    
-          ]
-      },{
-          name: 'server',
-      		description: 'server information',
-      		options: [
-    
-          ]
-      },{
-          name: 'server',
-      		description: 'server information',
-      		options: [
-    
-          ]
-      },
-          /*
-          ignoring auto response since its not in the
-      slash menu
-          */
-         {
-          name: 'server',
-      		description: 'server information',
-      		options: [
-    
-          ]
-      },{
-          name: 'report',
-      		description: 'person',
-          type: 2,
-      		options: [
-              {
-            name: 'person',
-        		description: 'report a person',
-            type: 1,
-        		options: [
-                {
-              type: 6,
-          	name: 'user',
-              required: true,
-          	description: 'user',
-              choices: [
-    
-              ]
-          },{
-              type: 3,
-          	name: 'reason',
-              required: true,
-          	description: 'reason',
-              choices: [
-    
-              ]
-          },
-            ]
-        },
-          ]
-      },{
-          name: 'links',
-      		description: 'link for website',
-      		options: [
-              {
-            type: 3,
-        	name: 'link',
-            required: false,
-        	description: 'link to a website...',
-            choices: [
-                  {
-              name: String('slash builder'),
-              value: String('slash')
-          },{
-              name: String('replit'),
-              value: String('replit')
-          },{
-              name: String('s4d official website'),
-              value: String('s4d')
-          },{
-              name: String('uptimerobot'),
-              value: String('uptimerobot')
-          },
-            ]
-        },
-          ]
-      },
-    ],{
-        debug: false,
     
     });
     
@@ -678,8 +497,7 @@
                   }
                   reviews.set(String('reviewed'), reviewed);
                   reviews.set(String('reviewers'), reviewers);
-                  recalculate_total_rating(helper);
-                  (interaction.channel).send({
+                  calc_total(helper)(interaction.channel).send({
                                   content:String((['successfully edited your rating for ',interaction.options.getMember('helper'),'!'].join(''))),
                                   allowedMentions: {
                                       users: [],
@@ -695,8 +513,7 @@
               (reviewers[String(user)]).push(helper);
               reviews.set(String('reviewed'), reviewed);
               reviews.set(String('reviewers'), reviewers);
-              recalculate_total_rating(helper);
-              await interaction.reply({ content: (['successfully rated ',interaction.options.getMember('helper'),'!'].join('')), ephemeral: true, components: [] });
+              calc_total(helper)await interaction.reply({ content: (['successfully rated ',interaction.options.getMember('helper'),'!'].join('')), ephemeral: true, components: [] });
     
             break;
             case 'helper-list':
@@ -893,6 +710,182 @@
     
         });
     
+    synchronizeSlashCommands(s4d.client, [
+      {
+          name: 'helper',
+      		description: 'a set of commands for doing stuff related to helpers!',
+          type: 2,
+      		options: [
+              {
+            name: 'review',
+        		description: 'rate a helper anywhere from 0 to five stars!',
+            type: 1,
+        		options: [
+                {
+              type: 6,
+          	name: 'helper',
+              required: true,
+          	description: 'the helper to rate',
+              choices: [
+    
+              ]
+          },{
+              type: 3,
+          	name: 'rating',
+              required: true,
+          	description: 'anything from 0-5 stars',
+              choices: [
+                    {
+                name: String('0 stars'),
+                value: String('0')
+            },{
+                name: String('⭐'),
+                value: String('1')
+            },{
+                name: String('⭐⭐'),
+                value: String('2')
+            },{
+                name: String('⭐⭐⭐'),
+                value: String('3')
+            },{
+                name: String('⭐⭐⭐⭐'),
+                value: String('4')
+            },{
+                name: String('⭐⭐⭐⭐⭐'),
+                value: String('5')
+            },
+              ]
+          },{
+              type: 3,
+          	name: 'comment',
+              required: false,
+          	description: 'what is your opinion on this helper?',
+              choices: [
+    
+              ]
+          },
+            ]
+        },{
+            name: 'list',
+        		description: 'get a list of helpers listed best to worst',
+            type: 1,
+        		options: [
+    
+            ]
+        },
+          ]
+      },{
+          name: 'bot',
+      		description: '',
+          type: 2,
+      		options: [
+              {
+            name: 'info',
+        		description: 'info about the bot',
+            type: 1,
+        		options: [
+    
+            ]
+        },{
+            name: 'shutdown',
+        		description: 'shutdown the bot (admin only)',
+            type: 1,
+        		options: [
+    
+            ]
+        },
+          ]
+      },{
+          name: 'help',
+      		description: 'help command',
+      		options: [
+    
+          ]
+      },{
+          name: 'server',
+      		description: 'server information',
+      		options: [
+    
+          ]
+      },{
+          name: 'server',
+      		description: 'server information',
+      		options: [
+    
+          ]
+      },
+          /*
+          ignoring auto response since its not in the
+      slash menu
+          */
+         {
+          name: 'server',
+      		description: 'server information',
+      		options: [
+    
+          ]
+      },{
+          name: 'report',
+      		description: 'person',
+          type: 2,
+      		options: [
+              {
+            name: 'person',
+        		description: 'report a person',
+            type: 1,
+        		options: [
+                {
+              type: 6,
+          	name: 'user',
+              required: true,
+          	description: 'user',
+              choices: [
+    
+              ]
+          },{
+              type: 3,
+          	name: 'reason',
+              required: true,
+          	description: 'reason',
+              choices: [
+    
+              ]
+          },
+            ]
+        },
+          ]
+      },{
+          name: 'links',
+      		description: 'link for website',
+      		options: [
+              {
+            type: 3,
+        	name: 'link',
+            required: false,
+        	description: 'link to a website...',
+            choices: [
+                  {
+              name: String('slash builder'),
+              value: String('slash')
+          },{
+              name: String('replit'),
+              value: String('replit')
+          },{
+              name: String('s4d official website'),
+              value: String('s4d')
+          },{
+              name: String('uptimerobot'),
+              value: String('uptimerobot')
+          },
+            ]
+        },
+          ]
+      },
+    ],{
+        debug: false,
+    
+    });
+    
     s4d.client.on('emojiUpdate', async (emoji) => {
       var embed1 = new Discord.MessageEmbed();
          embed1.setColor('#6666cc');
@@ -904,7 +897,6 @@
     
     });
     
-    const database2 = new Database('./autoresponse.json')
     s4d.client.on('emojiDelete', async (emoji) => {
       var embed1 = new Discord.MessageEmbed();
          embed1.setColor('#6666cc');
@@ -916,7 +908,6 @@
     
     });
     
-    const database1 = new Database('./database.json')
     s4d.client.on('emojiCreate', async (emoji) => {
       var embed1 = new Discord.MessageEmbed();
          embed1.setColor('#6666cc');
@@ -928,6 +919,5 @@
     
     });
     
-    const reviews = new Database('./reviewsDB.json')
     return s4d
 })();

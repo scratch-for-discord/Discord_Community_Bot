@@ -109,7 +109,7 @@
     const database2 = new Database('./autoresponse.json')
     const database1 = new Database('./database.json')
     const reviews = new Database('./reviewsDB.json')
-    const s4dcolor = (colourRgb((254 / 255) * 100, (169 / 255) * 100, (24 / 255) * 100));
+    var s4dcolor = (colourRgb((254 / 255) * 100, (169 / 255) * 100, (24 / 255) * 100));
     
     const calc_total = async (helper) => {
         let rjson = reviews.get(String('reviewed'));

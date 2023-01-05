@@ -230,7 +230,7 @@
     </value>
   </block>
   <block type="import_all" id=")RV;3P`0;X68pYo87~-w" collapsed="true" x="-36" y="-966">
-    <field name="TYPE">const</field>
+    <field name="TYPE">var</field>
     <field name="COLON">;</field>
     <value name="VAR">
       <shadow type="text" id="qyR{:hnv^D)d$A4J|;PY">
@@ -5222,7 +5222,7 @@
                                           </block>
                                         </value>
                                         <statement name="blocks">
-                                          <block type="lasercat_jg_case_default" id="tJ~)5KR;(9]oAv`vw~!]">
+                                          <block type="lasercat_jg_case_default" id="tJ~)5KR;(9]oAv`vw~!]" collapsed="true">
                                             <value name="IF0">
                                               <block type="jg_text_remake_paragraph_quotes" id="-ErZoO~STZZfD8;o1S5:">
                                                 <field name="TEXT">review</field>
@@ -5560,7 +5560,7 @@
                                                                                   </block>
                                                                                 </statement>
                                                                                 <next>
-                                                                                  <block type="controls_if" id="9NcU~P7SMM|xWCu^Bkx%">
+                                                                                  <block type="controls_if" id="9NcU~P7SMM|xWCu^Bkx%" collapsed="true">
                                                                                     <value name="IF0">
                                                                                       <block type="list_contains" id="q^/`7tmmKv[nGTv$5D01">
                                                                                         <value name="LIST">
@@ -5708,44 +5708,49 @@
                                                                                                               </block>
                                                                                                             </value>
                                                                                                             <next>
-                                                                                                              <block type="jg_channels_send_in_channel_with_allowed_list_of_pings_on_users_on_roles" id="^I+*W|.k/yke8R3UNGc(">
-                                                                                                                <value name="CONTENT">
-                                                                                                                  <shadow type="text" id="{EXkEu9-c[0:5o%wqI%9">
-                                                                                                                    <field name="TEXT">No user ping here!</field>
-                                                                                                                  </shadow>
-                                                                                                                  <block type="text_join" id="Tvr|Qry_trGf{UZT~Hg5">
-                                                                                                                    <mutation items="3"></mutation>
-                                                                                                                    <value name="ADD0">
-                                                                                                                      <block type="jg_text_remake_paragraph_quotes" id="[L?ijYP?P)6NIcZ;cVzR">
-                                                                                                                        <field name="TEXT">successfully edited your rating for </field>
-                                                                                                                      </block>
-                                                                                                                    </value>
-                                                                                                                    <value name="ADD1">
-                                                                                                                      <block type="options" id="N]Ie[)lMPYzX*H|1--Sb">
-                                                                                                                        <mutation mode="Member" type="null"></mutation>
-                                                                                                                        <field name="SEARCH">Member</field>
-                                                                                                                        <value name="BOOLEAN">
-                                                                                                                          <block type="jg_text_remake_paragraph_quotes" id="NTO?V};=Ob-dmRW-dzA;">
-                                                                                                                            <field name="TEXT">helper</field>
+                                                                                                              <block type="blank_code" id="J3L;Emum^N/NZ?HI!=Ks">
+                                                                                                                <field name="TEXT">&amp;#10;</field>
+                                                                                                                <next>
+                                                                                                                  <block type="jg_channels_send_in_channel_with_allowed_list_of_pings_on_users_on_roles" id="^I+*W|.k/yke8R3UNGc(">
+                                                                                                                    <value name="CONTENT">
+                                                                                                                      <shadow type="text" id="{EXkEu9-c[0:5o%wqI%9">
+                                                                                                                        <field name="TEXT">No user ping here!</field>
+                                                                                                                      </shadow>
+                                                                                                                      <block type="text_join" id="Tvr|Qry_trGf{UZT~Hg5">
+                                                                                                                        <mutation items="3"></mutation>
+                                                                                                                        <value name="ADD0">
+                                                                                                                          <block type="jg_text_remake_paragraph_quotes" id="[L?ijYP?P)6NIcZ;cVzR">
+                                                                                                                            <field name="TEXT">successfully edited your rating for </field>
+                                                                                                                          </block>
+                                                                                                                        </value>
+                                                                                                                        <value name="ADD1">
+                                                                                                                          <block type="options" id="N]Ie[)lMPYzX*H|1--Sb">
+                                                                                                                            <mutation mode="Member" type="null"></mutation>
+                                                                                                                            <field name="SEARCH">Member</field>
+                                                                                                                            <value name="BOOLEAN">
+                                                                                                                              <block type="jg_text_remake_paragraph_quotes" id="NTO?V};=Ob-dmRW-dzA;">
+                                                                                                                                <field name="TEXT">helper</field>
+                                                                                                                              </block>
+                                                                                                                            </value>
+                                                                                                                          </block>
+                                                                                                                        </value>
+                                                                                                                        <value name="ADD2">
+                                                                                                                          <block type="jg_text_remake_paragraph_quotes" id="43qDD%~m$)za)ZopFviN">
+                                                                                                                            <field name="TEXT">!</field>
                                                                                                                           </block>
                                                                                                                         </value>
                                                                                                                       </block>
                                                                                                                     </value>
-                                                                                                                    <value name="ADD2">
-                                                                                                                      <block type="jg_text_remake_paragraph_quotes" id="43qDD%~m$)za)ZopFviN">
-                                                                                                                        <field name="TEXT">!</field>
+                                                                                                                    <value name="CHANNEL">
+                                                                                                                      <block type="interaction_channel" id=":s}qR]VPJO+J}UMd@-3D"></block>
+                                                                                                                    </value>
+                                                                                                                    <value name="USERS">
+                                                                                                                      <block type="lists_create_with" id="_e5GC;bFY}gKgQb3AdO8">
+                                                                                                                        <mutation items="0"></mutation>
                                                                                                                       </block>
                                                                                                                     </value>
                                                                                                                   </block>
-                                                                                                                </value>
-                                                                                                                <value name="CHANNEL">
-                                                                                                                  <block type="interaction_channel" id=":s}qR]VPJO+J}UMd@-3D"></block>
-                                                                                                                </value>
-                                                                                                                <value name="USERS">
-                                                                                                                  <block type="lists_create_with" id="_e5GC;bFY}gKgQb3AdO8">
-                                                                                                                    <mutation items="0"></mutation>
-                                                                                                                  </block>
-                                                                                                                </value>
+                                                                                                                </next>
                                                                                                               </block>
                                                                                                             </next>
                                                                                                           </block>
@@ -5854,38 +5859,43 @@
                                                                                                       </block>
                                                                                                     </value>
                                                                                                     <next>
-                                                                                                      <block type="slash_reply" id="SnY30e[12@+{gSYqLK|T">
-                                                                                                        <value name="CONTENT">
-                                                                                                          <block type="text_join" id="@w*B3#ZaRHa#BI-61Fe@">
-                                                                                                            <mutation items="3"></mutation>
-                                                                                                            <value name="ADD0">
-                                                                                                              <block type="jg_text_remake_paragraph_quotes" id="`={VTIS[_s?h=%somtN=">
-                                                                                                                <field name="TEXT">successfully rated </field>
-                                                                                                              </block>
-                                                                                                            </value>
-                                                                                                            <value name="ADD1">
-                                                                                                              <block type="options" id="uC@8-JWVR7kBG*KxJB!D">
-                                                                                                                <mutation mode="Member" type="null"></mutation>
-                                                                                                                <field name="SEARCH">Member</field>
-                                                                                                                <value name="BOOLEAN">
-                                                                                                                  <block type="jg_text_remake_paragraph_quotes" id="eG@q3+NIM2OGY9QFSuS,">
-                                                                                                                    <field name="TEXT">helper</field>
+                                                                                                      <block type="blank_code" id="dc[rYn*;IW5U=;UBiq#W">
+                                                                                                        <field name="TEXT">&amp;#10;</field>
+                                                                                                        <next>
+                                                                                                          <block type="slash_reply" id="SnY30e[12@+{gSYqLK|T">
+                                                                                                            <value name="CONTENT">
+                                                                                                              <block type="text_join" id="@w*B3#ZaRHa#BI-61Fe@">
+                                                                                                                <mutation items="3"></mutation>
+                                                                                                                <value name="ADD0">
+                                                                                                                  <block type="jg_text_remake_paragraph_quotes" id="`={VTIS[_s?h=%somtN=">
+                                                                                                                    <field name="TEXT">successfully rated </field>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                                <value name="ADD1">
+                                                                                                                  <block type="options" id="uC@8-JWVR7kBG*KxJB!D">
+                                                                                                                    <mutation mode="Member" type="null"></mutation>
+                                                                                                                    <field name="SEARCH">Member</field>
+                                                                                                                    <value name="BOOLEAN">
+                                                                                                                      <block type="jg_text_remake_paragraph_quotes" id="eG@q3+NIM2OGY9QFSuS,">
+                                                                                                                        <field name="TEXT">helper</field>
+                                                                                                                      </block>
+                                                                                                                    </value>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                                <value name="ADD2">
+                                                                                                                  <block type="jg_text_remake_paragraph_quotes" id="`E8Og|1.4Z}F=F5dVNX5">
+                                                                                                                    <field name="TEXT">!</field>
                                                                                                                   </block>
                                                                                                                 </value>
                                                                                                               </block>
                                                                                                             </value>
-                                                                                                            <value name="ADD2">
-                                                                                                              <block type="jg_text_remake_paragraph_quotes" id="`E8Og|1.4Z}F=F5dVNX5">
-                                                                                                                <field name="TEXT">!</field>
+                                                                                                            <value name="BOOLEAN">
+                                                                                                              <block type="logic_boolean" id="YG@A*9wO($)`AY}oQsZN">
+                                                                                                                <field name="BOOL">TRUE</field>
                                                                                                               </block>
                                                                                                             </value>
                                                                                                           </block>
-                                                                                                        </value>
-                                                                                                        <value name="BOOLEAN">
-                                                                                                          <block type="logic_boolean" id="YG@A*9wO($)`AY}oQsZN">
-                                                                                                            <field name="BOOL">TRUE</field>
-                                                                                                          </block>
-                                                                                                        </value>
+                                                                                                        </next>
                                                                                                       </block>
                                                                                                     </next>
                                                                                                   </block>
@@ -5917,7 +5927,7 @@
                                               </block>
                                             </statement>
                                             <next>
-                                              <block type="lasercat_jg_case_default" id="^}aia/q0@SkrL~DNpM*F">
+                                              <block type="lasercat_jg_case_default" id="^}aia/q0@SkrL~DNpM*F" collapsed="true">
                                                 <value name="IF0">
                                                   <block type="jg_text_remake_paragraph_quotes" id="ZuoL/OF-1Gof%}IvS87u">
                                                     <field name="TEXT">helper-list</field>
@@ -6939,18 +6949,18 @@
       </block>
     </statement>
   </block>
-  <block type="frost_slash_register" id="KCcPp]8Fo_leBa_,pH({" collapsed="true" x="1567" y="-339">
+  <block type="frost_slash_register" id="KCcPp]8Fo_leBa_,pH({" collapsed="true" x="1632" y="-355">
     <statement name="OPTIONS">
-      <block type="frost_slash_sub_command_group" id="Lt(GG3f0s=7`IeZZ7HfJ" collapsed="true">
+      <block type="frost_slash_command" id="zTT_j/(/O|;Q?KG)wz#4">
         <value name="NAME">
-          <block type="jg_text_remake_paragraph_quotes" id="=py9j,Ip^0z.sxtP49]u">
+          <shadow type="text" id="!49F4F#%SBmn:4Ms:M-T">
             <field name="TEXT">helper</field>
-          </block>
+          </shadow>
         </value>
         <value name="DESC">
-          <block type="jg_text_remake_paragraph_quotes" id="^3xH{.A|0QDBIa`md%|Q">
+          <shadow type="text" id="~2:A!uTQG}2GNo8%+O=z">
             <field name="TEXT">a set of commands for doing stuff related to helpers!</field>
-          </block>
+          </shadow>
         </value>
         <statement name="OPTIONS">
           <block type="frost_slash_sub_command" id="wcUJ;VO@R1HrnzE6w[+(">
@@ -7112,7 +7122,7 @@
               <block type="frost_slash_sub_command" id="sIkgYPwX00SqYuadq1TT">
                 <value name="NAME">
                   <block type="jg_text_remake_paragraph_quotes" id="WUFyD@+QrZSbGDciV5%`">
-                    <field name="TEXT">list</field>
+                    <field name="TEXT">helper-list</field>
                   </block>
                 </value>
                 <value name="DESC">
@@ -7125,16 +7135,16 @@
           </block>
         </statement>
         <next>
-          <block type="frost_slash_sub_command_group" id="k$2Q/CzaSz=vsB2SK`_V" collapsed="true">
+          <block type="frost_slash_command" id="T[^6V~]l55C|y[j#9?-1">
             <value name="NAME">
-              <block type="jg_text_remake_paragraph_quotes" id="HY9*eC5m{Ok*Bj=|/aXG">
+              <shadow type="text" id="j(^QM8+7:Cu%#;5;j,T2">
                 <field name="TEXT">bot</field>
-              </block>
+              </shadow>
             </value>
             <value name="DESC">
-              <block type="jg_text_remake_paragraph_quotes" id="FzA-!#FG%(8xrfA-:w,,">
-                <field name="TEXT"></field>
-              </block>
+              <shadow type="text" id="#^hED7rG5pL{*q+jA2mG">
+                <field name="TEXT">description of bot</field>
+              </shadow>
             </value>
             <statement name="OPTIONS">
               <block type="frost_slash_sub_command" id="?,f;(J^wJlb)@Ufuezfy">
@@ -7189,192 +7199,159 @@
                       </shadow>
                     </value>
                     <next>
-                      <block type="frost_slash_command" id="aM%ZhN4L#|O]E2kygsC/">
+                      <block type="frost_slash_command" id="](3A~P0kyBC_Z.%+q7.1">
                         <value name="NAME">
-                          <shadow type="text" id="Il!zN=lWguMvp]G{579m">
-                            <field name="TEXT">server</field>
+                          <shadow type="text" id="@EJgEyO|crX#;(T(xqh(">
+                            <field name="TEXT">report</field>
                           </shadow>
                         </value>
                         <value name="DESC">
-                          <shadow type="text" id="~(n63dD+T5~|I9wQ6QF[">
-                            <field name="TEXT">server information</field>
+                          <shadow type="text" id="hgdQ~K-eH~=^S`AT~EO.">
+                            <field name="TEXT">person</field>
                           </shadow>
                         </value>
-                        <next>
-                          <block type="jg_comments_connected_comment" id="3CS*6A$A{D4Eu)FDci^P">
-                            <field name="TEXT">ignoring auto response since its not in the &amp;#10;slash menu</field>
-                            <next>
-                              <block type="frost_slash_command" id="?SqhwwDxjlv~n!R}:f(H">
+                        <statement name="OPTIONS">
+                          <block type="frost_slash_sub_command" id="pRiSN}KWfp$kxnHN}[Rv" collapsed="true">
+                            <value name="NAME">
+                              <block type="jg_text_remake_paragraph_quotes" id="2uHB4r!*%?V2VX1CVV4t">
+                                <field name="TEXT">person</field>
+                              </block>
+                            </value>
+                            <value name="DESC">
+                              <block type="jg_text_remake_paragraph_quotes" id="}P$0~_2`qqHcGKrkT9L0">
+                                <field name="TEXT">report a person</field>
+                              </block>
+                            </value>
+                            <statement name="OPTIONS">
+                              <block type="gsa_frost_slash_options" id="0ZfyoeRAt!Ei4j$ReYAr">
+                                <field name="TYPE">6</field>
                                 <value name="NAME">
-                                  <shadow type="text" id="e)iVz6_8J(xZiKo97b~B">
-                                    <field name="TEXT">server</field>
+                                  <shadow type="text" id="9Ye!n5R)4L{[Mq)cP;lH">
+                                    <field name="TEXT">user</field>
                                   </shadow>
                                 </value>
                                 <value name="DESC">
-                                  <shadow type="text" id="$R,sfOE6zG3dD:)-LKzG">
-                                    <field name="TEXT">server information</field>
+                                  <shadow type="text" id="g*Fz`=#G6B:NuxNoDu%}">
+                                    <field name="TEXT">user</field>
+                                  </shadow>
+                                </value>
+                                <value name="REQUIRED">
+                                  <shadow type="logic_boolean" id="0OC;_S,3zUe.!+hzC{J:">
+                                    <field name="BOOL">TRUE</field>
                                   </shadow>
                                 </value>
                                 <next>
-                                  <block type="frost_slash_sub_command_group" id="|ov2Q,]$n]5~r|;HMaH," collapsed="true">
+                                  <block type="gsa_frost_slash_options" id="*uP3EG,D9a*Eg+HBO4vo">
+                                    <field name="TYPE">3</field>
                                     <value name="NAME">
-                                      <block type="jg_text_remake_paragraph_quotes" id="8/8$7{I-3i`+~r%Y|!3V">
-                                        <field name="TEXT">report</field>
-                                      </block>
+                                      <shadow type="text" id="f9|Z+.vqRgA~U|.5+Q,S">
+                                        <field name="TEXT">reason</field>
+                                      </shadow>
                                     </value>
                                     <value name="DESC">
-                                      <block type="jg_text_remake_paragraph_quotes" id="F9lCXbe3wgr(FFkJbTiB">
-                                        <field name="TEXT">person</field>
-                                      </block>
+                                      <shadow type="text" id="?`go8hSU`_#YnME#RoC.">
+                                        <field name="TEXT">reason</field>
+                                      </shadow>
                                     </value>
-                                    <statement name="OPTIONS">
-                                      <block type="frost_slash_sub_command" id="pRiSN}KWfp$kxnHN}[Rv">
+                                    <value name="REQUIRED">
+                                      <shadow type="logic_boolean" id="}jPH64R{kBiTSHq#fNGD">
+                                        <field name="BOOL">TRUE</field>
+                                      </shadow>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="frost_slash_command" id="4ccAbZ74BG)I+3e,}U3%">
+                            <value name="NAME">
+                              <shadow type="text" id="9)!hxyq%/evAFS18^)ev">
+                                <field name="TEXT">links</field>
+                              </shadow>
+                            </value>
+                            <value name="DESC">
+                              <shadow type="text" id="^N,Zz77,GOL0tS=.OH%T">
+                                <field name="TEXT">link for website</field>
+                              </shadow>
+                            </value>
+                            <statement name="OPTIONS">
+                              <block type="gsa_frost_slash_options" id="Xr)F7R/,]nZ8-LBH,2G6" collapsed="true">
+                                <field name="TYPE">3</field>
+                                <value name="NAME">
+                                  <shadow type="text" id="hO?!Km2)l@,.a?vO0cMX">
+                                    <field name="TEXT">link</field>
+                                  </shadow>
+                                </value>
+                                <value name="DESC">
+                                  <shadow type="text" id="CJUtn/W_aUR{!0T28tt]">
+                                    <field name="TEXT">link to a website...</field>
+                                  </shadow>
+                                </value>
+                                <value name="REQUIRED">
+                                  <shadow type="logic_boolean" id="=flAh3-559iQzGbnzQd2">
+                                    <field name="BOOL">FALSE</field>
+                                  </shadow>
+                                </value>
+                                <statement name="CHOICES">
+                                  <block type="frost_slash_choices" id="99cDY2XIm=aVS2ZRuh%$">
+                                    <value name="NAME">
+                                      <shadow type="text" id="S],{ja$f_U#yFbHr+5?z">
+                                        <field name="TEXT">slash builder</field>
+                                      </shadow>
+                                    </value>
+                                    <value name="OPTION_NAME">
+                                      <shadow type="text" id="zP/JqQ%QZ`QsN3ISl)Ba">
+                                        <field name="TEXT">slash</field>
+                                      </shadow>
+                                    </value>
+                                    <next>
+                                      <block type="frost_slash_choices" id="awSf*jRTM~I6|HaCo]kn">
                                         <value name="NAME">
-                                          <block type="jg_text_remake_paragraph_quotes" id="2uHB4r!*%?V2VX1CVV4t">
-                                            <field name="TEXT">person</field>
-                                          </block>
+                                          <shadow type="text" id=",YfRF(BZ}-~e[uBadX^!">
+                                            <field name="TEXT">replit</field>
+                                          </shadow>
                                         </value>
-                                        <value name="DESC">
-                                          <block type="jg_text_remake_paragraph_quotes" id="}P$0~_2`qqHcGKrkT9L0">
-                                            <field name="TEXT">report a person</field>
-                                          </block>
+                                        <value name="OPTION_NAME">
+                                          <shadow type="text" id="o=?!u{]v]4@lpvgH=FI$">
+                                            <field name="TEXT">replit</field>
+                                          </shadow>
                                         </value>
-                                        <statement name="OPTIONS">
-                                          <block type="gsa_frost_slash_options" id="0ZfyoeRAt!Ei4j$ReYAr">
-                                            <field name="TYPE">6</field>
+                                        <next>
+                                          <block type="frost_slash_choices" id="#q$I,?^?^48G`^on+%PW">
                                             <value name="NAME">
-                                              <shadow type="text" id="9Ye!n5R)4L{[Mq)cP;lH">
-                                                <field name="TEXT">user</field>
+                                              <shadow type="text" id="k(I%3CTx|wJ*|nqR-WGW">
+                                                <field name="TEXT">s4d official website</field>
                                               </shadow>
                                             </value>
-                                            <value name="DESC">
-                                              <shadow type="text" id="g*Fz`=#G6B:NuxNoDu%}">
-                                                <field name="TEXT">user</field>
-                                              </shadow>
-                                            </value>
-                                            <value name="REQUIRED">
-                                              <shadow type="logic_boolean" id="0OC;_S,3zUe.!+hzC{J:">
-                                                <field name="BOOL">TRUE</field>
+                                            <value name="OPTION_NAME">
+                                              <shadow type="text" id="PT.(;1p/]1PiwrK9]Z}=">
+                                                <field name="TEXT">s4d</field>
                                               </shadow>
                                             </value>
                                             <next>
-                                              <block type="gsa_frost_slash_options" id="*uP3EG,D9a*Eg+HBO4vo">
-                                                <field name="TYPE">3</field>
+                                              <block type="frost_slash_choices" id="PLVcl$E@!K(8xa?YSSK.">
                                                 <value name="NAME">
-                                                  <shadow type="text" id="f9|Z+.vqRgA~U|.5+Q,S">
-                                                    <field name="TEXT">reason</field>
+                                                  <shadow type="text" id="2`,qob}u:iN.x~;8f^oI">
+                                                    <field name="TEXT">uptimerobot</field>
                                                   </shadow>
                                                 </value>
-                                                <value name="DESC">
-                                                  <shadow type="text" id="?`go8hSU`_#YnME#RoC.">
-                                                    <field name="TEXT">reason</field>
-                                                  </shadow>
-                                                </value>
-                                                <value name="REQUIRED">
-                                                  <shadow type="logic_boolean" id="}jPH64R{kBiTSHq#fNGD">
-                                                    <field name="BOOL">TRUE</field>
+                                                <value name="OPTION_NAME">
+                                                  <shadow type="text" id="VCK7.POfOrf$dpF,0M6Y">
+                                                    <field name="TEXT">uptimerobot</field>
                                                   </shadow>
                                                 </value>
                                               </block>
                                             </next>
                                           </block>
-                                        </statement>
-                                      </block>
-                                    </statement>
-                                    <next>
-                                      <block type="frost_slash_command" id="4ccAbZ74BG)I+3e,}U3%">
-                                        <value name="NAME">
-                                          <shadow type="text" id="9)!hxyq%/evAFS18^)ev">
-                                            <field name="TEXT">links</field>
-                                          </shadow>
-                                        </value>
-                                        <value name="DESC">
-                                          <shadow type="text" id="^N,Zz77,GOL0tS=.OH%T">
-                                            <field name="TEXT">link for website</field>
-                                          </shadow>
-                                        </value>
-                                        <statement name="OPTIONS">
-                                          <block type="gsa_frost_slash_options" id="Xr)F7R/,]nZ8-LBH,2G6">
-                                            <field name="TYPE">3</field>
-                                            <value name="NAME">
-                                              <shadow type="text" id="hO?!Km2)l@,.a?vO0cMX">
-                                                <field name="TEXT">link</field>
-                                              </shadow>
-                                            </value>
-                                            <value name="DESC">
-                                              <shadow type="text" id="CJUtn/W_aUR{!0T28tt]">
-                                                <field name="TEXT">link to a website...</field>
-                                              </shadow>
-                                            </value>
-                                            <value name="REQUIRED">
-                                              <shadow type="logic_boolean" id="=flAh3-559iQzGbnzQd2">
-                                                <field name="BOOL">FALSE</field>
-                                              </shadow>
-                                            </value>
-                                            <statement name="CHOICES">
-                                              <block type="frost_slash_choices" id="99cDY2XIm=aVS2ZRuh%$">
-                                                <value name="NAME">
-                                                  <shadow type="text" id="S],{ja$f_U#yFbHr+5?z">
-                                                    <field name="TEXT">slash builder</field>
-                                                  </shadow>
-                                                </value>
-                                                <value name="OPTION_NAME">
-                                                  <shadow type="text" id="zP/JqQ%QZ`QsN3ISl)Ba">
-                                                    <field name="TEXT">slash</field>
-                                                  </shadow>
-                                                </value>
-                                                <next>
-                                                  <block type="frost_slash_choices" id="awSf*jRTM~I6|HaCo]kn">
-                                                    <value name="NAME">
-                                                      <shadow type="text" id=",YfRF(BZ}-~e[uBadX^!">
-                                                        <field name="TEXT">replit</field>
-                                                      </shadow>
-                                                    </value>
-                                                    <value name="OPTION_NAME">
-                                                      <shadow type="text" id="o=?!u{]v]4@lpvgH=FI$">
-                                                        <field name="TEXT">replit</field>
-                                                      </shadow>
-                                                    </value>
-                                                    <next>
-                                                      <block type="frost_slash_choices" id="#q$I,?^?^48G`^on+%PW">
-                                                        <value name="NAME">
-                                                          <shadow type="text" id="k(I%3CTx|wJ*|nqR-WGW">
-                                                            <field name="TEXT">s4d official website</field>
-                                                          </shadow>
-                                                        </value>
-                                                        <value name="OPTION_NAME">
-                                                          <shadow type="text" id="PT.(;1p/]1PiwrK9]Z}=">
-                                                            <field name="TEXT">s4d</field>
-                                                          </shadow>
-                                                        </value>
-                                                        <next>
-                                                          <block type="frost_slash_choices" id="PLVcl$E@!K(8xa?YSSK.">
-                                                            <value name="NAME">
-                                                              <shadow type="text" id="2`,qob}u:iN.x~;8f^oI">
-                                                                <field name="TEXT">uptimerobot</field>
-                                                              </shadow>
-                                                            </value>
-                                                            <value name="OPTION_NAME">
-                                                              <shadow type="text" id="VCK7.POfOrf$dpF,0M6Y">
-                                                                <field name="TEXT">uptimerobot</field>
-                                                              </shadow>
-                                                            </value>
-                                                          </block>
-                                                        </next>
-                                                      </block>
-                                                    </next>
-                                                  </block>
-                                                </next>
-                                              </block>
-                                            </statement>
-                                          </block>
-                                        </statement>
+                                        </next>
                                       </block>
                                     </next>
                                   </block>
-                                </next>
+                                </statement>
                               </block>
-                            </next>
+                            </statement>
                           </block>
                         </next>
                       </block>

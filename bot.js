@@ -152,12 +152,12 @@
             }]
         });
         botuptime = (Math.floor(new Date().getTime() / 1000));
-        s4d.client.application?.commands.create({
+           });
+
+           s4d.client.application?.commands.create({
             name: 'CreateIssue',
             type: 3
         })
-
-    });
 
     s4d.client.on('guildUpdate', async (oldGuild, newGuild) => {
         channel_update = [];

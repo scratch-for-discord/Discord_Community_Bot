@@ -243,12 +243,22 @@
                     repliedUser: true
                 }
             });
-        } else if ((s4dmessage.id) == '932651844973502471') {
-            navigate_to_essential = 'how to fix,fix this,Is there a way, i have an problem,it doesn\'t work,it doesnt work,it doesn t work,help me,how do I,won\'t work,how do i make,didnt work,help please,can someone help'.split(',');
-            if (navigate_to_essential.includes(((s4dmessage.content).toLowerCase()))) {
-                s4dmessage.channel.send({
-                    content: String('Hello! looks like you are looking for help, please use appropriate channel <#1019857125557665842> <#1019858566917656627>')
-                });
+        } else if (((s4dmessage.channel).id) == '932651844973502471') {
+            if ((s4dmessage.member).bot) {
+                return
+            }
+            navigate_to_essential = 'how to fix,fix this,Is there a way,i have an problem,i have a problem,i have problem,it doesn\'t work,it doesnt work,it doesn t work,does not work,help me,how do I,won\'t work,how do i make,didnt work,help please,can someone help,help pls,pls help'.split(',');
+            for (var j_index2 in navigate_to_essential) {
+                j = navigate_to_essential[j_index2];
+                if (String(((s4dmessage.content).toLowerCase())).includes(String(j))) {
+                    (s4dmessage).reply({
+                        content: String('Hello! looks like you are looking for help, please use appropriate channel <#1019857125557665842> <#1019858566917656627>'),
+                        allowedMentions: {
+                            repliedUser: true
+                        }
+                    });
+                    return
+                }
             }
         } else if (((s4dmessage.channel).parentId) == '932651844973502470') {
             if ((String((s4dmessage.content)).includes(String('thx'))) || (String((s4dmessage.content)).includes(String('thanks'))) || (String((s4dmessage.content)).includes(String('thank you')))) {
@@ -951,7 +961,8 @@
                     embed1.setTitle(String('Before continuing...'))
                     embed1.setURL(String());
                     embed1.setDescription(String((['Make sure to include workspace image, error message, js line of the error', `
-              **GUIDELINES**`, `1. One post per request, one request per post
+              **GUIDELINES**
+              `, `1. One post per request, one request per post
               2. Title meaningfully your posts
               3. Talk in English only
               4. Tell your request straight away
@@ -986,7 +997,8 @@
                     embed2.setTitle(String('Before continuing...'))
                     embed2.setURL(String());
                     embed2.setDescription(String((['Note that this channel is for feedback and not for <#1019857125557665842>', `
-              **GUIDELINES**`, `1. One post per request, one request per post
+              **GUIDELINES**
+              `, `1. One post per request, one request per post
               2. Title meaningfully your posts
               3. Talk in English only
               4. Tell your request straight away

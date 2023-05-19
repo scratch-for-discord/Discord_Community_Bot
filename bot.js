@@ -27,7 +27,6 @@
     let https = require("https")
     const synchronizeSlashCommands = require('@frostzzone/discord-sync-commands');
     const Database = require("easy-json-database")
-    const Database = require("easy-json-database")
 
     // define s4d components (pretty sure 90% of these arnt even used/required)
     let s4d = {
@@ -49,8 +48,8 @@
     // check if d.js is v13
     if (!require('./package.json').dependencies['discord.js'].startsWith("^13.")) {
         let file = JSON.parse(fs.readFileSync('package.json'))
-        file.dependencies['discord.js'] = '^13.12.0'
-        fs.writeFileSync('package.json', JSON.stringify(file))
+        file.dependencies['discord.js'] = '^13.15.1'
+        fs.writeFileSync('package.json', JSON.stringify(file, null, 4))
         exec('npm i')
         throw new Error("Seems you arent using v13 please re-run or run `npm i discord.js@13.12.0`");
     }
@@ -59,7 +58,7 @@
     if (!require('./package.json').dependencies['discord-logs'].startsWith("^2.")) {
         let file = JSON.parse(fs.readFileSync('package.json'))
         file.dependencies['discord-logs'] = '^2.0.0'
-        fs.writeFileSync('package.json', JSON.stringify(file))
+        fs.writeFileSync('package.json', JSON.stringify(file, null, 4))
         exec('npm i')
         throw new Error("discord-logs must be 2.0.0. please re-run or if that fails run `npm i discord-logs@2.0.0` then re-run");
     }
@@ -93,7 +92,7 @@
     s4d.database = new Database('./database.json')
 
     // blockly code
-    var time_var, channel_update, botuptime, channel_update_old, j, s4dcolor, ar_keys, channel_category, channel_text, channel_voice, channel_announcement, channel_stage, roles_mod, roles_mentionable, roles_hoisted, roles_total;
+    var time_var, channel_update, botuptime, channel_update_old, navigate_to_essential, j, s4dcolor, ar_keys, channel_category, channel_text, channel_voice, channel_announcement, channel_stage, roles_mod, roles_mentionable, roles_hoisted, roles_total;
 
     // Describe this function...
     function time(time_var) {
@@ -108,6 +107,11 @@
         g = ('0' + (Math.round(g) || 0).toString(16)).slice(-2);
         b = ('0' + (Math.round(b) || 0).toString(16)).slice(-2);
         return '#' + r + g + b;
+    }
+
+    function colourRandom() {
+        var num = Math.floor(Math.random() * Math.pow(2, 24));
+        return '#' + ('00000' + num.toString(16)).substr(-6);
     }
 
 
@@ -152,12 +156,12 @@
             }]
         });
         botuptime = (Math.floor(new Date().getTime() / 1000));
-           });
-
-           s4d.client.application?.commands.create({
+        s4d.client.application?.commands.create({
             name: 'CreateIssue',
             type: 3
         })
+
+    });
 
     s4d.client.on('guildUpdate', async (oldGuild, newGuild) => {
         channel_update = [];
@@ -229,6 +233,33 @@
 
     });
 
+    s4d.client.on('messageCreate', async (s4dmessage) => {
+        if (((s4dmessage.channel).type) == 'GUILD_NEWS') {
+            eval('s4dmessage.crosspost()');
+        } else if ('<@939129451046920253>' == (s4dmessage.content)) {
+            s4dmessage.reply({
+                content: String((['Hi ', (s4dmessage.member).username, ', i have only slash commands!'].join(''))),
+                allowedMentions: {
+                    repliedUser: true
+                }
+            });
+        } else if ((s4dmessage.id) == '932651844973502471') {
+            navigate_to_essential = 'how to fix,fix this,Is there a way, i have an problem,it doesn\'t work,it doesnt work,it doesn t work,help me,how do I,won\'t work,how do i make,didnt work,help please,can someone help'.split(',');
+            if (navigate_to_essential.includes(((s4dmessage.content).toLowerCase()))) {
+                s4dmessage.channel.send({
+                    content: String('Hello! looks like you are looking for help, please use appropriate channel <#1019857125557665842> <#1019858566917656627>')
+                });
+            }
+        } else if (((s4dmessage.channel).parentId) == '932651844973502470') {
+            if ((String((s4dmessage.content)).includes(String('thx'))) || (String((s4dmessage.content)).includes(String('thanks'))) || (String((s4dmessage.content)).includes(String('thank you')))) {
+                s4dmessage.channel.send({
+                    content: String('use `/review` in <#932651844973502473> to rate your helper(s)!')
+                });
+            }
+        }
+
+    });
+
     s4d.client.on('channelUpdate', async (oldChannel, newChannel) => {
         channel_update = [];
         channel_update_old = [];
@@ -276,26 +307,6 @@
                 embeds: [embed1]
             });
 
-        }
-
-    });
-
-    s4d.client.on('messageCreate', async (s4dmessage) => {
-        if (((s4dmessage.channel).type) == 'GUILD_NEWS') {
-            eval('s4dmessage.crosspost()');
-        } else if ((s4dmessage.channel) == s4d.client.channels.cache.get('1010545985006600292')) {} else if ('<@939129451046920253>' == (s4dmessage.content)) {
-            s4dmessage.reply({
-                content: String((['Hi ', (s4dmessage.member.user).username, ', i have only slash commands!'].join(''))),
-                allowedMentions: {
-                    repliedUser: true
-                }
-            });
-        } else if (((s4dmessage.channel).parentId) == '932651844973502470') {
-            if ((String((s4dmessage.content)).includes(String('thx'))) || (String((s4dmessage.content)).includes(String('thanks'))) || (String((s4dmessage.content)).includes(String('thank you')))) {
-                s4dmessage.channel.send({
-                    content: String('use `/review` in <#932651844973502473> to rate your helper(s)!')
-                });
-            }
         }
 
     });
@@ -378,10 +389,10 @@
                 embed.setThumbnail(((interaction.guild).iconURL({
                     dynamic: true
                 })));
-                embed.addField('🆔・ Server ID', '```932651844344373278```', true);
-                embed.addField('👑・ Server owner', '<@395165536545275905>', true);
-                embed.addField('🕛・ Created', (['<t:', '1642428300', ':R>'].join('')), true);
-                embed.addField((['🫂・ Server members [ ', ((interaction.guild).members.cache.filter(m => m.user.bot).size) + ((interaction.guild).members.cache.filter(m => !m.user.bot).size), ' ]'].join('')), (['```Members: ', (interaction.guild).members.cache.filter(m => !m.user.bot).size, '  |  Bots: ', (interaction.guild).members.cache.filter(m => m.user.bot).size, '```'].join('')), false);
+                embed.addField('đź†”ă» Server ID', '```932651844344373278```', true);
+                embed.addField('đź‘‘ă» Server owner', '<@395165536545275905>', true);
+                embed.addField('đź•›ă» Created', (['<t:', '1642428300', ':R>'].join('')), true);
+                embed.addField((['đź«‚ă» Server members [ ', ((interaction.guild).members.cache.filter(m => m.user.bot).size) + ((interaction.guild).members.cache.filter(m => !m.user.bot).size), ' ]'].join('')), (['```Members: ', (interaction.guild).members.cache.filter(m => !m.user.bot).size, '  |  Bots: ', (interaction.guild).members.cache.filter(m => m.user.bot).size, '```'].join('')), false);
                 channel_category = 0;
                 channel_text = 0;
                 channel_voice = 0;
@@ -402,7 +413,7 @@
 
                 })
                 embed.addField((['Server categories and channels [ ', (interaction.guild).channels.cache.size, ']'].join('')), (['```Categories: ', channel_category, '  |  Text: ', channel_text, '  |  Voice:', channel_voice, '  |  Announcement: ', channel_announcement, '  |  Stage:', channel_stage, '```'].join('')), false);
-                embed.addField('<:nitro_badge:1011338125227868270>・ Boosts', (['```Boost level: ', (interaction.guild).premiumTier, '  |  Boost amount: ', (interaction.guild).premiumSubscriptionCount, '```'].join('')), false);
+                embed.addField('<:nitro_badge:1011338125227868270>ă» Boosts', (['```Boost level: ', (interaction.guild).premiumTier, '  |  Boost amount: ', (interaction.guild).premiumSubscriptionCount, '```'].join('')), false);
                 roles_mod = 0;
                 roles_mentionable = 0;
                 roles_hoisted = 0;
@@ -420,8 +431,8 @@
                     }
 
                 })
-                embed.addField((['🖊️・ Roles [ ', roles_total, ']'].join('')), (['```Hoisted: ', roles_hoisted, '  |  Mentionable: ', roles_mentionable, '  |  Moderator: ', roles_mod, '```'].join('')), false);
-                embed.addField('📘・ Description', (['```', (interaction.guild).description, '```'].join('')), false);
+                embed.addField((['đź–Šď¸Źă» Roles [ ', roles_total, ']'].join('')), (['```Hoisted: ', roles_hoisted, '  |  Mentionable: ', roles_mentionable, '  |  Moderator: ', roles_mod, '```'].join('')), false);
+                embed.addField('đź“ă» Description', (['```', (interaction.guild).description, '```'].join('')), false);
                 await interaction.reply({
                     embeds: [(embed)],
                     ephemeral: false,
@@ -460,15 +471,15 @@
                                 ephemeral: true,
                                 components: []
                             });
-                            (((interaction.guild).members.cache.get('513095506914705418') || await (interaction.guild).members.fetch('513095506914705418'))).send({
-                                content: String((['added keyword `', (interaction.options.getString('keyword')).toLowerCase(), '` with name ', interaction.options.getString('name'), ' and description ', String((interaction.options.getString('description'))).replaceAll('>', String('\n')), '\n', ' and image ', interaction.options.getString('image'), interaction.member.user].join('')))
+                            ((interaction.guild).members.cache.get(String('513095506914705418')) || await (interaction.guild).members.fetch(String('513095506914705418'))).send({
+                                content: String((['added keyword `', (interaction.options.getString('keyword')).toLowerCase(), '` with name ', interaction.options.getString('name'), ' and description ', String((interaction.options.getString('description'))).replaceAll('>', String('\n')), '\n', ' and image ', interaction.options.getString('image'), interaction.member].join('')))
                             });
 
                             break;
                         case 'remove':
                             if (database2.has(String(((interaction.options.getString('keyword')).toLowerCase())))) {
-                                (((interaction.guild).members.cache.get('513095506914705418') || await (interaction.guild).members.fetch('513095506914705418'))).send({
-                                    content: String((['removed keyword `', (interaction.options.getString('keyword')).toLowerCase(), '` with name ', database2.get(String(((interaction.options.getString('keyword')).toLowerCase())))[0], ' and description ', database2.get(String(((interaction.options.getString('keyword')).toLowerCase())))[1], ' and image ', database2.get(String(((interaction.options.getString('keyword')).toLowerCase()))).slice(-1)[0], '\n', interaction.member.user].join('')))
+                                ((interaction.guild).members.cache.get(String('513095506914705418')) || await (interaction.guild).members.fetch(String('513095506914705418'))).send({
+                                    content: String((['removed keyword `', (interaction.options.getString('keyword')).toLowerCase(), '` with name ', database2.get(String(((interaction.options.getString('keyword')).toLowerCase())))[0], ' and description ', database2.get(String(((interaction.options.getString('keyword')).toLowerCase())))[1], ' and image ', database2.get(String(((interaction.options.getString('keyword')).toLowerCase()))).slice(-1)[0], '\n', interaction.member].join('')))
                                 });
                                 database2.delete(String((interaction.options.getString('keyword'))));
                                 await interaction.reply({
@@ -498,16 +509,16 @@
                 break;
             case 'report':
                 var embed = new Discord.MessageEmbed()
-                embed.setTitle('🚨 REPORT 🚨')
+                embed.setTitle('đźš¨ REPORT đźš¨')
                     .setURL();
-                embed.setDescription((['**author: **', interaction.member.user, ' - ', (interaction.member.user).id, '\n', '**offender: **', interaction.options.getUser('user'), ' - ', (interaction.options.getMember('user')).id, '\n', '**message: **', interaction.options.getString('reason')].join('')));
+                embed.setDescription((['**author: **', interaction.member, ' - ', (interaction.member).id, '\n', '**offender: **', interaction.options.getUser('user'), ' - ', (interaction.options.getMember('user')).id, '\n', '**message: **', interaction.options.getString('reason')].join('')));
                 embed.setColor(s4dcolor);
                 s4d.client.channels.cache.get('932651845724291084').send({
                     embeds: [embed]
                 });
 
                 await interaction.reply({
-                    content: 'Thanks for your report, please wait until the staff team view it, in meantime take a cookie 🍪!',
+                    content: 'Thanks for your report, please wait until the staff team view it, in meantime take a cookie đźŤŞ!',
                     ephemeral: true,
                     components: []
                 });
@@ -554,7 +565,7 @@
             case 'helper':
                 switch ((interaction.options.getSubcommand())) {
                     case 'review':
-                        const user = ((interaction.member.user).id);
+                        const user = ((interaction.member).id);
                         const helper = ((interaction.options.getMember('helper')).id);
                         var reviewed = reviews.get(String('reviewed'));
                         let reviewers = reviews.get(String('reviewers'));
@@ -671,88 +682,88 @@
                         const buttons_all = (new MessageActionRow()
                             .addComponents(new MessageButton()
                                 .setCustomId('maxL')
-                                .setEmoji('⏮')
+                                .setEmoji('âŹ®')
                                 .setDisabled(false)
                                 .setStyle(('PRIMARY')),
                                 new MessageButton()
                                 .setCustomId('left')
-                                .setEmoji('◀')
+                                .setEmoji('â—€')
                                 .setDisabled(false)
                                 .setStyle(('PRIMARY')),
                                 new MessageButton()
                                 .setCustomId('right')
-                                .setEmoji('▶')
+                                .setEmoji('â–¶')
                                 .setDisabled(false)
                                 .setStyle(('PRIMARY')),
                                 new MessageButton()
                                 .setCustomId('maxR')
-                                .setEmoji('⏭')
+                                .setEmoji('âŹ­')
                                 .setDisabled(false)
                                 .setStyle(('PRIMARY')),
                             ));
                         const buttons_left = (new MessageActionRow()
                             .addComponents(new MessageButton()
                                 .setCustomId('maxL')
-                                .setEmoji('⏮')
+                                .setEmoji('âŹ®')
                                 .setDisabled(false)
                                 .setStyle(('PRIMARY')),
                                 new MessageButton()
                                 .setCustomId('left')
-                                .setEmoji('◀')
+                                .setEmoji('â—€')
                                 .setDisabled(false)
                                 .setStyle(('PRIMARY')),
                                 new MessageButton()
                                 .setCustomId('right')
-                                .setEmoji('▶')
+                                .setEmoji('â–¶')
                                 .setDisabled(true)
                                 .setStyle(('PRIMARY')),
                                 new MessageButton()
                                 .setCustomId('maxR')
-                                .setEmoji('⏭')
+                                .setEmoji('âŹ­')
                                 .setDisabled(true)
                                 .setStyle(('PRIMARY')),
                             ));
                         const buttons_right = (new MessageActionRow()
                             .addComponents(new MessageButton()
                                 .setCustomId('maxL')
-                                .setEmoji('⏮')
+                                .setEmoji('âŹ®')
                                 .setDisabled(true)
                                 .setStyle(('PRIMARY')),
                                 new MessageButton()
                                 .setCustomId('left')
-                                .setEmoji('◀')
+                                .setEmoji('â—€')
                                 .setDisabled(true)
                                 .setStyle(('PRIMARY')),
                                 new MessageButton()
                                 .setCustomId('right')
-                                .setEmoji('▶')
+                                .setEmoji('â–¶')
                                 .setDisabled(false)
                                 .setStyle(('PRIMARY')),
                                 new MessageButton()
                                 .setCustomId('maxR')
-                                .setEmoji('⏭')
+                                .setEmoji('âŹ­')
                                 .setDisabled(false)
                                 .setStyle(('PRIMARY')),
                             ));
                         const buttons_none = (new MessageActionRow()
                             .addComponents(new MessageButton()
                                 .setCustomId('maxL')
-                                .setEmoji('⏮')
+                                .setEmoji('âŹ®')
                                 .setDisabled(true)
                                 .setStyle(('PRIMARY')),
                                 new MessageButton()
                                 .setCustomId('left')
-                                .setEmoji('◀')
+                                .setEmoji('â—€')
                                 .setDisabled(true)
                                 .setStyle(('PRIMARY')),
                                 new MessageButton()
                                 .setCustomId('right')
-                                .setEmoji('▶')
+                                .setEmoji('â–¶')
                                 .setDisabled(true)
                                 .setStyle(('PRIMARY')),
                                 new MessageButton()
                                 .setCustomId('maxR')
-                                .setEmoji('⏭')
+                                .setEmoji('âŹ­')
                                 .setDisabled(true)
                                 .setStyle(('PRIMARY')),
                             ));
@@ -849,62 +860,6 @@
     });
 
     synchronizeSlashCommands(s4d.client, [{
-        name: 'helper',
-        description: 'a set of commands for doing stuff related to helpers!',
-        options: [{
-            name: 'review',
-            description: 'rate a helper anywhere from 0 to five stars!',
-            type: 1,
-            options: [{
-                type: 6,
-                name: 'helper',
-                required: true,
-                description: 'the helper to rate',
-                choices: [
-
-                ]
-            }, {
-                type: 3,
-                name: 'rating',
-                required: true,
-                description: 'anything from 0-5 stars',
-                choices: [{
-                    name: String('0 stars'),
-                    value: String('0')
-                }, {
-                    name: String('⭐'),
-                    value: String('1')
-                }, {
-                    name: String('⭐⭐'),
-                    value: String('2')
-                }, {
-                    name: String('⭐⭐⭐'),
-                    value: String('3')
-                }, {
-                    name: String('⭐⭐⭐⭐'),
-                    value: String('4')
-                }, {
-                    name: String('⭐⭐⭐⭐⭐'),
-                    value: String('5')
-                }, ]
-            }, {
-                type: 3,
-                name: 'comment',
-                required: false,
-                description: 'what is your opinion on this helper?',
-                choices: [
-
-                ]
-            }, ]
-        }, {
-            name: 'helper-list',
-            description: 'get a list of helpers listed best to worst',
-            type: 1,
-            options: [
-
-            ]
-        }, ]
-    }, {
         name: 'bot',
         description: 'description of bot',
         options: [{
@@ -983,6 +938,86 @@
         }, ]
     }, ], {
         debug: false,
+
+    });
+
+    s4d.client.on('threadCreate', async (s4dThread) => {
+        if ((((s4dThread).parent).parentId) == '932651844973502470') {
+            (s4dThread).members.add((s4d.client.user))
+            switch ((((s4dThread).parent).id)) {
+                case '1019857125557665842':
+                    var embed1 = new Discord.MessageEmbed();
+                    embed1.setColor((colourRandom()));
+                    embed1.setTitle(String('Before continuing...'))
+                    embed1.setURL(String());
+                    embed1.setDescription(String((['Make sure to include workspace image, error message, js line of the error', `
+              **GUIDELINES**`, `1. One post per request, one request per post
+              2. Title meaningfully your posts
+              3. Talk in English only
+              4. Tell your request straight away
+              5. Only mention members that are following your post or allowed you to mention them
+              6. Be patient
+              7. In the meantime check if there was already a similar problem or look at https://docs.scratch-for-discord.com/`].join(''))));
+                    embed1.setTimestamp(new Date());
+
+                    (s4dThread).messages.fetch({
+                        limit: 1
+                    }).then(async (last_messages_in_channel) => {
+                        (s4dThread).messages.fetch(((last_messages_in_channel.at(1 - 1)).id)).then(async (s4dmessage) => {
+                            s4dmessage.reply({
+                                content: String((String(s4dmessage.member))),
+                                allowedMentions: {
+                                    repliedUser: true
+                                }
+                            }).then(async (s4dfrost_real_reply) => {
+                                s4dfrost_real_reply.edit({
+                                    embeds: [embed1]
+                                });
+
+                            });
+
+                        });
+                    });
+
+                    break;
+                case '1019858566917656627':
+                    var embed2 = new Discord.MessageEmbed();
+                    embed2.setColor((colourRandom()));
+                    embed2.setTitle(String('Before continuing...'))
+                    embed2.setURL(String());
+                    embed2.setDescription(String((['Note that this channel is for feedback and not for <#1019857125557665842>', `
+              **GUIDELINES**`, `1. One post per request, one request per post
+              2. Title meaningfully your posts
+              3. Talk in English only
+              4. Tell your request straight away
+              5. Only mention members that are following your post or allowed you to mention them
+              6. File the most possible documentation related to your request (source code, error message, workspace image, developer's documentation...)
+              7. Be patient`].join(''))));
+                    embed2.setTimestamp(new Date());
+
+                    (s4dThread).messages.fetch({
+                        limit: 1
+                    }).then(async (last_messages_in_channel) => {
+                        (s4dThread).messages.fetch(((last_messages_in_channel.at(1 - 1)).id)).then(async (s4dmessage) => {
+                            s4dmessage.reply({
+                                content: String((String(s4dmessage.member))),
+                                allowedMentions: {
+                                    repliedUser: true
+                                }
+                            }).then(async (s4dfrost_real_reply) => {
+                                s4dfrost_real_reply.edit({
+                                    embeds: [embed2]
+                                });
+
+                            });
+
+                        });
+                    });
+
+                    break;
+
+            };
+        }
 
     });
 
